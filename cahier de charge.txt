@@ -1,0 +1,22 @@
+acceuil {
+slide -
+madagascar presentation -
+liste of parent road - non testeer
+grid of album
+composant pour aller vers la liste toutes les routes enfants -
+compoant de contact pour un devis
+quelques images
+fouter
+}
+list of child road
+text for each road
+admin {
+list of all parent road admin
+list of all child road
+add and update parent road
+add and update child road
+gestion de member {
+ajout et suppréssion}
+gestion de admin {
+ajout et suppréssion}
+}
