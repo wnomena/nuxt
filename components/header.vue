@@ -31,7 +31,7 @@
                 <div class="full-screen col-12 p-0 m-0 d-flex">
                     <span class="d-flex justify-content-center col-3  ms-1 p-1"><NuxtLink class="text-light text-decoration-none d-flex col-12 justify-content-center h-inherit m-0 align-items-center button" to="/" ><i class="bi bi-house-door"></i> <p class="m-0 d-lg-block d-md-none d-none"> Home </p></NuxtLink></span>
                     <span class="d-flex justify-content-center  col-3 ms-1 p-1"><NuxtLink to="/internal-footer/list-of-child-road" class="text-light text-decoration-none d-flex col-12 justify-content-center h-auto m-0 align-items-center button" ><i class="bi bi-signpost-split"></i> <p class="m-0 d-lg-block d-md-none d-none"> Our Tours</p></NuxtLink></span>            
-                    <span v-if="ngif" class="d-flex align-items-center justify-content-center flex-nowrap col-4 ms-1 p-1" data-bs-toggle="collapse" data-bs-target="#collapseExample"><i type="button" class="bi bi-people-fill"></i><small class="d-lg-flex align-items-center d-md-none d-none ms-1"></small></span>
+                    <span v-if="reference.ngif" class="d-flex align-items-center justify-content-center flex-nowrap col-4 ms-1 p-1" data-bs-toggle="collapse" data-bs-target="#collapseExample"><i type="button" class="bi bi-people-fill"></i><small class="d-lg-flex align-items-center d-md-none d-none ms-1">{{ reference.mail }}</small></span>
                     <span v-else class="d-flex justify-content-center  col-3 ms-1 p-1"><NuxtLink class="text-light text-decoration-none d-flex col-12 justify-content-center h-auto m-0 align-items-center button" to="/internal-footer/connexion"><i class="bi bi-globe2"></i> <p class="m-0 d-lg-block d-md-none d-none"> Connexion</p></NuxtLink></span>
             </div>
               </div>
@@ -42,9 +42,15 @@
 <script setup lang="ts">
 import { HttpService } from '~/server/fetch-class/fetch';
 import { LocalStorageService } from '~/server/fetch-class/localStorage'
-    let ngif:Ref<boolean> = ref(false)
+    let reference:Ref<{ngif : boolean,mail : string }> = ref({
+        ngif : false,
+        mail : ""
+    })
     onMounted(()=> {
-        if(LocalStorageService.getValueFormSessionStorage("id_for_member_or_admin") !== null) ngif.value = true
+        if(LocalStorageService.getValueFormSessionStorage("id_for_member_or_admin") !== ""){ 
+            reference.value.ngif = true
+            reference.value.mail = LocalStorageService.getValueFormSessionStorage("id_for_member_or_admin")
+        }
     })
 </script>
 <style scoped>

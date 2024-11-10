@@ -1,6 +1,8 @@
 export class LocalStorageService {
-    static getValueFormSessionStorage(params:string) :string | null {
-      return process.client ? sessionStorage.getItem(`${params}`) : null 
+    static getValueFormSessionStorage(params:string) :string {
+      let i = sessionStorage.getItem("id_for_admin_or_member")
+      if(i !== null) return i
+      else return ""
     }
     static setValueForSessionStorage(params:string,value : string) :void {
      if(process.client) sessionStorage.setItem(`${params}`,`${value}`)

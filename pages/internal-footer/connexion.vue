@@ -146,38 +146,3 @@ h3 {
     }
 }
 </style>
-
-<!--import { HttpService } from '~/server/fetch-class/fetch';
-
-    export default {
-        data(){
-            return {
-                selected : "selected text-center col-6 m-0 p-0",
-                unselected : "text-center m-0 p-0 col-6",
-                type : 0,
-                value_show : "",
-                mail : "",
-                password : "",
-            }
-        },
-        methods: {
-            updatestyle : function() {
-                let temp : string = this.unselected
-                this.unselected = this.selected
-                this.selected = temp
-                this.type = this.type == 0 ? 1 : 0
-                console.log(this.type)
-            },
-            formvalidation() {
-                if(this.mail.length < 2 || this.password.length < 2) {
-                    this.value_show = "Champs requis"
-                }
-                else if(this.type == 0) HttpService.login_member(this.mail,this.password).then((res)=> {
-                    console.log(res)
-                }).catch((err)=> console.log(err))
-                else if(this.type == 1) HttpService.login_admin(this.mail,this.password).then((res)=> {
-                    console.log(res)
-                }).catch((err)=> console.log(err))
-            }
-        }
-    }-->
