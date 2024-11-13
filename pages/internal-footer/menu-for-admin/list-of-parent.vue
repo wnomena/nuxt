@@ -60,10 +60,6 @@ function  fetchdelete() {
 
 </script>
 <style scoped>
-section  {
-    width: 100vw;
-    margin-top: 10px;
-}
 /* @media only screen and (min-with : 900px) { */
     section .bg-transparent {
         height: 400px;

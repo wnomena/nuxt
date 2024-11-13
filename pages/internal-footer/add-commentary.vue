@@ -2,7 +2,7 @@
     <div class="col-12">
     <section v-if="all_value.authorization" class="row">
         <div class="col-12 mt-4">
-            <input class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" name="" id="" value="" disabled>
+            <input class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" name="" id="" :value="all_value.mail" disabled>
         </div>
         <div class="col-12 mt-4">
             <input class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" name="" id="" value="Type : Member" disabled>
@@ -48,10 +48,11 @@ import type { child_road_for_display } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 import { LocalStorageService } from '~/server/fetch-class/localStorage';
 // let favorite = ref(null)
-let all_value:Ref<{child_road : child_road_for_display[],string_commentary : string, authorization : boolean}> = ref({
+let all_value:Ref<{child_road : child_road_for_display[],string_commentary : string, authorization : boolean, mail : string}> = ref({
     child_road : [],
     string_commentary : "",
     authorization : true,
+    mail : ""
 
 
 })
@@ -67,9 +68,16 @@ function left() {
 }
 function make_favorite(event : Event) {
     console.log(event)
+    //mboola tsy vita
+}
+function take_favorite_and_add_commentary() {
+    HttpService.put_new_commnetary(all_value.value.string_commentary,all_value.value.mail).then((res) => {
+        Method.navigate("/")
+    })
 }
 onMounted(async () => {
     if(LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member") !== "") {
+        all_value.value.mail = LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member")
         await HttpService.get_all_favorite_road().then((res) => {
         Array.from(res.data).forEach((each) => {
             Array.from(each.like_by_membes).forEach((like) => {

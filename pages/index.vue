@@ -1,5 +1,6 @@
 <template>
-    <Slideer></Slideer>
+    <div>
+        <Slideer></Slideer>
     <MadagascarPersentation />
     <ParentRoadList />
     <Grid />
@@ -7,6 +8,7 @@
     <ClientContact />
     <SomeImage />
     <PublicFooter />
+    </div>
 </template>
 <script>
 

@@ -1,6 +1,6 @@
 export class LocalStorageService {
     static getValueFormSessionStorage(params:string) :string {
-      let i = sessionStorage.getItem("id_for_admin_or_member")
+      let i = sessionStorage.getItem(params)
       if(i !== null) return i
       else return ""
     }
@@ -10,7 +10,4 @@ export class LocalStorageService {
     static removeValueFormSessionStorage(value : string):void {
        if(process.client) sessionStorage.removeItem(value)
     }
-    // actualisation() : void {
-    //  if(process.client) location.
-    // }
   }

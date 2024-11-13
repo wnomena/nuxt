@@ -7,7 +7,7 @@
         <div class="d-grid col-11 m-auto">
             <div class="icon items-1"><i class="bi bi-arrow-left-circle-fill text-primary d-flex align-items-center" ></i></div>
                 <div scroll class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
-                    <div v-for="i in table" :key="i.name.toString()" class="col-lg-3 h-lg-100 h-md-50 h-10 col-md-6 col-sm-10 col-12 border p-0 m-0 overflow-hidden rounded">
+                    <div v-for="i in refs.table" :key="i.name.toString()" class="col-lg-3 h-lg-100 h-md-50 h-10 col-md-6 col-sm-10 col-12 border p-0 m-0 overflow-hidden rounded" @click="next(i.name.toString())">
                         <div  class="col-12 h-100">
                             <div class="linear p-2 text-light">
                                 <h3>Name : {{ i.name }} </h3>
@@ -23,24 +23,22 @@
     </div>
 </section>
 </template>
-<script lang="ts">
+<script setup  lang="ts">
+import { Method } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
-    export default {
-        data(): {table : parent_road_list[]} {
-            return {
-                table : []
-            }
-        },
-        mounted() {
-            HttpService.get_all_parent_road().then((res) => {
-                this.table = [...res.data]
-            }).catch((err) => {
-                console.log(err)
-            })
-        },
-    }
+let refs:Ref<{table : parent_road_list[]}> = ref({
+    table : []
+})
+onMounted(() => {
+    HttpService.get_all_parent_road().then((value) => {
+        refs.value.table = [...value.data]
+    })
+})
+function next(name : string) {
+    Method.navigate("/internal-footer/list-of-child-road",{id : name})
+}
 </script>
 <style scoped>
 .row .col-12 {
