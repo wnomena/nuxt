@@ -1,3 +1,5 @@
+import type { Reactive } from "vue"
+
 export class Method {
     static navigate(url : string, query? : any) {
         if(!query) return navigateTo(`${url}`)
@@ -9,9 +11,9 @@ export class Method {
 }
 
 export class storage_for_token {
-    private static mail : string | undefined
-    private static type_of_account : number | undefined
-    private static token : string | undefined
+    private static mail : Reactive<string> | undefined
+    private static type_of_account : Reactive<number> | undefined
+    private static token : Reactive<string> | undefined
 
     static set_all_value(mail : string, type_of_account : number, token : string) {
         this.mail = mail,

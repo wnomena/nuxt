@@ -32,6 +32,7 @@
     </section>
 </template>
 <script setup lang="ts">
+import { storage_for_token } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 
 let value_show = ref("")
@@ -44,8 +45,13 @@ let password:Ref<string> = ref("")
 
 //all methods
  function formvalidation() {
+    console.log("mande")
     if(mail.value.length < 2 || password.value.length < 2) value_show.value = "Required fields"
-    else if(type.value == 0) HttpService.login_member({mail : mail.value,mot_de_passe : password.value})
+    else if(type.value == 0) HttpService.login_member({mail : mail.value,mot_de_passe : password.value}).then((res) => {
+        storage_for_token.set_all_value(mail.value.toString(),type.value,res.token)
+    }).catch((err) => {
+        console.log(err)
+    })
  }
  function updatestyle() {
     const temp:string = selected.value
