@@ -47,9 +47,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
         list_or_string : true
     })
 
-    onMounted(() => {
-        HttpService.get_all_commentary().then((res) => {
-            all_value.value.data = [...res.liste]
+    onMounted(async() => {
+       await HttpService.get_all_commentary().then((res) => {
+            all_value.value.data = [...res.data.liste]
         })
     })
     function update_value() {

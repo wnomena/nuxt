@@ -38,7 +38,7 @@ let contact_dom:Ref<{list_table : member_model[]}> = ref({
 })
 onBeforeMount(() => {
     HttpService.get_all_member("0").then((data) => {
-        contact_dom.value.list_table = [...data.data]
+        contact_dom.value.list_table = data.data.data
     })
 })
 function delete_member(mail : string) {

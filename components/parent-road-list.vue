@@ -8,12 +8,12 @@
             <div class="icon items-1"><i class="bi bi-arrow-left-circle-fill text-primary d-flex align-items-center" ></i></div>
                 <div scroll class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
                     <div v-for="i in refs.table" :key="i.name.toString()" class="col-lg-3 h-lg-100 h-md-50 h-10 col-md-6 col-sm-10 col-12 border p-0 m-0 overflow-hidden rounded" @click="next(i.name.toString())">
-                        <div  class="col-12 h-100">
+                        <div :style="{backgroundImage : 'url(' + i.presentation_image.toString() + ')'}" class="col-12 h-100">
                             <div class="linear p-2 text-light">
                                 <h3>Name : {{ i.name }} </h3>
                             <h4> A partir de {{ i.price }}<i class="bi bi-currency-pound"> price </i></h4>
                             <div class="d-flex justify-content-end">
-                                <div class="button_slide slide_down text-white"><NuxtLink to="/list-of-child-road"></NuxtLink></div>
+                                <div class="button_slide slide_down text-white"><NuxtLink :to="{path : '/internal-footer/list-of-child-road', query : { id : i.name.toString()}}" class="text-decoration-none">Suivant</NuxtLink></div>
                             </div>
                             </div>
                         </div>
@@ -31,9 +31,10 @@ import { HttpService } from '~/server/fetch-class/fetch';
 let refs:Ref<{table : parent_road_list[]}> = ref({
     table : []
 })
-onMounted(() => {
-    HttpService.get_all_parent_road().then((value) => {
-        refs.value.table = [...value.data]
+onMounted(async() => {
+    await HttpService.get_all_parent_road().then((value) => {
+        console.log(value.data)
+        refs.value.table = [...value.data.data]
     })
 })
 function next(name : string) {
@@ -69,7 +70,6 @@ function next(name : string) {
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.1s;
-    /* overflow: hidden; */
     height: 100%;
 }
 .row .col-12 .col-lg-3 .col-12 .linear .d-flex .button_slide {
@@ -80,6 +80,7 @@ function next(name : string) {
     margin: 3px;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 5px;
 }
 .row .col-12 .col-lg-3:hover > .col-12 .linear .d-flex .button_slide {
     box-shadow: inset 0 100px 0 #2c2b2b;

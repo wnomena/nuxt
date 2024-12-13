@@ -39,7 +39,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
     onMounted(() => {
         HttpService.get_all_member('0').then((res) => {
-            all_value.value.data = [...res.data]
+            all_value.value.data = [...res.data.data]
         })
     })
     function deletion(i:string) {

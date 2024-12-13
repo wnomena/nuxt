@@ -4,11 +4,11 @@
         <section v-if="confirmation" class="border">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
         <section class="d-flex flex-nowrap justify-content-around col-3 lg-3">
-            <div v-for="i in value" :key="i.name.toString()" class="bg-transparent" > //mila an le ve for pour la liste
+            <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent" > //mila an le ve for pour la liste
                 <img :src="i.presentation_image.toString()" alt="name" srcset="">
                 <h4>Nom : {{i.name}}</h4>
                 <div class="d-flex justify-content-around">
-                    <div @click="method(i.identifiant.toString())" class="suivant">Suivant</div>
+                    <div @click="method(i)" class="suivant">Suivant</div>
                     <div @click="link_to_update(i.name.toString())" class="modifier">Modifier</div>
                     <div @click="deletion(i.identifiant.toString())" class="supprimer">Supprimer</div>
                 </div>
@@ -28,14 +28,23 @@ import { Method } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model'
 import { HttpService } from '~/server/fetch-class/fetch'
 let confirmation:Ref<{type : boolean, info :string}> = ref({type : false, info :""})
-let value:Ref<parent_road_list[]> = ref([])
+let value:Ref<{list :  parent_road_list[]}> = ref({
+    list : []
+})
 
 //methods
-function method(id : string) {
+onMounted(async() => {
+    await HttpService.get_all_parent_road().then((response) => {
+        console.log(typeof response.data.data)
+        value.value.list = [...response.data.data]
+    })
+})
+function method(i: parent_road_list) {
         navigateTo({
             path : "/internal-footer/list-of-child-road",
             query : {
-                id : id
+                id : i.identifiant.toString(),
+                name : i.name.toString()
             }
         })
     }

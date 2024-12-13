@@ -49,7 +49,7 @@ export class presentation_image {
 export class parent_road_list {
     identifiant : Number
     name : String
-    about_all_road : String
+    description : String
     presentation_image : String
     price : number
     period : string
@@ -60,7 +60,7 @@ export class parent_road_list {
     constructor(a:Number,b : String, c: String, d : String,e:number,f : string){
         this.identifiant = a
         this.name = b
-        this.about_all_road = c
+        this.description = c
         this.presentation_image = d
         this.price = e
         this.period = f

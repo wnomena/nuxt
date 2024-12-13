@@ -1,8 +1,8 @@
 <template>
     <div class="col-12">
-    <section v-if="all_value.authorization" class="row">
+    <form v-if="all_value.authorization" class="row">
         <div class="col-12 mt-4">
-            <input class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" name="" id="" :value="all_value.mail" disabled>
+            <input name="mail" class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" id="" :value="all_value.mail" disabled>
         </div>
         <div class="col-12 mt-4">
             <input class="col-lg-10 col-12  d-flex m-auto ps-3 border fs-2" type="text" name="" id="" value="Type : Member" disabled>
@@ -22,12 +22,12 @@
                 </div>
             </div>
         <div class="col-12 mt-4">
-            <textarea v-model="all_value.string_commentary" class="col-10  d-flex m-auto ps-3" name="" id=""></textarea>
+            <textarea name="commentary" class="col-10  d-flex m-auto ps-3"></textarea>
         </div>
          <div class="col-12 mt-4">
             <div class="col-lg-10 col-12  d-flex m-auto ps-3 d-flex justify-content-end pe-2" ><div class="border rounded bg-primary p-2 fw-bold text-light">Enregistrer </div></div>    
         </div>
-    </section>
+    </form>
 
     <section v-else class="row alert">
         <div class="col-12 d-flex text-center align-items-center ">
@@ -48,13 +48,10 @@ import type { child_road_for_display } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 import { LocalStorageService } from '~/server/fetch-class/localStorage';
 // let favorite = ref(null)
-let all_value:Ref<{child_road : child_road_for_display[],string_commentary : string, authorization : boolean, mail : string}> = ref({
+let all_value:Ref<{child_road : child_road_for_display[], authorization : boolean,mail : string}> = ref({
     child_road : [],
-    string_commentary : "",
     authorization : true,
     mail : ""
-
-
 })
 function right() {
     const element: HTMLElement | null = document.getElementById("scroll")
@@ -68,44 +65,22 @@ function left() {
 }
 function make_favorite(event : Event) {
     console.log(event)
-    //mboola tsy vita
-}
-function take_favorite_and_add_commentary() {
-    HttpService.put_new_commnetary(all_value.value.string_commentary,all_value.value.mail).then((res) => {
-        Method.navigate("/")
-    })
-}
+    //maka event de manamboatra an le icon ho lasa plein de avy eo
+} 
 onMounted(async () => {
-    if(LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member") !== "") {
-        all_value.value.mail = LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member")
-        await HttpService.get_all_favorite_road().then((res) => {
-        Array.from(res.data).forEach((each) => {
-            Array.from(each.like_by_membes).forEach((like) => {
-                if(like.mail == LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member")) {
-                    all_value.value.authorization = false
-                }
-            })
-        })
-    })
-
-     await HttpService.get_all_child_road("0").then((res) => {
-        all_value.value.child_road = [...res.data]
-    })
-    }else {
-       Method.navigate("/")
-    }
+     await HttpService.get_all_child_road("0").then((response) => {
+        all_value.value.child_road = response.data.data
+     })
 })
 </script>
 <style scoped>
 .row .col-12 .col-lg-10 {
     height: 40px;
-    /* font-size: 35px; */
 }   
 .row .col-12 .col-lg-10 .border {
     cursor: pointer;
 }
 .row .col-12 textarea.col-10, .row .col-12 textarea.col-10:focus, .row .col-12 textarea.col-10:active {
-    /* height: 50vh; */
     overflow: hidden;
     outline: none;
 }

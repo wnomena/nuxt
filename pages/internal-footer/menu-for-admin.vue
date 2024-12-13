@@ -44,12 +44,8 @@
     </section>
 </template>
 <script setup lang="ts">
-import { Method } from '~/all_model/fonction-classique';
-import { LocalStorageService } from '~/server/fetch-class/localStorage';
 
-    onBeforeMount(() => {
-        Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
-    })
+
 </script>
 <style scoped>
     .bg-transparent .bg-primary .label_for_home {
