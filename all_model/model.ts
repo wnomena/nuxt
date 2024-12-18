@@ -230,3 +230,32 @@ export class confirmation_deletion {
         this.value = b
     }
 }
+export class some_component_type {
+    title : string
+    content : string
+
+    constructor(a:string) {
+        this.title = a
+        this.content = a
+    }
+}
+export class val {
+    table : some_component_type[]
+
+    constructor(a : some_component_type[]) {
+        this.table = a
+    }
+}
+export class contact {
+    name : string
+    mail : string
+    object : string
+    corps : string
+
+    constructor(a: string) {
+        this.corps = a
+        this.mail = a
+        this.name = a
+        this.object = a
+    }
+}

@@ -55,6 +55,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     function update_value() {
         all_value.value.list_or_string = all_value.value.list_or_string == true ? false : true
     }
+    //un fonction d'éffacement de comantaire/et un composant de confirmation avant l'effacement.
 </script>
 
 <style scoped>

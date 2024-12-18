@@ -4,7 +4,7 @@
         <h3 class="text-light"> {{ title }}</h3>
         <span style="cursor: pointer;" class="d-flex justify-content-center bg-primary" ><i class="bi bi-chevron-left"> Retour</i></span>
     </div>
-    <form class="w-full d-flex flex-wrap">
+    <form @submit="submit" class="w-full d-flex flex-wrap">
         <div class="bg-transparent d-flex flex-row flex-wrap">
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="name">Le nom de votre circuit</label>
@@ -65,9 +65,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
     onMounted(async() => {
         if(router.query.name?.toString()) {
+            title.value.title = "Update child road"
             await HttpService.get_one_child_road(router.query.id as string).then((response) => {
-                
+                title.value.update = response.data
             })
+        }
+        else {
+            title.value.title = "Add new child road"
         }
     })
     function submit(e:Event) {

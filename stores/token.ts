@@ -17,6 +17,12 @@ export const PiniaStore = defineStore("store",{
        },
         get_mail():String {
             return this.mail
+        },
+        get_mail_and_type() {
+            return {
+                mail : this.mail,
+                type :  this.type
+            }
         }
     }
 })

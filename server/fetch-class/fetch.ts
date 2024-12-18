@@ -1,7 +1,7 @@
 import { LocationQueryValue } from "vue-router"
 import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { LocalStorageService } from "./localStorage"
-import { child_road_list, commentary_model, fetch_clild_road, fetch_model, member_model, parent_road_list } from "~/all_model/model"
+import { child_road_list, commentary_model, contact, fetch_clild_road, fetch_model, member_model, parent_road_list } from "~/all_model/model"
 export class HttpService {
     static url : string = `http://localhost:5000`
     //all get request
@@ -11,7 +11,7 @@ export class HttpService {
     static async get_one_parent_road(identifiant : number):Promise<AxiosResponse<parent_road_list[]>> {
         return await axios.get(`${this.url}/public_get/parent_way/one_road/${identifiant}`)
     }
-    static async get_one_child_road(name : string):Promise<AxiosResponse<child_road_list[]>> {
+    static async get_one_child_road(name : string):Promise<AxiosResponse<child_road_list>> {
         return await axios.get(`${this.url}/public_get/one_road/${name}`)
     }
     static async get_all_child_road(id:string | LocationQueryValue[] | LocationQueryValue):Promise<AxiosResponse<fetch_clild_road>> {
@@ -24,7 +24,7 @@ export class HttpService {
         return await axios.get(`${this.url}/public_get/one_road/${name}`)
     }
     static async subscription(body : FormData):Promise<AxiosResponse<{message : string}>> {
-        return await axios.post(`${this.url}/subscription_member`,body)
+        return await axios.post(`${this.url}/subscription_member`,body,{ headers: { 'Content-Type': 'multipart/form-data' }})
     }
     static async login_member( body: FormData ): Promise<AxiosResponse<{message : string, token : string}>> {
         return await axios.post(`${this.url}/login/login_member`, body )
@@ -73,5 +73,11 @@ export class HttpService {
     }
     static async update_pass(a:FormData):Promise<AxiosResponse<{message : string}>> {
         return await axios.put(`${this.url}/utilisateurs/update/password/member/${a.get("mail")}/${a.get("type")}`)
+    }
+    static async add_new_contact(a : FormData):Promise<AxiosResponse<{message : string}>> {
+        return  await axios.post(`${this.url}/client_contact`,a)
+    }
+    static async get_contact(name: string):Promise<AxiosResponse<{data : contact[]}>> {
+        return await axios.get(`${this.url}/get_all_contact/${name}`)
     }
   }

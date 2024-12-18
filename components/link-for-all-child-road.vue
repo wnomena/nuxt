@@ -1,6 +1,6 @@
 <template>
-    <section class="row d-flex justify-content-end me-2 ms-2">
-    <div class="col-lg-8 col-md-12 border d-flex justify-content-center bg-light">
+    <section class="row mt-3 mb-3">
+    <div class="col-lg-10 col-md-12 border d-flex justify-content-center m-auto rounded">
         <div class="col-12 text-center">
             <h3>Travel differently</h3>
             <p class="fs-5">Visit diversity that is not found anywhere else in the world, whether it is fauna or flora</p>

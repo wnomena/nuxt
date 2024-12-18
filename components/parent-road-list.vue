@@ -1,23 +1,20 @@
 <template>
-    <section class="row bg-light">
+    <section class="row">
     <div class="col-12 text-center">
         <h3>Visit our islands and experience new sensations.</h3>
         <h5>Cap Sur Mada offers you unforgettable trips to several destinations of your choice.</h5>
     </div>
         <div class="d-grid col-11 m-auto">
             <div class="icon items-1"><i class="bi bi-arrow-left-circle-fill text-primary d-flex align-items-center" ></i></div>
-                <div scroll class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
-                    <div v-for="i in refs.table" :key="i.name.toString()" class="col-lg-3 h-lg-100 h-md-50 h-10 col-md-6 col-sm-10 col-12 border p-0 m-0 overflow-hidden rounded" @click="next(i.name.toString())">
-                        <div :style="{backgroundImage : 'url(' + i.presentation_image.toString() + ')'}" class="col-12 h-100">
-                            <div class="linear p-2 text-light">
-                                <h3>Name : {{ i.name }} </h3>
-                            <h4> A partir de {{ i.price }}<i class="bi bi-currency-pound"> price </i></h4>
-                            <div class="d-flex justify-content-end">
-                                <div class="button_slide slide_down text-white"><NuxtLink :to="{path : '/internal-footer/list-of-child-road', query : { id : i.name.toString()}}" class="text-decoration-none">Suivant</NuxtLink></div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
+                    <a v-for="i in refs.table" :key="i.name.toString()" href="#" class="card-link">
+                        <img :src="i.presentation_image.toString()" alt="Card Image" class="card-image">
+                        <p class="badge developer">{{ i.name }}</p>
+                        <h2 class="card-title"> From £ {{ i.price }}</h2>
+                        <button @click="next(i.name.toString())" class="card-button material-symbols-rounded">
+                            arrow_forward
+                        </button>
+                    </a>
                 </div>
             <div class="icon items-2"><i class="bi bi-arrow-right-circle-fill text-primary d-flex align-items-center" ></i></div>
     </div>
@@ -42,6 +39,7 @@ function next(name : string) {
 }
 </script>
 <style scoped>
+@import url(./style.css);
 .row .col-12 {
     padding: 10px 0px;
 }

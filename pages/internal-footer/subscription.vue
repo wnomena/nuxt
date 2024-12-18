@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div data-aos="fade-right" class="container mt-3 mb-3">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-12 m-lg-auto m-md-auto ps-3 pe-3 rounded">
       <div class="col-12 mt-3 mb-5"><h3 class="text-center text-light">Subscription</h3></div>

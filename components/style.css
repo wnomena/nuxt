@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(#eceffe, #ced6fb);
+}
+
+.material-symbols-sharp {
+  font-variation-settings:
+  'FILL' 10,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.material-symbols-sharp {
+  position: absolute;
+  right: 10%;
+  top: 7%;
+  color: rgb(129, 65, 65);
+  cursor: pointer;
+}
+
+.card-wrapper {
+    max-width: 1100px;
+    margin: 0 60px 35px;
+    padding: 20px 10px;
+    overflow: hidden;
+}
+
+.card-list .card-item {
+    list-style: none;
+    position: relative;
+}
+
+.card-list .card-item .card-link {
+    user-select: none;
+    display: block;
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card-list .card-item .card-link:hover {
+    border:1px solid #5372f0;
+}
+
+.card-list .card-link .card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-list .card-link .badge {
+    color: #5372f0;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 16px 0 18px;
+    background: #dde4ff;
+    width: fit-content;
+    border-radius: 50px;
+}
+
+.card-list .card-link .badge.designer {
+    color: #b22485;
+    background-color: #f7dff5;
+}
+.card-list .card-link .badge.developer {
+    color: #b25a2b;
+    background-color: #ffe3d2;
+}
+.card-list .card-link .badge.editor {
+    color: #205c20;
+    background-color: #d6f8d6;
+}
+.card-list .card-link .badge.gamer {
+    color: #856404;
+    background-color: #fff3cd;
+}
+.card-list .card-link .badge.marketer {
+    color: #b25a2b;
+    background-color: #ffe3d2;
+}
+
+.card-list .card-link .card-title {
+    font-size: 1.19rem;
+    color: #000;
+    font-weight: 600;
+}
+
+.card-list .card-link .card-button {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    color: #5372f0;
+    margin: 30px 0 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #5372f0;
+    transform: rotate(-45deg);
+    transition: .4s ease;
+}
+
+.card-list .card-link:hover .card-button {
+    color: #fff;
+    background-color: #5372f0;
+}

@@ -1,5 +1,5 @@
 <template>
-    <div class="container pb-3 pt-3">
+    <div data-aos="fade-right" class="container pb-3 pt-3">
   <form @submit="takeallinformation" class="row">
     <div class="col-lg-4 col-md-6 col-12 m-lg-auto m-md-auto ps-3 pe-3 rounded">
       <div class="col-12 mt-3 mb-5"><h3 class="text-center text-light">Subscription</h3></div>
@@ -10,7 +10,7 @@
       </div>
       <div class="col-lg-10 col-md-10 col-7 m-auto mb-4">
         <label class="col-12 text-center text-light fs-4" for="">Confirm your password </label>
-        <input name="second_pass" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="password"  id="">
+        <input name="mot_de_passe" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="password"  id="">
       </div> 
         <div class="col-lg-10 col-md-10 col-7 m-auto mb-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
           <button type="submit" class="bg-primary p-2 text-light rounded border-0"> Send </button>
@@ -35,10 +35,15 @@ async function takeallinformation(e:Event) {
     e.preventDefault()
     let formData:FormData = new FormData(e.target as HTMLFormElement)
     for(let [key,value] of formData.entries()) {
+        console.log(`${key} : ${value}`)
         if(!value) return all_value.value.err = "required field"
     }
+    if(formData.get("mot_de_passe") !== formData.get("first_pass")) return all_value.value.err = "Value not identical"
     formData.append("mail",router.query.mail as string)
     formData.append("nom_complet",router.query.complete as string)
+    formData.forEach((response) => {
+        console.log(response)
+    })
     await HttpService.subscription(formData).then((res) => {
         Method.navigate("/internal-footer/connexion")
     })

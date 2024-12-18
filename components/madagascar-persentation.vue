@@ -1,6 +1,6 @@
 <template>
-    <section class="row bg-primary p-2">
-    <div class="col-12 text-center">
+    <section class="row mt-3 mb-2">
+    <div class="col-10 text-center m-auto text-dark">
             <h4 class="text-decoration-underline text-dark">Why Madagascar ? </h4>
             Welcome to Madagascar, the pearl of the Indian Ocean! This unique and mysterious island, located off the southeast coast of Africa, is a true paradise for nature, culture, and adventure lovers. Madagascar is renowned for its exceptional biodiversity. About 90% of its fauna and flora are endemic, meaning they are not found anywhere else on the planet. It is also a land of cultural and historical richness. You will be enchanted by the diversity and depth of local traditions. For lovers of strong emotions and nature, Madagascar offers a multitude of activities:
             <ul>
@@ -14,16 +14,18 @@
 </section>
 </template>
 <style scoped>
-section .col-12 {
+section .col-10 {
     font-family: sans-serif;
     color: white;
     font-weight: bold;
 }
-section .col-12 h4 {
+section .col-10 h4 {
     font-family: "Calibri", 'Trebuchet MS', sans-serif;
     font-weight: bold;
 }
-.row .col-12 {
+.row .col-10 {
     font-size: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 </style>
