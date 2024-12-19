@@ -1,48 +1,45 @@
 <template>
-    <section class="row bg-light">
+    <section class="row">
     <div class="col-12 text-center">
         <h3>Visit our islands and experience new sensations.</h3>
         <h5>Cap Sur Mada offers you unforgettable trips to several destinations of your choice.</h5>
     </div>
         <div class="d-grid col-11 m-auto">
             <div class="icon items-1"><i class="bi bi-arrow-left-circle-fill text-primary d-flex align-items-center" ></i></div>
-                <div scroll class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
-                    <div v-for="i in table" :key="i.name.toString()" class="col-lg-3 h-lg-100 h-md-50 h-10 col-md-6 col-sm-10 col-12 border p-0 m-0 overflow-hidden rounded">
-                        <div  class="col-12 h-100">
-                            <div class="linear p-2 text-light">
-                                <h3>Name : {{ i.name }} </h3>
-                            <h4> A partir de {{ i.price }}<i class="bi bi-currency-pound"> price </i></h4>
-                            <div class="d-flex justify-content-end">
-                                <div class="button_slide slide_down text-white"><NuxtLink to="/list-of-child-road"></NuxtLink></div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
+                    <a v-for="i in refs.table" :key="i.name.toString()" href="#" class="card-link">
+                        <img :src="i.presentation_image.toString()" alt="Card Image" class="card-image">
+                        <p class="badge developer">{{ i.name }}</p>
+                        <h2 class="card-title"> From £ {{ i.price }}</h2>
+                        <button @click="next(i.name.toString())" class="card-button material-symbols-rounded">
+                            arrow_forward
+                        </button>
+                    </a>
                 </div>
             <div class="icon items-2"><i class="bi bi-arrow-right-circle-fill text-primary d-flex align-items-center" ></i></div>
     </div>
 </section>
 </template>
-<script lang="ts">
+<script setup  lang="ts">
+import { Method } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
-    export default {
-        data(): {table : parent_road_list[]} {
-            return {
-                table : []
-            }
-        },
-        mounted() {
-            HttpService.get_all_parent_road().then((res) => {
-                this.table = [...res.data]
-            }).catch((err) => {
-                console.log(err)
-            })
-        },
-    }
+let refs:Ref<{table : parent_road_list[]}> = ref({
+    table : []
+})
+onMounted(async() => {
+    await HttpService.get_all_parent_road().then((value) => {
+        console.log(value.data)
+        refs.value.table = [...value.data.data]
+    })
+})
+function next(name : string) {
+    Method.navigate("/internal-footer/list-of-child-road",{id : name})
+}
 </script>
 <style scoped>
+@import url(./style.css);
 .row .col-12 {
     padding: 10px 0px;
 }
@@ -71,7 +68,6 @@ import { HttpService } from '~/server/fetch-class/fetch';
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.1s;
-    /* overflow: hidden; */
     height: 100%;
 }
 .row .col-12 .col-lg-3 .col-12 .linear .d-flex .button_slide {
@@ -82,6 +78,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     margin: 3px;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 5px;
 }
 .row .col-12 .col-lg-3:hover > .col-12 .linear .d-flex .button_slide {
     box-shadow: inset 0 100px 0 #2c2b2b;

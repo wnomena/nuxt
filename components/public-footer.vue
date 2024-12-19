@@ -1,5 +1,5 @@
 <template>
-<footer class="bg-primary text-white text-center text-lg-start">
+<footer class="bg-secondary text-white text-center text-lg-start">
   <!-- Grid container -->
   <div class="container p-4">
     <!--Grid row-->
@@ -21,13 +21,13 @@
   
           <ul class="list-unstyled mb-0">
             <li>
-              <a href="#!" class="text-white">Our Services</a>
+              <a href="#!">Our Services</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Privacy Policy</a>
+              <a href="#!">Privacy Policy</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Terms and Conditions</a>
+              <a href="#!">Terms and Conditions</a>
             </li>
             <li>
               <a href="#!" class="text-white"></a>
@@ -48,7 +48,7 @@
               <a href="#!" class="text-white"><i class="bi bi-geo-alt-fill"> ID 36 Ankadivory Ilafy, Antananarivo</i></a>
             </li>
             <li>
-              <a href="#!" class="text-white"><i class="bi bi-envelope"> wnomena58@gmail.com</i></a>
+              <a href="#!" class="text-white"><i class="bi bi-envelope"> jsdev.web2@gmail.com</i></a>
             </li>
             <li class="d-flex justify-content-center">
               <a href="#!" class="text-white"><i class="bi bi-facebook"></i></a><a href="#!" class="text-white"><i class="bi bi-instagram"></i></a><a href="#!" class="text-white"><i class="bi bi-linkedin"></i></a><a href="#!" class="text-white"><i class="bi bi-youtube"></i></a>
@@ -63,9 +63,10 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2024 Copyright:
-    <a class="text-white" href="#">Sedraniaina Nomenjanahary</a>
+  <div class="p-3 d-lg-flex d-block justify-content-around text-primary fw-bold" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p>© 2024 Company, Inc. All rights reserved.</p>
+    <p>Designed by Fandresena Tsraoana Ny Aina and developed by Sedraniaina Nomenjanahary</p>
+    
   </div>
   <!-- Copyright -->
 </footer>  
@@ -80,9 +81,16 @@ footer.d-flex {
 a {
     text-decoration: none;
     font-weight: bold;
+    color: white;
+}
+a:hover {
+  color: #1492E6;
 }
 i {
     text-decoration: none;
     margin-right: 10px;
+}
+h5 {
+  color: green;
 }
 </style>

@@ -35,10 +35,6 @@
   </div>
 
 </template>
-<script lang="ts">
-import { NuxtPage } from '#build/components';
-
-</script>
 <style scoped>
 footer {
     width: 100vw;
