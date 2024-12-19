@@ -48,6 +48,7 @@
             <div data-aos="fade-up-left" data-aos-anchor-placement="center-center" class="col-lg-3 d-lg-block d-none col-11 border rounded m-1 items-3 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
+                        <div class="col-12 d-lg-none d-md-none d-flex justify-content-end"><i class="bi bi-x-square"></i></div>
                         <div class="col-12 d-flex align-items-end">
                             <div class="col-12 d-flex justify-content-end">
                                 <i class="bi bi-arrow-down-right-circle-fill fs-2 m-2"></i>

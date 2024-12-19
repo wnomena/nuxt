@@ -6,7 +6,7 @@
     <div class="row">
       <!--Grid column-->
       <div class="col-lg-5 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase">About us</h5>
+        <h5 class="text-decoration-underline">About us</h5>
 
         <p>
           Cap sur Mada is a travel agency specializing in organizing authentic and tailor-made trips to Madagascar. Passionate about this unique island, we are dedicated to helping travelers discover the rich natural, cultural, and human heritage of Madagascar. Our team, made up of local experts and experienced guides, accompanies you throughout your adventure, offering customized tours that cater to your desires—whether you're seeking adventure, relaxation, or cultural immersion.
@@ -17,7 +17,7 @@
       <!--Grid column-->
       <div class="d-block d-md-flex justify-content-around col-lg-6 col-md-12 mb-4 mb-md-0">
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-capitalize">Quick Links</h5>
+          <h5 class="text-decoration-underline">Quick Links</h5>
   
           <ul class="list-unstyled mb-0">
             <li>
@@ -38,7 +38,7 @@
   
         <!--Grid column-->
         <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-capitalize mb-0">Contact</h5>
+          <h5 class="text-decoration-underline mb-0">Contact</h5>
   
           <ul class="list-unstyled">
             <li>
@@ -63,9 +63,9 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="p-3 d-lg-flex d-block justify-content-around text-primary fw-bold" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="p-3 d-lg-flex d-block justify-content-around text-light fw-bold" style="background-color: rgba(0, 0, 0, 0.2);">
     <p>© 2024 Company, Inc. All rights reserved.</p>
-    <p>Designed by Fandresena Tsraoana Ny Aina and developed by Sedraniaina Nomenjanahary</p>
+    <p>Designed by Fandresena Tsaroana Ny Aina and developed by Sedraniaina Nomenjanahary</p>
     
   </div>
   <!-- Copyright -->
@@ -89,8 +89,5 @@ a:hover {
 i {
     text-decoration: none;
     margin-right: 10px;
-}
-h5 {
-  color: green;
 }
 </style>
