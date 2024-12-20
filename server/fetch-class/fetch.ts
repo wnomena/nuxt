@@ -1,9 +1,10 @@
 import { LocationQueryValue } from "vue-router"
+const Store = PiniaStore()
 import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
-import { LocalStorageService } from "./localStorage"
-import { child_road_list, commentary_model, contact, fetch_clild_road, fetch_model, member_model, parent_road_list } from "~/all_model/model"
+import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
+import { PiniaStore } from "~/stores/token"
 export class HttpService {
-    static url : string = `http://localhost:5000`
+    static url : string = `https://web.caponmada.com`
     //all get request
     static async get_all_parent_road() : Promise<AxiosResponse<{data :  parent_road_list[]}>> {
         return await axios.get(`${this.url}/get_all/parent_circuit`)
@@ -33,7 +34,7 @@ export class HttpService {
         return await axios.post(`${this.url}/login`,{ body})
     }
     static async delete_parent_road(id : string): Promise<AxiosResponse<{message : string}>> {
-        let mail : string | null = LocalStorageService.getValueFormSessionStorage("id_for_member_or_admin")
+        let mail = Store.get_mail_and_type().mail
         return await axios.delete(`${this.url}/utilisateurs/${mail}/user/deleter/${id}`)
     }
 
@@ -41,7 +42,7 @@ export class HttpService {
         return await axios.get(`${this.url}/get_all/favorite_road`)
     }
     static async delete_member(member_mail: String): Promise<AxiosResponse<{message : string}>> {
-        return await axios.delete(`${this.url}/utilisateurs/${LocalStorageService.getValueFormSessionStorage("id_for_admin_or_member")}/user/deleter/${member_mail}`)
+        return await axios.delete(`${this.url}/utilisateurs/${Store.get_mail_and_type().type}/user/deleter/${member_mail}`)
     }
     static async put_new_commnetary(body : FormData):Promise<AxiosResponse<{message : string}>> {
         return await axios.post(`${this.url}/add_new/commentary/by/member/${body.get("mail")}`,body)
