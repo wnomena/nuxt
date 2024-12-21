@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import { Method } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-import { LocalStorageService } from '~/server/fetch-class/localStorage';
 let all_refs : Ref<{err:string}> = ref({
     err : '',
     complete : "",

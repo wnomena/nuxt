@@ -1,6 +1,6 @@
 <template>
     <section class="row mt-3 mb-3">
-        <form @submit="submit" class="col-lg-6 col-md-10 col-11 m-auto mb-3">
+        <form @submit="submit_function" class="col-lg-6 col-md-10 col-11 m-auto mb-3">
             <h1 class="text-center m-3 text-light">Contact us</h1>
             <h6 class="text-center text-success"></h6>
             <div class="col-11 m-auto mb-3 d-flex justify-content-around flex-wrap">
@@ -22,7 +22,7 @@
                 <textarea type="text" name="corps" rows="5" class="col-12 rounded border-0"></textarea>
             </div>
             <div class="col-11 d-flex justify-content-end m-auto mb-3">
-                <button type="button" class="border-0 col-3 text-center rounded"> Send </button>
+                <button type="submit" class="border-0 col-3 text-center rounded"> Send </button>
             </div>
         </form>
     </section>
@@ -32,12 +32,13 @@
 import { HttpService } from '~/server/fetch-class/fetch';
     const err:Ref<string> = ref("")
 
-    async function submit(e:Event) {
+    async function submit_function(e:Event) {
+        e.preventDefault()
         const data = new FormData(e.target as HTMLFormElement)
+        data.forEach((er) => console.log(er))
         await HttpService.add_new_contact(data).then((response) => {
             err.value = response.data.message
-        })
-        e.preventDefault()
+        }).catch((err) => console.log(err))
     }
 </script>
 
@@ -67,5 +68,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
         font-optical-sizing: auto;
         /* font-weight: 400; */
         font-style: normal;
+    }
+    button {
+        cursor : pointer
     }
 </style>
