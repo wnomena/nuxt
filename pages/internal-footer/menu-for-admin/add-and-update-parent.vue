@@ -69,8 +69,9 @@ onMounted(async() => {
     } else {
         await HttpService.get_all_parent_road().then((res) => {
             const value:parent_road_list[] = res.data.data
-            const convert_number:String  = router.query.id?.toString() ? router.query.id?.toString() : '' 
-            const updating_title =  Array.from(value).filter((a) => a.identifiant.toString() == convert_number)
+            console.log(value) 
+            const updating_title =  Array.from(value).filter((a) => a.name == router.query.id as string)
+            console.log(updating_title)
             if(updating_title.length !== 0) {
                 title.value.value= "Update one parent road" 
                 title.value.updating_title = updating_title[0]              
@@ -81,15 +82,18 @@ onMounted(async() => {
 async function upload(e : Event) {
     e.preventDefault()
     const formData : FormData = new FormData(e.target as HTMLFormElement)
+    formData.forEach(element => {
+        console.log(element)
+    });
     if(title.value.value.split(" ")[0] == "Add") {
         await HttpService.add_new_parent_road(formData).then((response) => {
-            Method.navigate("/interanl-footer/menu-for-admin/list-of-parent")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         })
     }
     else if(title.value.value.split(" ")[0] == "Update") {
-        formData.append("ident_equal_to_parent",title.value.updating_title.identifiant.toString())
+        formData.append("identifiant",title.value.updating_title.identifiant.toString())
         await HttpService.update_parent_road(formData).then((response) => {
-            Method.navigate("/interanl-footer/menu-for-admin/list-of-parent")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         })
     }
 }

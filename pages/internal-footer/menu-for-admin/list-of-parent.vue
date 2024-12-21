@@ -52,7 +52,7 @@ function link_to_update(id: string) {
         navigateTo({
             path : "/internal-footer/menu-for-admin/add-and-update-parent",
             query : {
-                name : id
+                id : id
             }
         })
     }
