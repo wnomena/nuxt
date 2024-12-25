@@ -42,15 +42,18 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
   const store = PiniaStore()
   let err:Ref<string> = ref("")
+    const route = useRoute()
     let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
       let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         let input:Ref<string> = ref("password")
         let type:Ref<number> = ref(0)
   async function validate(e:Event) {
     let formData:FormData = new FormData(e.target as HTMLFormElement)
+    formData.append("type",type.value.toString())
     for(let [key,value] of formData.entries()) {
      if(!value) err.value = "Required field"
     }
+
     if(formData.get("new_pass") !== formData.get("confirmNewpass")) err.value = "New password not identical"
     else if(formData.get("new_pass") !== formData.get("confirmNewpass")) {
       HttpService.update_pass(formData).then((res) => {

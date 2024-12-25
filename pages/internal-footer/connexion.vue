@@ -1,6 +1,6 @@
 <template>
     <section data-aos="fade-right" class="row">
-        <div class="col-12">
+        <div class="col-12 m-2">
             <div class="row">
     <div class="col-6 d-flex flex-nowrap m-auto overflow-hidden p-0">
         <div @click="updatestyle" :class="selected">Membre</div>
@@ -8,7 +8,7 @@
     </div>
 </div>
         </div>
-        <form @submit="formvalidation" class="col-12 d-flex flex-column">
+        <form @submit="formvalidation" class="col-12 d-flex flex-column p-1">
   <div class="col-lg-4 col-md-6 col-12 m-lg-auto m-md-auto p-1 rounded">
     <div class="col-12 mt-3 mb-5"><h3 class="text-center text-light">Connexion</h3></div>
     <div class="col-12 mt-1 mb-1"><h5 class="text-center">{{ value_show }}</h5></div>
@@ -21,7 +21,7 @@
       <input class="col-11  mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="password" name="mot_de_passe" id="">
     </div> 
       <div class="col-lg-10 col-md-10 col-7 m-auto mb-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-        <button  type="submit" class="bg-primary p-2 text-light rounded">Log in</button>
+        <button  type="submit" class="bg-primary p-2 text-light rounded border-0">Log in</button>
       </div>
       <div class="validate d-flex col-12 flex-column mb-2">
         <span class="col-12 fs-5 text-lg-start text-md-start text-center"><NuxtLink to="/internal-footer/subscription" class="text-decoration-none"> Sign up </NuxtLink></span>
@@ -32,6 +32,7 @@
     </section>
 </template>
 <script setup lang="ts">
+// import type { AxiosResponse } from 'axios';
 import { Method, storage_for_token } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 import { PiniaStore } from '~/stores/token';
@@ -44,23 +45,23 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
 
 //all methods
  async function formvalidation(e:Event) {
+    e.preventDefault()
     let data:FormData = new FormData(e.target as HTMLFormElement)
     if(type.value) {
       await HttpService.login_admin(data).then((res) => {
             store.change(data.get("mail") as string,type.value)
-            Method.navigate("/")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err) => {
-            value_show.value = err.data.message
+            console.log("err")
         })
     } else {
         await HttpService.login_member(data).then((res) => {
             store.change(data.get("mail") as string,type.value)
             Method.navigate("/")
         }).catch((err) => {
-            value_show.value = err.data.message
+            console.log("err")
         })
     }
-    e.preventDefault()
  }
  function updatestyle() {
     const temp:string = selected.value

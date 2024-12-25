@@ -2,7 +2,8 @@
     <section class="row mt-3 mb-3">
         <form @submit="submit_function" class="col-lg-6 col-md-10 col-11 m-auto mb-3">
             <h1 class="text-center m-3 text-light">Contact us</h1>
-            <h6 class="text-center text-success"></h6>
+            <h3 class="text-danger text-center">{{ notification.err }}</h3>
+            <h3 class="text-success text-center">{{ notification.success }}</h3>
             <div class="col-11 m-auto mb-3 d-flex justify-content-around flex-wrap">
                 <div class="col-lg-5 col-md-5 col-12">
                     <label for="name" class="col-12 text-light fw-bold">Name</label>
@@ -30,15 +31,27 @@
 
 <script lang="ts" setup>
 import { HttpService } from '~/server/fetch-class/fetch';
-    const err:Ref<string> = ref("")
+    const notification:Ref<{err: string,success : string}> = ref({
+        err: '',
+        success : ''
+    })
 
     async function submit_function(e:Event) {
         e.preventDefault()
         const data = new FormData(e.target as HTMLFormElement)
-        data.forEach((er) => console.log(er))
+        for(let [key,value] of data.entries() ){
+            if(!value) {
+                notification.value.err = "Required field"
+                notification.value.success = ""
+                return false
+            }
+        }
         await HttpService.add_new_contact(data).then((response) => {
-            err.value = response.data.message
-        }).catch((err) => console.log(err))
+            notification.value.success = response.data.message
+            notification.value.err = ""
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 </script>
 
