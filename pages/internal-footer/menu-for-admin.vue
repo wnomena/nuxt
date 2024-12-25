@@ -1,5 +1,5 @@
 <template>
-    <section class="row">
+    <section>
         <section class="bg-transparent">
     <div class="bg-primary d-flex flex-nowrap p-1 justify-content-between">
         <span class="label_for_home d-flex justify-content w-50"><NuxtLink class="text-dark" to="/" > <h3> Acceuil</h3></NuxtLink></span>

@@ -69,31 +69,6 @@ function  fetchdelete() {
 
 </script>
 <style scoped>
-section  {
-    width: 100vw;
-    margin-top: 10px;
-}
-/* @media only screen and (min-with : 900px) { */
-    section .bg-transparent {
-        height: 400px;
-        width: 300px;
-        outline: none;
-        overflow: hidden;
-        border-radius: 10px;
-    }
-    section .bg-transparent img {
-        height: 70%;
-        width: inherit;      
-    }
-    div.d-flex div {
-        /* padding: 5px; */
-        font-weight: bold;
-        padding: 0px 5px;
-        /* padding-right: 3px; */
-        height: 30px;
-
-
-    }
     .suivant {
         border: 2px solid #4584f8;
         color: #4584f8;
@@ -124,11 +99,6 @@ section  {
     .supprimer:hover {
         background-color: red;
         color: white;
-    }
-    .app-internal-footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
     }
 /* } */
 .row:nth-child(2) {
