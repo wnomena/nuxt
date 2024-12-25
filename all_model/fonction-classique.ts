@@ -1,4 +1,5 @@
 import type { Reactive } from "vue"
+import { HttpService } from "~/server/fetch-class/fetch"
 
 export class Method {
     static navigate(url : string, query? : any) {
@@ -39,4 +40,5 @@ export class storage_for_token {
         this.token = undefined
         this.type_of_account = undefined
     }
+
 }

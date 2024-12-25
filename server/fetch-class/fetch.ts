@@ -4,7 +4,7 @@ import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 import { PiniaStore } from "~/stores/token"
 export class HttpService {
-    static url : string = `nomena.caponmada.com`
+    static url : string = `http://localhost:5000`
     //all get request
     static async get_all_parent_road() : Promise<AxiosResponse<{data :  parent_road_list[]}>> {
         return await axios.get(`${this.url}/get_all/parent_circuit`)
@@ -31,7 +31,7 @@ export class HttpService {
         return await axios.post(`${this.url}/login/login_member`, body )
     }
     static async  login_admin(body : FormData):Promise<AxiosResponse<{message : string, token : string}>> {
-        return await axios.post(`${this.url}/login`,{ body})
+        return await axios.post(`${this.url}/login`,body)
     }
     static async delete_parent_road(id : string): Promise<AxiosResponse<{message : string}>> {
         return await axios.delete(`${this.url}/utilisateurs/:mail/user/deleter/${id}`)
@@ -52,7 +52,7 @@ export class HttpService {
         return await axios.post(`${this.url}/add_new/commentary/by/member/${body.get("mail")}`,body)
     }
     static async add_new_admin(body : FormData): Promise<AxiosResponse<{message : string}>> {
-        return $fetch(`${this.url}/add_new_admin/${body.get("user_mail")}/${body.get("new_admin")}/${body.get("nom_complet")}`)
+        return await axios.post(`${this.url}/utilisateurs/by_admin/create/new_member`,body)
     }
     static async get_all_commentary():Promise<AxiosResponse<{message : string, liste :commentary_model[]}>> {
         return await axios.get(`${this.url}/get_all_commentary`)
@@ -77,7 +77,8 @@ export class HttpService {
         return await axios.delete(`${this.url}/utilisateurs/delete_admin/by_admin/:user_mail/:member_mail`)
     }
     static async update_pass(a:FormData):Promise<AxiosResponse<{message : string}>> {
-        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${a.get("mail")}/${a.get("mail")}`)
+        const Pinia = PiniaStore()
+        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${Pinia.get_mail_and_type().mail}/${Pinia.get_mail_and_type().type}`,a)
     }
     static async get_contact(name: string):Promise<AxiosResponse<{data : contact[]}>> {
         return await axios.get(`${this.url}/get_all_contact/${name}`)

@@ -259,3 +259,12 @@ export class contact {
         this.object = a
     }
 }
+export class pinia_model {
+    mail : undefined | string
+    type : number
+
+    constructor(a: undefined | string, b : number) {
+        this.mail = a
+        this.type = b
+    }
+}

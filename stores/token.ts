@@ -1,8 +1,9 @@
 import {defineStore} from "pinia"
+import type { pinia_model } from "~/all_model/model"
 export const PiniaStore = defineStore("store",{
-    state: () => {
+    state: ():pinia_model => {
         return {
-            mail : "",
+            mail : undefined,
             type : 0
         }
     },
@@ -12,10 +13,10 @@ export const PiniaStore = defineStore("store",{
         this.type = type
        },
        delete_token() {
-        this.mail = ""
+        this.mail = undefined
         this.type = 0
        },
-        get_mail():String {
+        get_mail():string | undefined {
             return this.mail
         },
         get_mail_and_type() {
@@ -23,6 +24,9 @@ export const PiniaStore = defineStore("store",{
                 mail : this.mail,
                 type :  this.type
             }
+        },
+        authenticate():boolean {
+            return this.mail && this.type == 1 ? true : false
         }
     }
 })
