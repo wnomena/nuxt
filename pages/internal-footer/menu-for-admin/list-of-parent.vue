@@ -69,7 +69,83 @@ function  fetchdelete() {
 
 </script>
 <style scoped>
+section  {
+    width: 100vw;
+    margin-top: 10px;
+}
 /* @media only screen and (min-with : 900px) { */
+    section .bg-transparent {
+        height: 400px;
+        width: 300px;
+        outline: none;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    section .bg-transparent img {
+        height: 70%;
+        width: inherit;      
+    }
+    div.d-flex div {
+        /* padding: 5px; */
+        font-weight: bold;
+        padding: 0px 5px;
+        /* padding-right: 3px; */
+        height: 30px;
+
+
+    }
+    .suivant {
+        border: 2px solid #4584f8;
+        color: #4584f8;
+        border-radius: 5px;
+        cursor: pointer;
+        /* transition: 1s; */
+    }
+    .suivant:hover {
+        background-color: #4584f8;
+        color: white;
+    }
+    .modifier {
+        border: 2px solid #4b4848;
+        color: #4b4848;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .modifier:hover {
+        background-color: #4b4848;
+        color: white;
+    }
+    .supprimer {
+        border: 2px solid red;
+        color: red;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .supprimer:hover {
+        background-color: red;
+        color: white;
+    }
+    .app-internal-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+/* } */
+.row:nth-child(2) {
+    height: 100vh;
+    display: block;
+    background-color: rgba(gray,gray,gray,alpha);
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    align-content: center;
+}
+.row:nth-child(2) .rounded {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
 
 
 </style>

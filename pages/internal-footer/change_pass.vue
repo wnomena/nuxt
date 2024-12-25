@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-center"><div class="text-center text-danger fw-bold">{{ err }}</div></div>
         <div class="mb-3 text-center col-12">
             <label for="old_pass" class="form-label col-12">Tape your password</label>
-            <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7 overflow-hidden" name="old_pass" aria-describedby="emailHelp">
+            <input :type="input" :value="route.query.old" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7 overflow-hidden" name="old_pass" aria-describedby="emailHelp">
           </div>
         <div class="mb-3 text-center col-12">
           <label for="new_pass" class="form-label col-12">Tape your new password</label>
@@ -48,6 +48,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         let input:Ref<string> = ref("password")
         let type:Ref<number> = ref(0)
   async function validate(e:Event) {
+    e.preventDefault()
     let formData:FormData = new FormData(e.target as HTMLFormElement)
     formData.append("type",type.value.toString())
     for(let [key,value] of formData.entries()) {
@@ -55,15 +56,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
     }
 
     if(formData.get("new_pass") !== formData.get("confirmNewpass")) err.value = "New password not identical"
-    else if(formData.get("new_pass") !== formData.get("confirmNewpass")) {
-      HttpService.update_pass(formData).then((res) => {
-        store.delete_token()
+    else if(formData.get("new_pass") === formData.get("confirmNewpass")) {
+      await HttpService.update_pass(formData).then((res) => {
         Method.navigate("/internal-footer/connexion")
       }).catch((error) => {
-        err.value = error.data.message
+        console.log(error)
       })
     } 
-    e.preventDefault()
   }
   function updatestyle() {
     const temp:string = selected.value

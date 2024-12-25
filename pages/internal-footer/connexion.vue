@@ -50,16 +50,22 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     if(type.value) {
       await HttpService.login_admin(data).then((res) => {
             store.change(data.get("mail") as string,type.value)
-            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+            if(res.data.message == "-1") {
+                navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
+            } else {
+                Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+            }
         }).catch((err) => {
-            console.log("err")
+            console.log(err)
+            value_show.value = err.response.data.message
         })
     } else {
         await HttpService.login_member(data).then((res) => {
             store.change(data.get("mail") as string,type.value)
             Method.navigate("/")
         }).catch((err) => {
-            console.log("err")
+            console.log(err)
+            value_show.value = err.response.data.message
         })
     }
  }
