@@ -5,9 +5,9 @@ export default defineNuxtRouteMiddleware((to,from) => {
     console.log(to.path)
     const path = to.path.split("/")
     console.log(path[2] == "menu-for-admin")
-    // if(path[2]  == 'menu-for-admin') {
-    //     if(!store.authenticate()) {
-    //        return Method.navigate("/internal-footer/connexion")
-    //     }
-    // }
+    if(path[2]  == 'menu-for-admin') {
+        if(!store.authenticate()) {
+           return Method.navigate("/internal-footer/connexion")
+        }
+    }
 })

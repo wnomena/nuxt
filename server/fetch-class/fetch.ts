@@ -4,7 +4,7 @@ import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 import { PiniaStore } from "~/stores/token"
 export class HttpService {
-    static url : string = `http://localhost:5000`
+    static url : string = `https://nomena.caponmada.com`
     //all get request
     static async get_all_parent_road() : Promise<AxiosResponse<{data :  parent_road_list[]}>> {
         return await axios.get(`${this.url}/get_all/parent_circuit`)
