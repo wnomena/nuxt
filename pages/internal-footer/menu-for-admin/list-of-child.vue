@@ -1,8 +1,8 @@
 <template>
     <section>
-    <div class="col-12 d-flex justify-content-end"><p @click="modifier((0).toString())" >Ajout</p></div> // fonction ajout
+    <div class="col-12"><p @click="modifier((0).toString())" >Ajout</p></div>
     <div class="img_contain">
-        <img :img="img" alt="" srcset=""> //add image
+        <img :img="img" alt="" srcset=""> 
     </div>
     <div class="d-flex flex-column w-50 p-1 h-auto">
         <div  v-for="i in value1" :key="i.name.toString()" class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around m-2 h-5" @click="onclick(i.presentation_image)"> //boucle for
@@ -47,6 +47,11 @@ section {
     flex-wrap: wrap;
     margin: 10px 0;
     overflow-y: hidden;
+}
+section .col-12 p {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 section .img_contain {
     width: 40%;

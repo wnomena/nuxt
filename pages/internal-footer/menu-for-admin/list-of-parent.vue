@@ -4,13 +4,15 @@
         <section v-if="confirmation" class="border col-12">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
         <section class="d-flex flex-nowrap justify-content-around">
-            <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent col-lg-3 col-md-4 col-10" > //mila an le ve for pour la liste
-                <img :src="i.presentation_image.toString()" alt="name" srcset="">
+            <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent col-lg-3 col-md-4 col-10 border p-1" >
+                <div class="col-11 m-auto">
+                    <img class="border rounded m-1 col-12" :src="i.presentation_image.toString()" alt="name" srcset="">
+                </div>
                 <h4>Nom : {{i.name}}</h4>
                 <div class="d-flex justify-content-around">
-                    <div @click="method(i)" class="suivant">Suivant</div>
-                    <div @click="link_to_update(i.name.toString())" class="modifier">Modifier</div>
-                    <div @click="deletion(i.identifiant.toString())" class="supprimer">Supprimer</div>
+                    <div @click="method(i)" class="suivant ps-1 pe-1">Suivant</div>
+                    <div @click="link_to_update(i.name.toString())" class="modifier ps-1 pe-1">Modifier</div>
+                    <div @click="deletion(i.identifiant.toString())" class="supprimer ps-1 pe-1">Supprimer</div>
                 </div>
             </div>
         </section>
@@ -41,7 +43,7 @@ onMounted(async() => {
 })
 function method(i: parent_road_list) {
         navigateTo({
-            path : "/internal-footer/list-of-child-road",
+            path : "/internal-footer/menu-for-admin/list-of-child",
             query : {
                 id : i.identifiant.toString(),
                 name : i.name.toString()
@@ -101,7 +103,7 @@ function  fetchdelete() {
         color: white;
     }
 /* } */
-.row:nth-child(2) {
+/* .row:nth-child(2) {
     height: 100vh;
     display: block;
     background-color: rgba(gray,gray,gray,alpha);
@@ -115,7 +117,5 @@ function  fetchdelete() {
     margin: auto;
     display: flex;
     flex-direction: column;
-}
-
-
+} */
 </style>

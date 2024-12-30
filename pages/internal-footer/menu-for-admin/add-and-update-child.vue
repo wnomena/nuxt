@@ -1,8 +1,8 @@
 <template>
     <section class="container-fluid m-0 p-0 w-100">
     <div class="m-0 p-0 w-full d-flex justify-content-between">
-        <h3 class="text-light"> {{ title }}</h3>
-        <span style="cursor: pointer;" class="d-flex justify-content-center bg-primary" ><i class="bi bi-chevron-left"> Retour</i></span>
+        <h3 class="text-light"> {{ title.title }}</h3>
+        <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-child', query : {id : router.query.name}}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
     </div>
     <form @submit="submit" class="w-full d-flex flex-wrap">
         <div class="bg-transparent d-flex flex-row flex-wrap">
@@ -21,34 +21,34 @@
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="">Période</label>
                 <div class="periode d-flex flex-row justify-content-around">
-                    <input :value="title.update.period.toString().split(' ')[0]" v-change="12" name="period_B"   class="border" type="number" placeholder="07"> <input :value="title.update.period.toString().split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
+                    <input :value="title.update.period.toString().split(' ')[0]" v-change="12" name="period_B"   class="border col-5" type="number" placeholder="07"> <input :value="title.update.period.toString().split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
                 </div>
             </div>
-            <div class="bg-transparent border-0 d-flex flex-column m-0">
+            <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Durée totale</label>
                 <div class="periode d-flex flex-row justify-content-around">
                     <input  name="sejours_delais_B"  class="border" type="number" placeholder="jours"> <input name="sejours_delais_E"  class="border" type="number" placeholder="nuit"> 
                 </div>
             </div>
-            <div class="bg-transparent border-0 d-flex flex-column m-0">
+            <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="difficulty">Difficulté</label>
                 <input v-change="100" name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
-            <div class="bg-transparent border-0 d-flex flex-column m-0">
+            <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="price"> Prix </label>
                 <input name="price"  class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
-            <div class="bg-transparent border-0 d-flex flex-column m-0">
+            <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Image</label>
                 <input name="image"  class="border-top-0 border-start-0 border-end-0" type="file">
             </div>
         </div>
-        <div class="bg-transparent border-0 d-flex flex-column m-0 w-auto">
+        <div class="bg-transparent  d-flex flex-column m-0 w-auto">
             <label for="">La description du circuit</label>
             <textarea  name="description" id="" placeholder="Une petite description"></textarea>
         </div>
-        <div style="width: 300px;" class="bg-transparent d-flex">
-            <span class="rounded border bg-primary" ><button type="submit">Valider</button></span><span class="rounded"><button type="reset">Annuler</button></span>
+        <div class="bg-transparent d-flex">
+            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" type="reset">Annuler</button></span>
         </div>
     </form>
 </section>
@@ -126,7 +126,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     border-left: 0;
     border-right: 0;
     font-weight: bold;
-    width: 200px;
+    /* width: 200px; */
 }
 .bg-transparent .periode input {
     width: 60px; margin: 5px;
@@ -146,6 +146,9 @@ textarea {
 }
 .bg-transparent span p {
     transform: translateY(5px);
+}
+button {
+    background-color: transparent;
 }
 @media only screen and (max-width : 990px) {
     .container-fluid .w-full .bg-transparent {
