@@ -1,7 +1,7 @@
 <template>
     <section class="row overflow-hidden">
         <div class="col-11 d-flex m-auto">
-            <div data-aos="fade-up-right" data-aos-anchor-placement="center-center" class="col-lg-3 col-md-5 col-11 border rounded m-1 items-1 overflow-hidden">
+            <div data-aos="fade-up-right" class="col-lg-3 col-md-5 col-11 border rounded m-1 items-1 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-flex align-items-end">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-anchor-placement="center-center" class="col-lg-3 col-md-5 d-lg-block d-md-block d-none  col-11 border rounded m-1 items-2 overflow-hidden">
+            <div data-aos="fade-up" class="col-lg-3 col-md-5 d-lg-block d-md-block d-none  col-11 border rounded m-1 items-2 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-flex align-items-end">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up-left" data-aos-anchor-placement="center-center" class="col-lg-3 d-lg-block d-none col-11 border rounded m-1 items-3 overflow-hidden">
+            <div data-aos="fade-up-left" class="col-lg-3 d-lg-block d-none col-11 border rounded m-1 items-3 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-lg-none d-md-none d-flex justify-content-end"><i class="bi bi-x-square"></i></div>

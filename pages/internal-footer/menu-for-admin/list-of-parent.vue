@@ -3,8 +3,8 @@
     <section class="row">
         <section v-if="confirmation" class="border col-12">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
-        <section class="d-flex flex-nowrap justify-content-around col-3 lg-3">
-            <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent" > //mila an le ve for pour la liste
+        <section class="d-flex flex-nowrap justify-content-around">
+            <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent col-lg-3 col-md-4 col-10" > //mila an le ve for pour la liste
                 <img :src="i.presentation_image.toString()" alt="name" srcset="">
                 <h4>Nom : {{i.name}}</h4>
                 <div class="d-flex justify-content-around">
