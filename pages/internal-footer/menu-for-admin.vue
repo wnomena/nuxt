@@ -40,7 +40,7 @@
         </span>
     </div>
     <div class="bg-primary d-flex flex-nowrap justify-content-between">
-        <span class="label_for_home d-flex justify-content w-50"><NuxtLink class="text-dark" to="/internal-footer/menu-for-admin/list-of-commentary"><h3>Client contact</h3></NuxtLink></span>
+        <span class="label_for_home d-flex justify-content w-50"><NuxtLink class="text-dark" to="/internal-footer/menu-for-admin/client-contact-list"><h3>Client contact</h3></NuxtLink></span>
         <span>
             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="40" fill="none" stroke="#000000" class="bi bi-chat-square-fill" viewBox="0 0 16 16">
                 <path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>

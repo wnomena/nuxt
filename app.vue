@@ -5,12 +5,11 @@
         <NuxtPage />
     </div>
 </template>
-<script lang="ts">
-    export default {
-        mounted():void {
-            document.title = "CAP ON MADA"
-        }
-    }
+<script setup lang="ts">
+    PiniaStore()
+    onMounted(() => {
+        document.title = "CAP ON MADA"
+    })
 </script>
 <style >
 @import url(https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css);

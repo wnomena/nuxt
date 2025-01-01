@@ -1,6 +1,6 @@
 <template>
-  <div class="row">
-    <div class="col-10 rounded">
+  <div class="row d-flex">
+    <div class="col-10 rounded border d-flex align-items-center">
       <p class="text-center">{{ value?.mail }}</p>
       <p class="text-center">{{ value?.object }}</p>
       <p class="text-center">{{ value?.corps }}</p>
@@ -33,6 +33,8 @@ const router = useRoute()
     }
 </script>
 
-<style>
-
+<style scoped>
+  .row {
+    height: 100vh;
+  }
 </style>

@@ -30,12 +30,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
       data : []
     })
     onMounted(async() => {
+        console.log("reponse")
         await HttpService.get_contact("").then((response) => {
+            console.log(response)
             all_value.value.data = response.data.data
         })
     })
 </script>
-
 <style scoped>
     section {
     width: 100%;
