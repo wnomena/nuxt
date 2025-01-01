@@ -23,8 +23,5 @@
     "usebootstrap": "^3.5.100",
     "vue": "latest",
     "vue-router": "latest"
-  },
-  "devDependencies": {
-    "pinia": "^2.3.0"
   }
 }
