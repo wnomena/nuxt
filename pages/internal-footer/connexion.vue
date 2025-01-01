@@ -49,11 +49,13 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     let data:FormData = new FormData(e.target as HTMLFormElement)
     if(type.value) {
       await HttpService.login_admin(data).then((res) => {
-            store.change(data.get("mail") as string,type.value)
+            // store.change(data.get("mail") as string,type.value)
             if(res.data.message == "-1") {
                 navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
             } else {
-                Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+                console.log("manin 2")
+                store.change(data.get("mail") as string,type.value)
+                navigateTo("/internal-footer/menu-for-admin/list-of-parent")
             }
         }).catch((err) => {
             console.log(err)

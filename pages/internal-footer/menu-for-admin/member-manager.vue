@@ -7,12 +7,11 @@
               </svg>
               <h3>Les membres</h3>
         </div>
-        <span style="align-items: center; width: 250px" class="return me-1 bg-primary d-flex justify-content-center">
-            <i class="bi bi-chevron-left"> <a to="admin/home/admin-or-member/SubscriptionAdminAndMemberComponent"  class="text-light text-decoration-none"> Add new</a> </i>
-        </span>
-        <span style="align-items: center; width: 250px" class="return bg-primary d-flex justify-content-center">
-            <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="internal-footer/menu-for-admin/list-of-parent" >Retour</NuxtLink></i>
-        </span>
+        <div class="d-flex">
+            <span style="align-items: center; width: 250px" class="return bg-primary d-flex justify-content-center">
+            <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="/internal-footer/menu-for-admin/list-of-parent"> Retour</NuxtLink></i>
+            </span>
+            </div>
     </div>
     <div class="commentary_list" v-for="i in all_value.data" :key="i.mail.toString()">
         <div class="container-fluid d-flex justify-content-between">
@@ -56,6 +55,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
 section .d-flex {
     width: 100%;
     background-color: #383535;
+}
+section .d-flex .d-flex {
+    width: fit-content;
 }
 i {
     font-weight: bold;

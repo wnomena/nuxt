@@ -8,12 +8,14 @@
                   </svg>
                   <h3>Admin</h3>
             </div>
-            <span style="align-items: center; width: 250px" class="return bg-primary d-flex justify-content-center">
-                <i class="bi bi-chevron-left"> <a class="text-decoration-none text-light" routerLink="admin/home/admin-or-member/SubscriptionAdminAndMemberComponent" routerLinkActive="activebutton"> Add new</a> </i>
+            <div class="d-flex">
+              <span style="align-items: center; width: 250px" class="return bg-primary d-flex justify-content-center">
+                <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="/internal-footer/menu-for-admin/add-new-admin"> Add new</NuxtLink> </i>
             </span>
             <span style="align-items: center; width: 250px" class="return bg-primary d-flex justify-content-center">
-            <i class="bi bi-chevron-left"> <a class="text-decoration-none text-light" routerLink="admin/home/list-of-parent" routerLinkActive="activebutton"> Retour</a></i>
+            <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="/internal-footer/menu-for-admin/list-of-parent"> Retour</NuxtLink></i>
             </span>
+            </div>
         </div>
         <div class="commentary_list" v-for="i in reference.data" :key="i.mot_de_passe.toString()">
             <div class="container-fluid d-flex justify-content-between">

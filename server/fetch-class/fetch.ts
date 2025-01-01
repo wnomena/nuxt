@@ -4,8 +4,12 @@ import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 import { PiniaStore } from "~/stores/token"
 export class HttpService {
-    static url : string = `https://nomena.caponmada.com`
+    static Pinia = PiniaStore()
+    static url : string = `http://localhost:5000`
     //all get request
+    static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
+        return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${this.Pinia.get_mail()}/${i}`)
+      }
     static async get_all_parent_road() : Promise<AxiosResponse<{data :  parent_road_list[]}>> {
         return await axios.get(`${this.url}/get_all/parent_circuit`)
     }
@@ -77,10 +81,12 @@ export class HttpService {
         return await axios.delete(`${this.url}/utilisateurs/delete_admin/by_admin/:user_mail/:member_mail`)
     }
     static async update_pass(a:FormData):Promise<AxiosResponse<{message : string}>> {
-        const Pinia = PiniaStore()
-        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${Pinia.get_mail_and_type().mail}/${Pinia.get_mail_and_type().type}`,a)
+        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${this.Pinia.get_mail_and_type().mail}/${this.Pinia.get_mail_and_type().type}`,a)
     }
     static async get_contact(name: string):Promise<AxiosResponse<{data : contact[]}>> {
         return await axios.get(`${this.url}/get_all_contact/${name}`)
+    }
+    static async update_contact(name: string):Promise<AxiosResponse<{message : string}>> {
+        return await axios.put(`${this.url}/update_contact/${name}`)
     }
   }

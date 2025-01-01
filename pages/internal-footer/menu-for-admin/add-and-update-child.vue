@@ -75,7 +75,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
         }
     })
     function submit(e:Event) {
+
         const formData:FormData = new FormData(e.target as HTMLFormElement)
+        formData.append("parent_ident_equal_to_child",router.query.id as string)
         for(let [key,value] of formData.entries()) {
             if(!value) {
                 location.reload()

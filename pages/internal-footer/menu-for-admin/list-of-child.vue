@@ -5,7 +5,7 @@
         <img :img="img" alt="" srcset=""> 
     </div>
     <div class="d-flex flex-column w-50 p-1 h-auto">
-        <div  v-for="i in value1" :key="i.name.toString()" class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around m-2 h-5" @click="onclick(i.presentation_image)"> //boucle for
+        <div  v-for="i in value1" :key="i.name.toString()" class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around m-2 h-5" @click="onclick(i.presentation_image)"> 
             <div  class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around w-100 ">
                 <p>Nom : {{i.name}}</p><p>Difficulté : {{i.difficulty}}</p><p>Prix : {{i.price}}</p><p>Distance : {{i.distance}}</p><p>Delais : {{i.sejour_delay}}</p> <p @click="modifier(i.name)" class="modifier"  >Modifier</p>
             </div>
@@ -37,7 +37,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
         })
     })
     function modifier(i : string) {
-        Method.navigate("/internal-footer/menu-for-admin/add-and-update-child",{name : i})
+        const root = useRoute()
+        if(root.query.id as string) Method.navigate("/internal-footer/menu-for-admin/add-and-update-child",{name : i,id : useRoute().query.id})
+        else Method.navigate("/internal-footer/menu-for-admin/add-and-update-child",{name : i})
     }
 </script>
 <style scoped>

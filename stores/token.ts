@@ -7,6 +7,7 @@ export const PiniaStore = defineStore("store",{
             type : 0
         }
     },
+    
     actions: {
        change(mail:string,type : number) {
         this.mail = mail
@@ -26,7 +27,8 @@ export const PiniaStore = defineStore("store",{
             }
         },
         authenticate():boolean {
+            console.log(this.get_mail_and_type())
             return this.mail && this.type == 1 ? true : false
         }
-    }
+    },
 })
