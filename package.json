@@ -19,9 +19,12 @@
     "nuxt-bootstrap-icons": "^2.1.0",
     "nuxt-swiper": "^2.0.0",
     "pinia-plugin-persistedstate": "^4.2.0",
-    "rxjs": "^7.8.1",
+    "rxjs": "^7.8.1", 
     "usebootstrap": "^3.5.100",
     "vue": "latest",
     "vue-router": "latest"
-  }
+  },
+  "overrides": {
+  "vue": "latest"
+}
 }

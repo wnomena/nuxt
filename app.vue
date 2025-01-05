@@ -6,7 +6,6 @@
     </div>
 </template>
 <script setup lang="ts">
-    PiniaStore()
     onMounted(() => {
         document.title = "CAP ON MADA"
     })

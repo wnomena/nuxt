@@ -1,14 +1,12 @@
 import { LocationQueryValue } from "vue-router"
-import { PiniaStore } from "~/stores/token"
-const Pinia = PiniaStore()
+import { Pinia } from "~/stores/token"
 import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 export class HttpService {
-    // static Pinia = PiniaStore()
-    static url : string = `https://nomena.caponmada.com`
+    private static url : string = `http://localhost:5000` /*s://nomena.caponmada.com*/ 
     //all get request
     static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
-        return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Pinia.get_mail()}/${i}`)
+        return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Pinia.get().mail}/${i}`)
       }
     static async get_all_parent_road() : Promise<AxiosResponse<{data :  parent_road_list[]}>> {
         return await axios.get(`${this.url}/get_all/parent_circuit`)
@@ -50,7 +48,7 @@ export class HttpService {
         return await axios.post(`${this.url}/client-contact`,a)
     }
     // static async delete_member(member_mail: String): Promise<AxiosResponse<{message : string}>> {
-    //     return await axios.delete(`${this.url}/utilisateurs/${Store.get_mail_and_type().type}/user/deleter/${member_mail}`)
+    //     return await axios.delete(`${this.url}/utilisateurs/${Pinia.get_mail_and_type().type}/user/deleter/${member_mail}`)
     // }
     static async put_new_commnetary(body : FormData):Promise<AxiosResponse<{message : string}>> {
         return await axios.post(`${this.url}/add_new/commentary/by/member/${body.get("mail")}`,body)
@@ -81,7 +79,7 @@ export class HttpService {
         return await axios.delete(`${this.url}/utilisateurs/delete_admin/by_admin/:user_mail/:member_mail`)
     }
     static async update_pass(a:FormData):Promise<AxiosResponse<{message : string}>> {
-        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${Pinia.get_mail_and_type().mail}/${Pinia.get_mail_and_type().type}`,a)
+        return await axios.put(`${this.url}/utilisateurs/update/password/admin/${Pinia.get().mail}/${Pinia.get().type}`,a)
     }
     static async get_contact(name: string):Promise<AxiosResponse<{data : contact[]}>> {
         return await axios.get(`${this.url}/get_all_contact/${name}`)

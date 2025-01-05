@@ -33,10 +33,10 @@
 </template>
 <script setup lang="ts">
 // import type { AxiosResponse } from 'axios';
-import { Method, storage_for_token } from '~/all_model/fonction-classique';
+import { Method } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-import { PiniaStore } from '~/stores/token';
-const store = PiniaStore()
+import { Pinia } from "~/stores/token";
+
 let value_show = ref("")
 let type:Ref<number> = ref(0)
 
@@ -49,12 +49,11 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     let data:FormData = new FormData(e.target as HTMLFormElement)
     if(type.value) {
       await HttpService.login_admin(data).then((res) => {
-            // store.change(data.get("mail") as string,type.value)
             if(res.data.message == "-1") {
                 navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
             } else {
                 console.log("manin 2")
-                store.change(data.get("mail") as string,type.value)
+                Pinia.set(data.get("mail") as string,type.value)
                 navigateTo("/internal-footer/menu-for-admin/list-of-parent")
             }
         }).catch((err) => {
@@ -63,7 +62,7 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         })
     } else {
         await HttpService.login_member(data).then((res) => {
-            store.change(data.get("mail") as string,type.value)
+            Pinia.set(data.get("mail") as string,type.value)
             Method.navigate("/")
         }).catch((err) => {
             console.log(err)

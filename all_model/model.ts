@@ -247,16 +247,20 @@ export class val {
     }
 }
 export class contact {
+    _id : string
     name : string
     mail : string
     object : string
     corps : string
+    seen : boolean
 
-    constructor(a: string) {
+    constructor(a: string,b: true) {
+        this._id = a
         this.corps = a
         this.mail = a
         this.name = a
         this.object = a
+        this.seen = b
     }
 }
 export class pinia_model {

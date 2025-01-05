@@ -1,34 +1,32 @@
-import {defineStore} from "pinia"
+import {createPinia, defineStore, setActivePinia} from "pinia"
 import type { pinia_model } from "~/all_model/model"
-export const PiniaStore = defineStore("store",{
-    state: ():pinia_model => {
-        return {
-            mail : undefined,
-            type : 0
-        }
+
+const useCounterStore = defineStore('counter', {
+    state: () => ({ type: 0, mail: '' }),
+    getters: {
+      doubleCount: (state) => state.type * 2,
     },
-    
     actions: {
-       change(mail:string,type : number) {
-        this.mail = mail
-        this.type = type
-       },
-       delete_token() {
-        this.mail = undefined
-        this.type = 0
-       },
-        get_mail():string | undefined {
-            return this.mail
-        },
-        get_mail_and_type() {
+        get(): pinia_model {
             return {
                 mail : this.mail,
-                type :  this.type
+                type : this.type
             }
         },
-        authenticate():boolean {
-            console.log(this.get_mail_and_type())
-            return this.mail && this.type == 1 ? true : false
+        set(mail : string, type : number) {
+            this.mail = mail,
+            this.type = type
+        },
+        delete() {
+            this.mail = '',
+            this.type = 0
+        },
+        authenticate():Boolean {
+            return this.mail.length > 4 && this.type > 0 ? true : false
         }
     },
-})
+  })
+  
+const pinia = createPinia()
+setActivePinia(pinia)
+export const Pinia = useCounterStore()

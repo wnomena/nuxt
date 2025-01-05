@@ -11,7 +11,7 @@
             <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="internal-footer/menu-for-admin/list-of-parent" >Retour</NuxtLink></i>
         </span>
     </div>
-    <div class="commentary_list" v-for="i in all_value.data" :key="i.mail.toString()">
+    <div class="commentary_list" v-for="i in all_value.data" :key="i.mail.toString()" @click="next(i._id)">
         <div class="container-fluid d-flex justify-content-between">
             <span>Nom : {{ i.name }}</span>
             <span> E-mail : {{ i.mail }}</span>
@@ -31,11 +31,19 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
     onMounted(async() => {
         console.log("reponse")
-        await HttpService.get_contact("").then((response) => {
+        await HttpService.get_contact("test").then((response) => {
             console.log(response)
             all_value.value.data = response.data.data
         })
     })
+    function next(_id : string) {
+        navigateTo({
+            path : "/internal-footer/menu-for-admin/full-information-client",
+            query : {
+                _id : _id
+            }
+        })
+    }
 </script>
 <style scoped>
     section {
@@ -57,6 +65,7 @@ i {
 section .commentary_list {
     width: 100%;
     background-color: white;
+    cursor: pointer;
 }
 section .commentary_list .container-fluid{
     width: 100%;
