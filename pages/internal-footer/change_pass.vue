@@ -39,8 +39,6 @@
 <script lang="ts" setup>
 import { Method } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-
-  const store = PiniaStore()
   let err:Ref<string> = ref("")
     const route = useRoute()
     let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
