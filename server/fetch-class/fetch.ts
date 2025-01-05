@@ -3,7 +3,7 @@ import { Pinia } from "~/stores/token"
 import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 export class HttpService {
-    private static url : string = `http://localhost:5000` /*s://nomena.caponmada.com*/ 
+    private static url : string = `https://nomena.caponmada.com`
     //all get request
     static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
         return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Pinia.get().mail}/${i}`)
