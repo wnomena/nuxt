@@ -38,7 +38,7 @@
           </div>
           <div class="collapse row bg-transparent p-0 m-0" id="collapseExample">
     <div class="col-12 d-flex p-0 m-0">
-        <div  class="col-lg-4 col-4 h-auto"><p v-if="mail.type == 1" class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-person-fill-gear"> Page admin</i></p><p v-if="mail.type == 0" class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-person-fill-gear"> New commentary</i></p></div>
+        <div  class="col-lg-4 col-4 h-auto"><p v-if="mail.type  == 1" class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-person-fill-gear"> Page admin</i></p><p v-if="mail.type == 0" class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-person-fill-gear"> New commentary</i></p></div>
 
         <div  class="col-lg-4 col-4 h-auto"><NuxtLink to="/internal-footer/change_pass" class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-gear-fill"> Change pass</i></NuxtLink></div>
         <div @click="deco" class="col-lg-4 col-4 h-auto"><p class="fw-bold border d-flex justify-content-center align-items-center bg-success mb-0"><i class="bi bi-box-arrow-right"> Log out</i></p></div>
@@ -48,14 +48,13 @@
 </section>
 </template>
 <script setup lang="ts">
-const store = PiniaStore()
+import { Pinia } from "~/stores/token"
 const mail = computed(() => {
-    return store.get_mail_and_type()
+    return Pinia.get()
 })
-const deco = () => store.delete_token()
+const deco = () => Pinia.delete()
 </script>
 <style scoped>
-    /* @import url("node_modules/bootstrap/dist/css/bootstrap.min.css"); */
   span {
     font-family: sans-serif;
     font-weight: bold;
