@@ -47,9 +47,6 @@ export class HttpService {
         a.forEach((er) => console.log(er))
         return await axios.post(`${this.url}/client-contact`,a)
     }
-    // static async delete_member(member_mail: String): Promise<AxiosResponse<{message : string}>> {
-    //     return await axios.delete(`${this.url}/utilisateurs/${Pinia.get_mail_and_type().type}/user/deleter/${member_mail}`)
-    // }
     static async put_new_commnetary(body : FormData):Promise<AxiosResponse<{message : string}>> {
         return await axios.post(`${this.url}/add_new/commentary/by/member/${body.get("mail")}`,body)
     }
@@ -76,7 +73,7 @@ export class HttpService {
     }
     static async delete_other_admin(mail:string) {
         //mbola mila gestion d'etat ahafahana maka an le données users
-        return await axios.delete(`${this.url}/utilisateurs/delete_admin/by_admin/:user_mail/:member_mail`)
+        return await axios.delete(`${this.url}/utilisateurs/delete_admin/by_admin/${Pinia.get().mail}/${mail}`)
     }
     static async update_pass(a:FormData):Promise<AxiosResponse<{message : string}>> {
         return await axios.put(`${this.url}/utilisateurs/update/password/admin/${Pinia.get().mail}/${Pinia.get().type}`,a)
