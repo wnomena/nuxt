@@ -50,6 +50,7 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     if(type.value) {
       await HttpService.login_admin(data).then((res) => {
             if(res.data.message == "-1") {
+                
                 navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
             } else {
                 console.log("manin 2")
