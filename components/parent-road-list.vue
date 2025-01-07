@@ -7,7 +7,7 @@
         <div class="d-grid col-11 m-auto">
             <div class="icon items-1"><i class="bi bi-arrow-left-circle-fill text-primary d-flex align-items-center" ></i></div>
                 <div class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden">
-                    <NuxtLink v-for="i in refs.table" :key="i.name.toString()" :to="{path: '/internal-footer/list-of-child-road',query : {id : i.identifiant.toString()}}" class="card-link col-4">
+                    <NuxtLink v-for="i in refs.table" :key="i.name.toString()" :to="{path: '/internal-footer/list-of-child-road',query : {id : i.identifiant.toString()}}" class="card-link col-lg-4 col-md-5 col-10">
                         <img :src="i.presentation_image.toString()" alt="Card Image" class="card-image bg-light">
                         <p class="badge developer">{{ i.name }}</p>
                         <h2 class="card-title"> From £ {{ i.price }}</h2>
