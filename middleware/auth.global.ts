@@ -1,13 +1,14 @@
 import { Method } from "~/all_model/fonction-classique"
-import { Pinia } from '~/stores/token';
+import {createPinia, defineStore, setActivePinia} from "pinia"
+import { useCounterStore } from "~/stores/token"
+// const pinia = createPinia()
+// setActivePinia(pinia)
+// const Pinia = useCounterStore()
 
 export default defineNuxtRouteMiddleware((to,from) => {
-    console.log(to.path)
     const path = to.path.split("/")
-    console.log(path[2] == "menu-for-admin")
     if(path[2]  == 'menu-for-admin') {
-        if(!Pinia.authenticate()) {
+        if(!Teste.authenticate()) {
            return Method.navigate("/internal-footer/connexion")
-        }
-    }
+        }}
 })

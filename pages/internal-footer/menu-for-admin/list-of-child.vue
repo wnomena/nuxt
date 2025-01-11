@@ -1,6 +1,6 @@
 <template>
     <section>
-    <div class="col-12"><p @click="modifier((0).toString())" >Ajout</p></div>
+    <div class="col-12"><p @click="modifier('')" >Ajout</p></div>
     <div class="img_contain">
         <img :img="img" alt="" srcset=""> 
     </div>
@@ -27,6 +27,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     }
     onMounted(async() => {
         const id = useRoute().query.id
+         console.log(useRoute().query.id)
         await HttpService.get_all_child_road(id).then((value) => {
             const tout = value.data.data
             for(let i = 0; i <  tout.length; i++) {
@@ -38,8 +39,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
     function modifier(i : string) {
         const root = useRoute()
-        if(root.query.id as string) Method.navigate("/internal-footer/menu-for-admin/add-and-update-child",{name : i,id : useRoute().query.id})
-        else Method.navigate("/internal-footer/menu-for-admin/add-and-update-child",{name : i})
+        if(!i) navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string}})
+        else navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { name : i}})
     }
 </script>
 <style scoped>
