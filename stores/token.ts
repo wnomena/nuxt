@@ -1,10 +1,12 @@
 import {createPinia, defineStore, setActivePinia} from "pinia"
 import type { pinia_model } from "~/all_model/model"
 
-const useCounterStore = defineStore('counter', {
-    state: () => ({ type: 0, mail: '' }),
-    getters: {
-      doubleCount: (state) => state.type * 2,
+export const useCounterStore = defineStore('counter', {
+    state: () => {
+        return {
+            type : 0,
+            mail : ""
+        }
     },
     actions: {
         get(): pinia_model {
@@ -27,6 +29,32 @@ const useCounterStore = defineStore('counter', {
     },
   })
   
-const pinia = createPinia()
-setActivePinia(pinia)
-export const Pinia = useCounterStore()
+// const pinia = createPinia()
+// setActivePinia(pinia)
+// export const Pinia = useCounterStore()
+
+export let Teste = {
+    type : ref(0),
+    mail : ref(""),
+    get : function(){
+        return {
+            mail : this.mail.value,
+            type : this.type.value
+        }
+    },
+    set : function(mail : string, type : number) {
+        this.mail.value = mail
+        this.type.value = type
+    },
+    delete : function() {
+        this.mail.value = ""
+        this.type.value = 0
+    },
+    authenticate : function() {
+        return this.mail.value && this.type.value == 1 ? true : false
+    }
+}
+
+function get() {
+    throw new Error("Function not implemented.")
+}

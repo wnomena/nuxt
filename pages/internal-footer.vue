@@ -38,6 +38,8 @@
 <style scoped>
 footer {
     width: 100vw;
+    position: fixed;
+    bottom: 0;
 }
 section.mb-4 {
     margin: auto;
@@ -48,4 +50,10 @@ section.mb-4 {
 svg:hover {
     fill: #ffffff;
 }
+@media (min-width: 900px) {
+  footer {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+}}
 </style>

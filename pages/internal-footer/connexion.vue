@@ -35,7 +35,7 @@
 // import type { AxiosResponse } from 'axios';
 import { Method } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-import { Pinia } from "~/stores/token";
+import { useCounterStore } from '~/stores/token';
 
 let value_show = ref("")
 let type:Ref<number> = ref(0)
@@ -54,7 +54,8 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
                 navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
             } else {
                 console.log("manin 2")
-                Pinia.set(data.get("mail") as string,type.value)
+                Teste.set(data.get("mail") as string,type.value)
+                console.log(Teste.authenticate())
                 navigateTo("/internal-footer/menu-for-admin/list-of-parent")
             }
         }).catch((err) => {
@@ -63,7 +64,7 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         })
     } else {
         await HttpService.login_member(data).then((res) => {
-            Pinia.set(data.get("mail") as string,type.value)
+            Teste.set(data.get("mail") as string,type.value)
             Method.navigate("/")
         }).catch((err) => {
             console.log(err)

@@ -21,13 +21,13 @@
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="">Période</label>
                 <div class="periode d-flex flex-row justify-content-around">
-                    <input :value="title.update.period.toString().split(' ')[0]" v-change="12" name="period_B"   class="border col-5" type="number" placeholder="07"> <input :value="title.update.period.toString().split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
+                    <input :value="title.update.period.split(' ')[0]" v-change="12" name="period_B"   class="border col-5" type="number" placeholder="07"> <input :value="title.update.period.split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
                 </div>
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Durée totale</label>
                 <div class="periode d-flex flex-row justify-content-around">
-                    <input  name="sejours_delais_B"  class="border" type="number" placeholder="jours"> <input name="sejours_delais_E"  class="border" type="number" placeholder="nuit"> 
+                    <input :value="title.update.sejour_delay.split(' ')[0]" name="sejours_delais_B"  class="border" type="number" placeholder="jours"> <input name="sejours_delais_E" :value="title.update.sejour_delay.split(' ')[1]" class="border" type="number" placeholder="nuit"> 
                 </div>
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
@@ -66,7 +66,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
     onMounted(async() => {
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
-            await HttpService.get_one_child_road(router.query.id as string).then((response) => {
+            console.log(router.query.name)
+            await HttpService.get_one_child_road(router.query.name as string).then((response) => {
+                console.log(response)
                 title.value.update = response.data
             })
         }
@@ -74,19 +76,20 @@ import { HttpService } from '~/server/fetch-class/fetch';
             title.value.title = "Add new child road"
         }
     })
-    function submit(e:Event) {
-
+    async function submit(e:Event) {
+        e.preventDefault()
         const formData:FormData = new FormData(e.target as HTMLFormElement)
         formData.append("parent_ident_equal_to_child",router.query.id as string)
         for(let [key,value] of formData.entries()) {
             if(!value) {
-                location.reload()
+                alert("Required field")
+                break
             }else if(title.value.title.split(" ")[0] == "Add") {
-                HttpService.add_new_child_road(formData).then((response) => {
+                await HttpService.add_new_child_road(formData).then((response) => {
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
-                HttpService.update_child_road(formData).then((response) => {
+                await HttpService.update_child_road(formData).then((response) => {
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 })
             }
