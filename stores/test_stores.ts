@@ -17,4 +17,4 @@ export class Token {
         this.type.value = 0
     }
 }
-export const token = new Token()
+export const Pinia = new Token()
