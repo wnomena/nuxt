@@ -46,7 +46,7 @@
                 <button type="submit" id="button">Enregistrer</button>
             </div>
             <div class="bg-transparent d-flex justify-content-start w-50">
-                <button type="reset" id="cancel">Annuler</button>
+                <button @click="()=>navigateTo('/internal-footer/menu-for-admin/list-of-parent')" id="cancel">Annuler</button>
             </div>
         </div>
     </form>

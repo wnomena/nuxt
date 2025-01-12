@@ -48,7 +48,7 @@
             <textarea  name="description" id="" placeholder="Une petite description"></textarea>
         </div>
         <div class="bg-transparent d-flex">
-            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" type="reset">Annuler</button></span>
+            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" @click="()=>navigateTo('/internal-footer/menu-for-admin/list-of-parent')" >Annuler</button></span>
         </div>
     </form>
 </section>
