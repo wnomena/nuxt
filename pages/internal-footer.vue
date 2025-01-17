@@ -36,11 +36,11 @@
 
 </template>
 <style scoped>
-footer {
+/* footer {
     width: 100vw;
     position: fixed;
     bottom: 0;
-}
+} */
 section.mb-4 {
     margin: auto;
     width: 400px;
@@ -50,10 +50,10 @@ section.mb-4 {
 svg:hover {
     fill: #ffffff;
 }
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
   footer {
     width: 100vw;
     position: fixed;
     bottom: 0;
-}}
+}} */
 </style>
