@@ -3,10 +3,10 @@
     <section class="row">
         <section v-if="confirmation" class="border col-12">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
-        <section class="d-flex flex-nowrap justify-content-around">
+        <section class="d-flex flex-nowrap justify-content-around" style="height : 60vh">
             <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent col-lg-3 col-md-4 col-10 border p-1" >
                 <div class="col-11 m-auto">
-                    <img class="border rounded m-1 col-12" :src="i.presentation_image.toString()" alt="name" srcset="">
+                    <img style="height : 70%" class="border rounded m-1 col-12" :src="i.presentation_image.toString()" alt="name" srcset="">
                 </div>
                 <h4>Nom : {{i.name}}</h4>
                 <div class="d-flex justify-content-around">

@@ -42,3 +42,9 @@ export class storage_for_token {
     }
 
 }
+export function add_or_udate(type : string):Boolean | undefined {
+    if(type.split(" ")[0] == "Add") {
+        return false
+    }
+    else return true
+}
