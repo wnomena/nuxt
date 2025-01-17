@@ -28,7 +28,8 @@ let reference :Ref<{value  : child_road_for_display[]}> = ref({
 })
 
 onMounted(async() => {
-    await HttpService.get_all_child_road("fdghcfgh").then((res) => {
+    await HttpService.get_all_child_road("0").then((res) => {
+        console.log(res)
         reference.value.value = res.data.data
     })
 })

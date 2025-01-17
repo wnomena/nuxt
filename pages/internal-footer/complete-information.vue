@@ -64,14 +64,17 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
     onMounted(() => {
         if(router.query.name) HttpService.get_one_child(router.query.name).then((res) => {
-            reference.value.value_to_show = [res.data]
+            console.log(res.data.data)
+            reference.value.value_to_show = [res.data.data]
         })
         else Method.navigate("/")
     })
 </script>
 
-<style>
-
+<style scoped>
+.row {
+    overflow-y: scroll;
+}
 .row .col-12 .row .col-4 {
     box-shadow: 5px 5px 10px gray;
 }

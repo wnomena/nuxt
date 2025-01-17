@@ -3,7 +3,7 @@ import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 import { Teste, useCounterStore } from "~/stores/token"
 export class HttpService {
-    private static url : string = `https://nomena.caponmada.com`
+    private static url : string = `http://localhost:5000`
     //all get request
     static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
         return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Teste.get().mail}/${i}`)
@@ -18,12 +18,13 @@ export class HttpService {
         return await axios.get(`${this.url}/public_get/one_road/${name}`)
     }
     static async get_all_child_road(id:string | LocationQueryValue[] | LocationQueryValue):Promise<AxiosResponse<fetch_clild_road>> {
+        console.log(id)
         return await axios.get(`${this.url}/${id}/public/way`)
     }
     static async get_all_member(params : string): Promise<AxiosResponse<{message : string,data :  member_model[]}>> {
         return await axios.get(`${this.url}/get_admin_or_member/${params}`)
     }
-    static async get_one_child(name : string | LocationQueryValue | LocationQueryValue[]):Promise<AxiosResponse<child_road_list>>{
+    static async get_one_child(name : string | LocationQueryValue | LocationQueryValue[]):Promise<AxiosResponse<{data: child_road_list, message : string}>>{
         return await axios.get(`${this.url}/public_get/one_road/${name}`)
     }
     static async subscription(body : FormData):Promise<AxiosResponse<{message : string}>> {
