@@ -54,6 +54,7 @@
 </template>
 <script lang="ts" setup>
 // import type { Reactive } from 'vue';
+import type { AxiosError } from 'axios';
 import { Method } from '~/all_model/fonction-classique';
 import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
@@ -88,13 +89,17 @@ async function upload(e : Event) {
     if(title.value.value.split(" ")[0] == "Add") {
         await HttpService.add_new_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
-        })
+        }).catch((err:AxiosError<{message : string}>) => {
+                    alert(err.response?.data.message)
+                })
     }
     else if(title.value.value.split(" ")[0] == "Update") {
         formData.append("identifiant",title.value.updating_title.identifiant.toString())
         await HttpService.update_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
-        })
+        }).catch((err:AxiosError<{message : string}>) => {
+                    alert(err.response?.data.message)
+                })
     }
 }
 </script>

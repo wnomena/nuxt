@@ -1,5 +1,6 @@
 import type { Reactive } from "vue"
 import { HttpService } from "~/server/fetch-class/fetch"
+import { Month } from "./model"
 
 export class Method {
     static navigate(url : string, query? : any) {
@@ -47,4 +48,12 @@ export function add_or_udate(type : string):Boolean | undefined {
         return false
     }
     else return true
+}
+export function period_function(i : string):string {
+    let table:string[] = []
+    const a = i.split(" ")
+    for(let i of a) {
+        table.push(Month(parseInt(i)))
+    }
+    return `${table[0]} - ${table[1]}`
 }

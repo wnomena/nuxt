@@ -97,8 +97,7 @@ export function Month(number : number) {
     else if(number == 9) return "September"
     else if(number == 10) return "October"
     else if(number == 11) return "November"
-    else if(number == 12) return "December"
-    else return false
+    else  return "December"
 }
 export function inversed_month(month : string) {
     if(month == "January") return 1
