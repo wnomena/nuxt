@@ -8,7 +8,7 @@
         <div class="bg-transparent d-flex flex-row flex-wrap">
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="name">Le nom de votre circuit</label>
-                <input :value="title.update.name" name="name"  class="border-top-0 border-start-0 border-end-0" desabled  type="text">
+                <input :value="title.update.name" name="name"  class="border-top-0 border-start-0 border-end-0" :disabled="add_or_udate(title.title)"  type="text">
             </div>
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="distance">Distance à parcourir</label>
@@ -32,11 +32,11 @@
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="difficulty">Difficulté</label>
-                <input v-change="100" name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
+                <input :value="title.update.difficulty" v-change="100" name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="price"> Prix </label>
-                <input name="price"  class="border-top-0 border-start-0 border-end-0" type="number">
+                <input name="price" :value="title.update.price" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Image</label>
@@ -54,7 +54,7 @@
 </section>
 </template>
 <script lang="ts" setup>
-import { Method } from '~/all_model/fonction-classique';
+import { add_or_udate, Method } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
@@ -62,29 +62,33 @@ import { HttpService } from '~/server/fetch-class/fetch';
         title : "",
         update : {name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []}
     })
-
     onMounted(async() => {
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)
             await HttpService.get_one_child_road(router.query.name as string).then((response) => {
-                console.log(response)
-                title.value.update = response.data
+                console.log(response.data.data)
+                title.value.update = response.data.data
             })
         }
         else {
             title.value.title = "Add new child road"
         }
     })
+    // const type = () => add_or_udate(title.value.title)
     async function submit(e:Event) {
         e.preventDefault()
         const formData:FormData = new FormData(e.target as HTMLFormElement)
-        formData.append("parent_ident_equal_to_child",router.query.id as string)
+        formData.append("name",router.query.name as string)
         for(let [key,value] of formData.entries()) {
+            console.log(key,value)
             if(!value) {
+                console.log(key)
                 alert("Required field")
-                break
-            }else if(title.value.title.split(" ")[0] == "Add") {
+                return false
+            }
+        }
+        if(title.value.title.split(" ")[0] == "Add") {
                 await HttpService.add_new_child_road(formData).then((response) => {
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 })
@@ -93,7 +97,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 })
             }
-        }
+        
     }
 </script>
 <style scoped>
