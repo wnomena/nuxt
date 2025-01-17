@@ -4,6 +4,7 @@
         <h3 class="text-light"> {{ title.title }}</h3>
         <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-child', query : {id : router.query.name}}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
     </div>
+    <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
     <form @submit="submit" class="w-full d-flex flex-wrap">
         <div class="bg-transparent d-flex flex-row flex-wrap">
             <div class="bg-transparent border-0 d-flex flex-column m-0">
@@ -59,7 +60,10 @@ import { add_or_udate, Method } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
-    const title: Ref<{title: string , update : child_road_list}> = ref({
+    const title: Ref<{
+        alert: string;title: string , update : child_road_list
+}> = ref({
+        alert : "",
         title : "",
         update : {name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []}
     })
@@ -85,7 +89,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
             console.log(key,value)
             if(!value) {
                 console.log(key)
-                alert("Required field")
+                 title.value.alert = ` Required field : ${key}`
                 return false
             }
         }
@@ -94,14 +98,14 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 }).catch((err:AxiosError<{message : string}>) => {
-                    alert(err.response?.data.message)
+                    title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
                 await HttpService.update_child_road(formData).then((response) => {
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 }).catch((err:AxiosError<{message : string}>) => {
-                    alert(err.response?.data.message)
+                    title.value.alert =  err.response?.data.message as string
                 })
             }
         
