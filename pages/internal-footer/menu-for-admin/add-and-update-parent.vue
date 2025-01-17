@@ -4,6 +4,7 @@
         <h3>{{ title.value }}</h3>
         <span class="d-flex bg-primary"><NuxtLink class="text-decoration-none text-light m-auto" to="/internal-footer/menu-for-admin/list-of-parent"><i class="bi bi-chevron-left"> Retour</i></NuxtLink></span>
     </div>
+    <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
     <form v-empty @submit="upload" class="bg-transparent w-100 m-top-10 d-flex flex-wrap">
         <div class="col-6 d-flex bg-transparent flex-row">
             <div class="bg-transparent d-flex flex-column" >
@@ -60,7 +61,8 @@ import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
 const router = useRoute()
-const title : Ref<{value : string, updating_title : parent_road_list}> = ref({
+const title : Ref<{value : string, updating_title : parent_road_list,alert : string}> = ref({
+    alert : "",
     value : "",
     updating_title : { identifiant : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''}
 })
@@ -79,18 +81,21 @@ onMounted(async() => {
             }
         })
     }
-})
+}) 
 async function upload(e : Event) {
     e.preventDefault()
     const formData : FormData = new FormData(e.target as HTMLFormElement)
     formData.forEach(element => {
         console.log(element)
+        if(!element) {
+            title.value.alert = "Required field"
+        }
     });
     if(title.value.value.split(" ")[0] == "Add") {
         await HttpService.add_new_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err:AxiosError<{message : string}>) => {
-                    alert(err.response?.data.message)
+            title.value.alert =  err.response?.data.message as string
                 })
     }
     else if(title.value.value.split(" ")[0] == "Update") {
@@ -98,7 +103,7 @@ async function upload(e : Event) {
         await HttpService.update_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err:AxiosError<{message : string}>) => {
-                    alert(err.response?.data.message)
+                    title.value.alert =  err.response?.data.message as string
                 })
     }
 }
