@@ -3,7 +3,7 @@ import  axios, { Axios, AxiosHeaders, AxiosResponse } from "axios"
 import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
 import { Teste, useCounterStore } from "~/stores/token"
 export class HttpService {
-    private static url : string = `http://localhost:5000`
+    private static url : string = `https://nomena.caponmada.com`
     //all get request
     static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
         return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Teste.get().mail}/${i}`)
