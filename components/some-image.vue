@@ -133,6 +133,10 @@ section {
     display: block;
     height: 50%;
 }
+.row .col-11 .col-lg-3 .bg-primary .contain:active {
+    transform: translateY(50%);
+    transition: 0.5s;
+}
 .row .col-11 .col-lg-3 .bg-primary .contain:hover > .col-12 {
     color: #1492E6;
 }

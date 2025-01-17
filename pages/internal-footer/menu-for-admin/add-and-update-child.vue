@@ -54,6 +54,7 @@
 </section>
 </template>
 <script lang="ts" setup>
+import { AxiosError } from 'axios';
 import { add_or_udate, Method } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
@@ -79,7 +80,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     async function submit(e:Event) {
         e.preventDefault()
         const formData:FormData = new FormData(e.target as HTMLFormElement)
-        formData.append("name",router.query.name as string)
+        formData.append("parent_ident_equal_to_child",router.query.id as string)
         for(let [key,value] of formData.entries()) {
             console.log(key,value)
             if(!value) {
@@ -90,11 +91,17 @@ import { HttpService } from '~/server/fetch-class/fetch';
         }
         if(title.value.title.split(" ")[0] == "Add") {
                 await HttpService.add_new_child_road(formData).then((response) => {
+                    console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+                }).catch((err:AxiosError<{message : string}>) => {
+                    alert(err.response?.data.message)
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
                 await HttpService.update_child_road(formData).then((response) => {
+                    console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+                }).catch((err:AxiosError<{message : string}>) => {
+                    alert(err.response?.data.message)
                 })
             }
         

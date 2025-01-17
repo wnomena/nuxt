@@ -11,10 +11,10 @@
                     <i class="bi bi-geo-alt-fill"> Distance à parcourir : {{ i.distance }} Km</i>
                 </div>
                 <div class="col-12 m-1">
-                    <i class="bi bi-clock-fill"> Durée total : {{ i.sejour_delay }}</i>
+                    <i class="bi bi-clock-fill"> Durée total : {{ i.sejour_delay.split(" ")[0] }} Days - {{ i.sejour_delay.split(" ")[1] }} Night</i>
                 </div>
                 <div class="col-12 m-1">
-                    <i class="bi bi-calendar-plus"> Période : {{ i.period }}</i>
+                    <i class="bi bi-calendar-plus"> Période : {{ period_function(i.period) }}</i>
                 </div>
                 <div class="col-12 m-1">
                     <i class="bi bi-graph-up-arrow"> Difficulté : <progress class="pt-2" id="file" max="100" :value="i.difficulty">yujfgy</progress>
@@ -42,9 +42,9 @@
                             <p class="col-8 text-center" > Pour mieux organiser votre voyage, nous vous invitons à nous joindre à l'aide de ces moyens de contact cité ci dessous</p>
                         </div>
                         <div class="bg d-flex justify-content-center gap-2 mb-1">
-                            <div class="bg-primary"><i class="bi bi-telephone-fill"> +261 34 10 512 08</i></div>
-                            <div class="bg-primary"><i class="bi bi-envelope-at-fill"> wnomena</i></div>
-                            <div class="bg-primary"><i class="bi bi-currency-pound"> Demander un devis</i></div>
+                            <div class="bg-primary"><i class="bi bi-telephone-fill"> +261 38 57 589 64</i></div>
+                            <div class="bg-primary"><i class="bi bi-envelope-at-fill">contact@caponmada.com</i></div>
+
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Method } from '~/all_model/fonction-classique';
+import { Method, period_function } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
