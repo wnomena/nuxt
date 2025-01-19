@@ -33,6 +33,7 @@
 </template>
 <script setup lang="ts">
 // import type { AxiosResponse } from 'axios';
+import type { AxiosError } from 'axios';
 import { Method } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 import { useCounterStore } from '~/stores/token';
@@ -58,9 +59,9 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
                 console.log(Teste.authenticate())
                 navigateTo("/internal-footer/menu-for-admin/list-of-parent")
             }
-        }).catch((err) => {
+        }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
-            value_show.value = err.response.data.message
+            value_show.value = err.response ? err.response.data.message
         })
     } else {
         await HttpService.login_member(data).then((res) => {
