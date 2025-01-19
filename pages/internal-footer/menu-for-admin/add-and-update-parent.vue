@@ -95,6 +95,7 @@ async function upload(e : Event) {
         await HttpService.add_new_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err:AxiosError<{message : string}>) => {
+            console.log(err)
             title.value.alert =  err.response?.data.message as string
                 })
     }
@@ -103,6 +104,7 @@ async function upload(e : Event) {
         await HttpService.update_parent_road(formData).then((response) => {
             Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err:AxiosError<{message : string}>) => {
+            console.log(err)
                     title.value.alert =  err.response?.data.message as string
                 })
     }

@@ -98,6 +98,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 }).catch((err:AxiosError<{message : string}>) => {
+                    console.log(err)
                     title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
@@ -105,6 +106,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
                 }).catch((err:AxiosError<{message : string}>) => {
+                    console.log(err)
                     title.value.alert =  err.response?.data.message as string
                 })
             }
