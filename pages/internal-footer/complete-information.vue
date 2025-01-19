@@ -1,12 +1,8 @@
 <template>
   <section class="row m-1 p-1">
     <div class="col-12 large-text">
-        <div v-for="i in reference.value_to_show" :key="i.name" class="row">
-            <div class="col-8">
-                <h2>{{ i.name }}</h2>
-                <div class="col-12">{{i.description}}</div>
-            </div>
-            <div class="col-4 ps-2  border rounded">
+        <div v-for="i in reference.value_to_show" :key="i.name" class="row d-flex flex-lg-row-reverse flex-md-row-reverse flex-row">
+            <div class="col-lg-4 col-md-4 col-12 ps-2  border rounded">
                 <div class="col-12 m-1">
                     <i class="bi bi-geo-alt-fill"> Distance à parcourir : {{ i.distance }} Km</i>
                 </div>
@@ -27,6 +23,10 @@
                 <div class="col-12 mt-4 mb-2 fs-3">
                     <i class="bi bi-wallet"> A partir de {{ i.price }} <i class="bi bi-currency-pound"></i></i>
                 </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-12">
+                <h2>{{ i.name }}</h2>
+                <div class="col-12">{{i.description}}</div>
             </div>
         </div>
     </div>
@@ -75,22 +75,22 @@ import { HttpService } from '~/server/fetch-class/fetch';
 .row {
     overflow-y: scroll;
 }
-.row .col-12 .row .col-4 {
+.row .col-12 .row .col-lg-4 {
     box-shadow: 5px 5px 10px gray;
 }
-.row .col-12 .row .col-4 .col-12 {
+.row .col-12 .row .col-lg-4 .col-12 {
     font-weight: bold;
     font-size: large;
     font-family: 'Gill Sans', 'Gill Sans MT',"Calibri", 'Trebuchet MS', sans-serif
 }
-.row .col-12 .row .col-4 .col-12 .bi progress {
+/* .row .col-12 .row .col-lg-4 .col-12 .bi progress {
     background-color: transparent;
     border-radius: 10px;
     height: 20px;
 }
 progress[value] {
     color: red;
-}
+} */
 .row .bg-transparent {
     border-top: 1px solid black;
     margin-top: 30px;

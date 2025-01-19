@@ -45,10 +45,15 @@ import { HttpService } from '~/server/fetch-class/fetch';
       let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         let input:Ref<string> = ref("password")
         let type:Ref<number> = ref(0)
-  async function validate(e:Event) {
+onMounted(() => {
+  if(!Teste.get().mail) {
+    navigateTo("/internal-footer/connexion")
+  }
+})
+          async function validate(e:Event) {
     e.preventDefault()
     let formData:FormData = new FormData(e.target as HTMLFormElement)
-    formData.append("type",type.value.toString())
+    formData.append("type",Teste.get().type.toString())
     for(let [key,value] of formData.entries()) {
      if(!value) err.value = "Required field"
     }

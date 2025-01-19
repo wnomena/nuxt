@@ -61,15 +61,19 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
             }
         }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
-            value_show.value = err.response ? err.response.data.message
+            if(err.response) {
+                value_show.value = err.response.data.message
+            }
         })
     } else {
         await HttpService.login_member(data).then((res) => {
             Teste.set(data.get("mail") as string,type.value)
             Method.navigate("/")
-        }).catch((err) => {
+        }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
-            value_show.value = err.response.data.message
+            if(err.response) {
+                value_show.value = err.response.data.message
+            }
         })
     }
  }
