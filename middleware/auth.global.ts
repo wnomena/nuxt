@@ -7,6 +7,7 @@ import { useCounterStore } from "~/stores/token"
 
 export default defineNuxtRouteMiddleware((to,from) => {
     const path = to.path.split("/")
+    Teste.set_display(false)
     if(path[2]  == 'menu-for-admin') {
         if(!Teste.authenticate()) {
            return Method.navigate("/internal-footer/connexion")
