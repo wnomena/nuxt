@@ -50,6 +50,7 @@ export let Teste = {
     },
     set_display: function(display:boolean) {
         this.display.value = display
+        console.log(display)
     },
     delete : function() {
         this.mail.value = ""
