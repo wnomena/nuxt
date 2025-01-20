@@ -43,7 +43,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
     function deletion(i:string) {
         HttpService.delete_member(i).then((res) => {
-            Method.navigate("/internal-footer//menu-for-admin/list-of-parent")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         })
     }
 </script>
