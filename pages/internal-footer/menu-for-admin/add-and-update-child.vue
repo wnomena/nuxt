@@ -49,9 +49,20 @@
             <textarea  name="description" id="" placeholder="Une petite description"></textarea>
         </div>
         <div class="bg-transparent d-flex">
-            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" @click="()=>navigateTo('/internal-footer/menu-for-admin/list-of-parent')" >Annuler</button></span>
+            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" @click="() => title.confirmation = true">Effacer</button></span>
         </div>
     </form>
+      <section v-if="title.confirmation" class=" section col-12">
+        <div class="col-5 m-auto bg-warning rounded m-2 p-3">
+            <h3 class="col-12 text-center">
+                Are you sure you want to delete?
+            </h3>
+            <div class="col-12 d-flex justify-content-center gap-1">
+                <div class="p-1 rounded bg-danger" @click="update_before_deleting()">Yes</div>
+                <div class="p-1 rounded bg-success" @click="() => {title.value.confirmation = false}">No</div>
+            </div>
+        </div>
+  </section>
 </section>
 </template>
 <script lang="ts" setup>
@@ -61,13 +72,15 @@ import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
     const title: Ref<{
-        alert: string;title: string , update : child_road_list
+        alert: string;title: string , update : child_road_list,confirmation : boolean
 }> = ref({
         alert : "",
         title : "",
-        update : {name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []}
+        update : {_id : "",name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []},
+        confirmation : false
     })
     onMounted(async() => {
+        console.log(router.query)
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)
@@ -80,7 +93,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
             title.value.title = "Add new child road"
         }
     })
-    // const type = () => add_or_udate(title.value.title)
+    async function update_before_deleting() {
+        await HttpService.delete_child_road(title.value.update.name).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+    }
     async function submit(e:Event) {
         e.preventDefault()
         const formData:FormData = new FormData(e.target as HTMLFormElement)
@@ -102,6 +117,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
+                formData.append("_id",router.query.name as string)
                 await HttpService.update_child_road(formData).then((response) => {
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")

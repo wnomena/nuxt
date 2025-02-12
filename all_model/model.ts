@@ -130,7 +130,7 @@ class like {
     }
 }
 export class child_road_for_display {
-    id : number
+    _id : string
     name : string
     description : string
     distance : number
@@ -143,7 +143,7 @@ export class child_road_for_display {
     period : string
 
     constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
-        this.id = f
+        this._id = a
         this.name = a
         this.description = b
         this.distance = c
@@ -157,6 +157,7 @@ export class child_road_for_display {
     }
 }
 export class child_road_list {
+    _id : string
     name : string
     description : string
     distance : number
@@ -169,6 +170,7 @@ export class child_road_list {
     period : string
 
     constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
+        this._id = a
         this.name = a
         this.description = b
         this.distance = c
