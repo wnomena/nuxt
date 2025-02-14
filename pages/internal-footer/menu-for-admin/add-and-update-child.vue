@@ -2,7 +2,7 @@
     <section class="container-fluid m-0 p-0 w-100">
     <div class="m-0 p-0 w-full d-flex justify-content-between">
         <h3 class="text-light"> {{ title.title }}</h3>
-        <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-child', query : {id : router.query.name}}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
+        <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-parent'}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
     </div>
     <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
     <form @submit="submit" class="w-full d-flex flex-wrap">
@@ -49,7 +49,7 @@
             <textarea  name="description" id="" placeholder="Une petite description"></textarea>
         </div>
         <div class="bg-transparent d-flex">
-            <span class="rounded border bg-primary" ><button class="border-0" type="submit">Valider</button></span><span class="rounded bg-danger"><button class="border-0" @click="() => title.confirmation = true">Effacer</button></span>
+            <button class="border-0 submit" type="submit">Valider</button><span v-if="display()" @click="() => title.confirmation = true" class="border-0"> Effacer </span>
         </div>
     </form>
       <section v-if="title.confirmation" class=" section col-12">
@@ -59,7 +59,7 @@
             </h3>
             <div class="col-12 d-flex justify-content-center gap-1">
                 <div class="p-1 rounded bg-danger" @click="update_before_deleting()">Yes</div>
-                <div class="p-1 rounded bg-success" @click="() => {title.value.confirmation = false}">No</div>
+                <div class="p-1 rounded bg-success" @click="() => title.confirmation = false">No</div>
             </div>
         </div>
   </section>
@@ -80,7 +80,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         confirmation : false
     })
     onMounted(async() => {
-        console.log(router.query)
+        if(!router.query.name || !router.query.id) console.log("vide") 
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)
@@ -93,8 +93,18 @@ import { HttpService } from '~/server/fetch-class/fetch';
             title.value.title = "Add new child road"
         }
     })
+    const display = () => {
+        if(title.value.title.split(" ")[0] == "Add") {
+            console.log("ajout")
+            return false
+        }
+        else{
+             console.log("modif")
+             return true
+        }
+    }
     async function update_before_deleting() {
-        await HttpService.delete_child_road(title.value.update.name).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+        await HttpService.delete_child_road(title.value.update._id).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
     }
     async function submit(e:Event) {
         e.preventDefault()
@@ -130,7 +140,16 @@ import { HttpService } from '~/server/fetch-class/fetch';
     }
 </script>
 <style scoped>
-
+    section.section {
+        position: absolute;
+        top: 0;
+    }
+    section.section .col-5 .col-12 div {
+        width: 70px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+    }
 .container-fluid {
     width: 100%;
 }
