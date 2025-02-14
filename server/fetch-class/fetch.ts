@@ -71,7 +71,7 @@ export class HttpService {
         return await axios.post(`${this.url}/utilisateurs/add_unders/circuit/by_users`,formData)
     }
     static async delete_child_road(formData: string):Promise<AxiosResponse<{message : string}>> {
-        return await axios.delete(`${this.url}/utilisateurs/delete_/value/of_one/${formData}`)
+        return await axios.delete(`${this.url}/utilisateurs/delete/child_road/${formData}`)
     }
     static async delete_other_admin(mail:string) {
         //mbola mila gestion d'etat ahafahana maka an le données users

@@ -47,10 +47,21 @@
                 <button type="submit" id="button">Enregistrer</button>
             </div>
             <div class="bg-transparent d-flex justify-content-start w-50">
-                <button @click="()=>navigateTo('/internal-footer/menu-for-admin/list-of-parent')" id="cancel">Annuler</button>
+                <span v-if="display()" @click="()=> title.confirmation = true" id="cancel"> Effacer </span>
             </div>
         </div>
     </form>
+        <section v-if="title.confirmation" class=" section col-12">
+        <div class="col-5 m-auto bg-warning rounded m-2 p-3">
+            <h3 class="col-12 text-center">
+                Are you sure you want to delete?
+            </h3>
+            <div class="col-12 d-flex justify-content-center gap-1 bg-initial">
+                <div class="p-1 rounded bg-danger" @click="update_before_deleting()">Yes</div>
+                <div class="p-1 rounded bg-success" @click="() => title.confirmation = false">No</div>
+            </div>
+        </div>
+  </section>
 </section>
 </template>
 <script lang="ts" setup>
@@ -64,8 +75,13 @@ const router = useRoute()
 const title : Ref<{value : string, updating_title : parent_road_list,alert : string}> = ref({
     alert : "",
     value : "",
-    updating_title : { identifiant : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''}
+    updating_title : { identifiant : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''},
+    confirmation : false
 })
+function display() {
+    if(title.value.value.split(" ")[0] == "Add") return false
+    else return true
+}
 onMounted(async() => {
     if(router.query.id == undefined) {
         title.value.value = "Add new parent road"
@@ -82,6 +98,9 @@ onMounted(async() => {
         })
     }
 }) 
+    async function update_before_deleting() {
+        await HttpService.delete_parent_road(title.value.update.identifiant).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+    }
 async function upload(e : Event) {
     e.preventDefault()
     const formData : FormData = new FormData(e.target as HTMLFormElement)
@@ -111,6 +130,16 @@ async function upload(e : Event) {
 }
 </script>
 <style scoped>
+    section.section {
+        position: absolute;
+        top: 0;
+    }
+    section.section .col-5 .col-12 div {
+        width: 70px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+    }
 .container-fluid {
     padding: 0;
 }
