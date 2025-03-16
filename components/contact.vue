@@ -4,25 +4,25 @@
             <h1 class="text-center m-3 text-light">Contact us</h1>
             <h3 class="text-danger text-center">{{ notification.err }}</h3>
             <h3 class="text-success text-center">{{ notification.success }}</h3>
-            <div class="col-11 m-auto mb-3 d-flex justify-content-around flex-wrap">
+            <div v-if="notification.success == ''" class="col-11 m-auto mb-3 d-flex justify-content-around flex-wrap">
                 <div class="col-lg-5 col-md-5 col-12">
                     <label for="name" class="col-12 text-light fw-bold">Name</label>
                     <input type="text" name="name" id="" class="col-12  bg-primary border-0 rounded">
                 </div>
-                <div class="col-lg-5 col-md-5 col-12">
+                <div  class="col-lg-5 col-md-5 col-12">
                     <label for="mail" class="col-12 text-light fw-bold">Mail</label>
                     <input type="text" name="mail" id="" class="col-12  bg-primary border-0 rounded">
                 </div>
             </div>
-            <div class="col-10 m-auto mb-3">
+            <div v-if="notification.success == ''" class="col-10 m-auto mb-3">
                 <label for="object" class="col-12 text-light fw-bold">Object</label>
                 <input type="text" name="object" id="" class="col-12 rounded border-0">
             </div>
-            <div class="col-10 m-auto mb-3">
+            <div v-if="notification.success == ''" class="col-10 m-auto mb-3">
                 <label for="corps" class="col-12 text-light fw-bold">Corps</label>
                 <textarea type="text" name="corps" rows="5" class="col-12 rounded border-0"></textarea>
             </div>
-            <div class="col-11 d-flex justify-content-end m-auto mb-3">
+            <div v-if="notification.success == ''" class="col-11 d-flex justify-content-end m-auto mb-3">
                 <button type="submit" class="border-0 col-3 text-center rounded"> Send </button>
             </div>
         </form>
@@ -47,6 +47,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
             }
         }
         await HttpService.add_new_contact(data).then((response) => {
+            console.log(response)
             notification.value.success = response.data.message
             notification.value.err = ""
         }).catch((err) => {
