@@ -12,15 +12,17 @@ class type {
 //value for subscription
 export let subscription_value:type[] = []
 export class member_model {
+    _id : Number
     nom_complet:String
     mail : String
     mot_de_passe:String
 
 
-    constructor(a:String,b:String,c:String, d:String){
-        this.nom_complet = b
-        this.mail = c
-        this.mot_de_passe = d
+    constructor(a:String,b: Number){
+        this.nom_complet = a
+        this.mail = a
+        this.mot_de_passe = a
+        this._id = b
     }
 }
 export class commentary_model {
@@ -47,7 +49,7 @@ export class presentation_image {
     }
 }
 export class parent_road_list {
-    identifiant : Number
+    _id : Number
     name : String
     description : String
     presentation_image : String
@@ -58,7 +60,7 @@ export class parent_road_list {
 
 
     constructor(a:Number,b : String, c: String, d : String,e:number,f : string){
-        this.identifiant = a
+        this._id = a
         this.name = b
         this.description = c
         this.presentation_image = d
@@ -138,11 +140,10 @@ export class child_road_for_display {
     sejour_delay : string
     price : number
     difficulty : number
-    like_by_membes : like[]
     confort : number
     period : string
 
-    constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
+    constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,i : number,j : string) {
         this._id = a
         this.name = a
         this.description = b
@@ -151,7 +152,6 @@ export class child_road_for_display {
         this.sejour_delay = e
         this.price = f
         this.difficulty = g
-        this.like_by_membes = h
         this.confort = i
         this.period = j
     }
