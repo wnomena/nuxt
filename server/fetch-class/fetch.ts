@@ -88,3 +88,32 @@ export class HttpService {
         return await axios.put(`${this.url}/update_contact/${name}`)
     }
   }
+  export class HttpServices {
+    //getter 
+    private static url = ""
+    static async getCommentary(id:Number | null):Promise<AxiosResponse<commentary_model>> {
+        return await axios.get(`${this.url}/commentary/${id}/all`)
+    }
+    static async getUser(mail : String |null):Promise<AxiosResponse<member_model>> {
+        return await axios.get(`${this.url}/user/${mail}/all`)
+    }
+    static async getMember(mail : String | null):Promise<AxiosResponse<member_model>> {
+        return await axios.get(`${this.url}/member/${mail}/all`)
+    }
+    static async getParent(id: Number | null) :Promise<AxiosResponse<parent_road_list>> {
+        return await axios.get(`${this.url}/parent/${id}`)
+    }
+    static async getChildByParent(parentId:Number | null) :Promise<AxiosResponse<child_road_list>> {
+        return await axios.get(`${this.url}/child/parentId/${parentId}`)
+    }
+    static async getChildById(id:Number |  null) :Promise<AxiosResponse<child_road_list>> {
+        return await axios.get(`${this.url}/child/id/${id}`)
+    }
+    static async getContact(id: Number | null) :Promise<AxiosResponse<contact>> {
+        return await axios.get(`${this.url}/contact/${id}`)
+    }
+    // static async getLike(id: Number | null) {
+    //     await await axios.get(`${this.url}`)
+    // }
+    //setter
+  }
