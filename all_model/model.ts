@@ -49,7 +49,7 @@ export class presentation_image {
     }
 }
 export class parent_road_list {
-    _id : Number
+    identifiant : Number
     name : String
     description : String
     presentation_image : String
@@ -60,7 +60,7 @@ export class parent_road_list {
 
 
     constructor(a:Number,b : String, c: String, d : String,e:number,f : string){
-        this._id = a
+        this.identifiant = a
         this.name = b
         this.description = c
         this.presentation_image = d
@@ -132,7 +132,7 @@ class like {
     }
 }
 export class child_road_for_display {
-    _id : string
+    identifiant : string
     name : string
     description : string
     distance : number
@@ -144,7 +144,7 @@ export class child_road_for_display {
     period : string
 
     constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,i : number,j : string) {
-        this._id = a
+        this.identifiant = a
         this.name = a
         this.description = b
         this.distance = c
@@ -157,7 +157,7 @@ export class child_road_for_display {
     }
 }
 export class child_road_list {
-    _id : string
+    identifiant : Number
     name : string
     description : string
     distance : number
@@ -169,9 +169,9 @@ export class child_road_list {
     confort : number
     period : string
 
-    constructor(a:string,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
-        this._id = a
-        this.name = a
+    constructor(a:Number,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
+        this.identifiant = a
+        this.name = b
         this.description = b
         this.distance = c
         this.presentation_image = d

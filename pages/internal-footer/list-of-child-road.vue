@@ -1,7 +1,7 @@
 <template>
     <section class="row m-0">
     <div v-for="i in reference.value" :key="i.name" class="col-lg-10 m-auto d-flex mt-3 mb-3 p-1">
-            <div v-if="i.id % 2" style="border-color:red" class="col-12 d-flex flex-nowrap border">
+            <div v-if="i.identifiant % 2" style="border-color:red" class="col-12 d-flex flex-nowrap border">
                 <div class="col-lg-4 bg-primary border">
                     <img class="col-12"  style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
                 </div>
@@ -38,6 +38,7 @@ onMounted(async() => {
     })
 })
 function next(name :string) {
+    console.log(name)
     Method.navigate("/internal-footer/complete-information",{name : name})
 }
 </script>

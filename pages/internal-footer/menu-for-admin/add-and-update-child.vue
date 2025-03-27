@@ -104,7 +104,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         }
     }
     async function update_before_deleting() {
-        await HttpService.delete_child_road(title.value.update._id).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+        await HttpService.delete_child_road(title.value.update.name).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
     }
     async function submit(e:Event) {
         e.preventDefault()

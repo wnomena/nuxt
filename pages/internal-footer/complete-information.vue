@@ -63,6 +63,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
 
     onMounted(() => {
+        console.log(`router.query.name : ${router.query.name}`)
         if(router.query.name) HttpService.get_one_child(router.query.name).then((res) => {
             console.log(res.data.data)
             reference.value.value_to_show = [res.data.data]
