@@ -1,21 +1,21 @@
 <template>
     <section class="row m-0">
     <div v-for="i in reference.value" :key="i.name" class="col-lg-10 m-auto d-flex mt-3 mb-3 p-1">
-            <div v-if="i.identifiant % 2" style="border-color:red" class="col-12 d-flex flex-nowrap border">
-                <div class="col-lg-4 bg-primary border">
-                    <img class="col-12"  style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
+            <div v-if="parseInt(i.identifiant) % 2" style="border-color:red" class="col-12 d-lg-flex d-block flex-nowrap border">
+                <div class="col-lg-4 col-12 m-lg-start m-auto">
+                    <img class="col-10"  style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
                 </div>
-            <div class="col-lg-7 border">
+            <div class="col-lg-7 col-12">
                 <div><h5 class="fw-bold m-0 p-0"> Description : </h5> <small  class="ms-1">{{ i.description }}</small></div>
-                <div class="d-flex justify-content-end"> <a class="text-decoration-none">More ..</a></div>
+                <div class="d-flex justify-content-end"> <div @click="next(i.name)" class="text-decoration-none text-primary">Next ..</div></div>
             </div>
             </div>
-            <div v-else class="col-12 d-flex flex-nowrap border">
+            <div v-else class="col-12 d-flex flex-nowrap">
                 <div class="col-lg-7 m-auto">
                 <div ><h5 class="fw-bold m-0 p-0"> Description : </h5> <small class="ms-1">{{ i.description }}</small></div>
-                <div class="d-flex justify-content-end"> <p @click="next(i.name)" class="text-decoration-none text-primary">More ..</p></div>
+                <div class="d-flex justify-content-end"> <div @click="next(i.name)" class="text-decoration-none text-primary">Next ..</div></div>
             </div>
-            <div class="col-lg-4 bg-primary ms-1">
+            <div class="col-lg-4 ms-1">
                 <img class="col-12" style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
             </div>
     </div>
@@ -38,7 +38,7 @@ onMounted(async() => {
     })
 })
 function next(name :string) {
-    console.log(name)
+    console.log("name")
     Method.navigate("/internal-footer/complete-information",{name : name})
 }
 </script>

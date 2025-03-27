@@ -21,7 +21,7 @@
                     </i>
                 </div>
                 <div class="col-12 mt-4 mb-2 fs-3">
-                    <i class="bi bi-wallet"> A partir de {{ i.price }} <i class="bi bi-currency-pound"></i></i>
+                    <i class="bi bi-wallet"> From {{ i.price }} <i class="bi bi-currency-pound"></i></i>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-12">
@@ -42,8 +42,8 @@
                             <p class="col-8 text-center" > Pour mieux organiser votre voyage, nous vous invitons à nous joindre à l'aide de ces moyens de contact cité ci dessous</p>
                         </div>
                         <div class="bg d-flex justify-content-center gap-2 mb-1">
-                            <div class="bg-primary"><i class="bi bi-telephone-fill"> +261 38 57 589 64</i></div>
-                            <div class="bg-primary"><i class="bi bi-envelope-at-fill">contact@caponmada.com</i></div>
+                            <div class="bg-primary d-none d-lg-block"><i class="bi bi-telephone-fill"> +261 38 57 589 64</i></div>
+                            <div class="bg-primary d-none d-lg-block"><i class="bi bi-envelope-at-fill">contact@caponmada.com</i></div>
 
                         </div>
                     </div>
