@@ -1,7 +1,7 @@
 <template>
     <section class="row m-0">
     <div v-for="i in reference.value" :key="i.name" class="col-lg-10 m-auto d-flex mt-3 mb-3 p-1">
-            <div v-if="parseInt(i.identifiant) % 2" style="border-color:red" class="col-12 d-lg-flex d-block flex-nowrap border">
+            <div v-if="i.identifiant % 2" style="border-color:red" class="col-12 d-lg-flex d-block flex-nowrap border">
                 <div class="col-lg-4 col-12 m-lg-start m-auto">
                     <img class="col-10"  style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
                 </div>

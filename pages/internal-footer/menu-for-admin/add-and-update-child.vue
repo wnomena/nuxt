@@ -71,12 +71,10 @@ import { add_or_udate, Method } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
-    const title: Ref<{
-        alert: string;title: string , update : child_road_list,confirmation : boolean
-}> = ref({
+    const title: Ref<{alert: string;title: string , update : child_road_list,confirmation : boolean}> = ref({
         alert : "",
         title : "",
-        update : {_id : "",name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []},
+        update : {identifiant : 0,name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []},
         confirmation : false
     })
     onMounted(async() => {
