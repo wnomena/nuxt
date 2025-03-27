@@ -78,7 +78,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         confirmation : false
     })
     onMounted(async() => {
-        if(!router.query.name || !router.query.id) console.log("vide") 
+        if(!router.query.name || !router.query.id) console.log(router.query) 
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)
@@ -125,7 +125,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
-                formData.append("_id",router.query.name as string)
+                formData.append("identifiant",router.query.name as string)
                 await HttpService.update_child_road(formData).then((response) => {
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
