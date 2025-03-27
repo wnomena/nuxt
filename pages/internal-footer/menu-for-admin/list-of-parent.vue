@@ -41,8 +41,8 @@ onMounted(async() => {
         value.value.list = [...response.data.data]
     })
 })
-function method(i: parent_road_list) {
-        navigateTo({
+async function method(i: parent_road_list) {
+        await navigateTo({
             path : "/internal-footer/menu-for-admin/list-of-child",
             query : {
                 id : i.identifiant.toString(),

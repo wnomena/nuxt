@@ -7,7 +7,7 @@
     <div class="d-flex flex-column w-50 p-1 h-auto">
         <div  v-for="i in value1" :key="i.name.toString()" class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around m-2 h-5" @click="onclick(i.presentation_image)"> 
             <div  class="border border-secondary overflow-hidden d-flex align-items-center justify-content-around w-100 ">
-                <p>Nom : {{i.name}}</p><p>Difficulté : {{i.difficulty}}</p><p>Prix : {{i.price}}</p><p>Distance : {{i.distance}}</p><p>Delais : {{i.sejour_delay}}</p> <p @click="modifier(i._id)" class="modifier"  >Modifier</p>
+                <p>Nom : {{i.name}}</p><p>Difficulté : {{i.difficulty}}</p><p>Prix : {{i.price}}</p><p>Distance : {{i.distance}}</p><p>Delais : {{i.sejour_delay}}</p> <p @click="modifier(i.name)" class="modifier"  >Modifier</p>
             </div>
         </div>
     </div>
@@ -38,10 +38,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
             }
         })
     })
-    function modifier(i : string | undefined) {
+    function modifier(i : string| undefined) {
         const root = useRoute()
-        if(!i) navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string}})
-        else navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { name : i}})
+         navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string,name : i}})
     }
     function ajout() {
 
