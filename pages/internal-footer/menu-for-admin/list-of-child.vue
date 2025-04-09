@@ -38,10 +38,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
             }
         })
     })
-    function modifier(i : string | undefined) {
+    function modifier(i : string| undefined) {
         const root = useRoute()
-        if(!i) navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string}})
-        else navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { name : i}})
+         navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string,name : i}})
     }
     function ajout() {
 

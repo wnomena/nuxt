@@ -78,7 +78,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         confirmation : false
     })
     onMounted(async() => {
-        if(!router.query.name || !router.query.id) console.log("vide") 
+        if(!router.query.name || !router.query.id) console.log(router.query) 
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)

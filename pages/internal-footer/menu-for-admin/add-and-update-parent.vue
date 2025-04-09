@@ -72,7 +72,7 @@ import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
 const router = useRoute()
-const title : Ref<{value : string, updating_title : parent_road_list,alert : string}> = ref({
+const title : Ref<{value : string, updating_title : parent_road_list,alert : string,confirmation : boolean}> = ref({
     alert : "",
     value : "",
     updating_title : { identifiant : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''},
@@ -99,7 +99,7 @@ onMounted(async() => {
     }
 }) 
     async function update_before_deleting() {
-        await HttpService.delete_parent_road(title.value.update.identifiant).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+        await HttpService.delete_parent_road(title.value.updating_title.identifiant.toString()).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
     }
 async function upload(e : Event) {
     e.preventDefault()
