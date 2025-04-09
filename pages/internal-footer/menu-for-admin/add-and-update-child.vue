@@ -49,7 +49,7 @@
             <textarea  name="description" id="" placeholder="Une petite description"></textarea>
         </div>
         <div class="bg-transparent d-flex">
-            <button class="border-0 submit" type="submit">Valider</button><span v-if="display()" @click="() => title.confirmation = true" class="border-0"> Effacer </span>
+            <button class="border-0 submit" type="submit">Valider</button><span @click="display" class="border-0"> Effacer </span>
         </div>
     </form>
       <section v-if="title.confirmation" class=" section col-12">
@@ -102,12 +102,15 @@ import { HttpService } from '~/server/fetch-class/fetch';
         }
     }
     async function update_before_deleting() {
+        console.log(title.value.update.name)
         await HttpService.delete_child_road(title.value.update.name).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
     }
     async function submit(e:Event) {
         e.preventDefault()
+
         const formData:FormData = new FormData(e.target as HTMLFormElement)
         formData.append("parent_ident_equal_to_child",router.query.id as string)
+        console.log(formData)
         for(let [key,value] of formData.entries()) {
             console.log(key,value)
             if(!value) {
@@ -125,7 +128,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
-                formData.append("_id",router.query.name as string)
+                formData.append("name",router.query.name as string)
                 await HttpService.update_child_road(formData).then((response) => {
                     console.log(response)
                     Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
