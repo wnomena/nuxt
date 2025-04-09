@@ -70,7 +70,7 @@ import { AxiosError } from 'axios';
 import { add_or_udate, Method } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-    const router = useRoute()
+    const router = useRoute()   
     const title: Ref<{alert: string;title: string , update : child_road_list,confirmation : boolean}> = ref({
         alert : "",
         title : "",
