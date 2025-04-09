@@ -1,7 +1,7 @@
 
 <template>
     <section class="row">
-        <section v-if="confirmation" class="border col-12">
+        <section v-if="!confirmation.type" class="border col-12">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
         <section class="d-flex flex-nowrap justify-content-around" style="height : 60vh">
             <div v-for="i in value.list" :key="i.name.toString()" class="bg-transparent col-lg-3 col-md-4 col-10 border p-1" >
@@ -17,12 +17,17 @@
             </div>
         </section>
     </section>
-    <section v-else class="col-12">
-        <div class="m-auto rounded col-lg-3 bg-light">
-            <h5 class="text-center">Action irreversible, voulez vous continuer ?</h5>
-            <div class="d-flex col-12 justify-content-center gap-1 m-1"><div @click="fetchdelete" class="bg-danger rounded">Continuer</div><div class="bg-success rounded"><a href="admin/home/list-of-parent" class="text-decoration-none text-light">Annuler</a></div></div>
-    </div>
-</section>
+    <section v-if="confirmation.type" class=" section col-12">
+        <div class="col-5 m-auto bg-warning rounded m-2 p-3">
+            <h3 class="col-12 text-center">
+                Are you sure you want to delete?
+            </h3>
+            <div class="col-12 d-flex justify-content-center gap-1">
+                <div class="p-1 rounded bg-danger" @click="fetchdelete()">Yes</div>
+                <div class="p-1 rounded bg-success" @click="() => confirmation.type = false">No</div>
+            </div>
+        </div>
+  </section>
     </section>
 </template>
 <script setup lang="ts">
@@ -59,13 +64,15 @@ function link_to_update(id: string) {
         })
     }
 function deletion(value : string) {
+        console.log(value)
         confirmation.value = {type : true, info : value}
+        console.log(confirmation.value)
 }
 function  fetchdelete() {
         HttpService.delete_parent_road(confirmation.value.info).then((res)=> {
-            Method.navigate("/internal-footer/list-of-parent")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         }).catch((err) => {
-            Method.navigate("/internal-footer/list-of-parent")
+            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
         })
     }
 
@@ -101,6 +108,16 @@ function  fetchdelete() {
     .supprimer:hover {
         background-color: red;
         color: white;
+    }
+    section.section {
+        position: absolute;
+        top: 0;
+    }
+    section.section .col-5 .col-12 div {
+        width: 70px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
     }
 /* } */
 /* .row:nth-child(2) {

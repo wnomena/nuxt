@@ -1,6 +1,6 @@
 <template>
     <section>
-    <div class="col-12"><p @click="modifier()" >Ajout</p></div>
+    <div class="col-12"><p @click="modifier(undefined)" >Ajout</p></div>
     <div class="img_contain">
         <img :img="img" alt="" srcset=""> 
     </div>

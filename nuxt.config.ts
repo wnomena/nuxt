@@ -6,5 +6,5 @@ export default defineNuxtConfig({
   plugins : [],
   compatibilityDate: "2024-11-01",
 
-  modules: ["@pinia/nuxt","nuxt-aos"]
+  modules: ["@pinia/nuxt", "nuxt-aos", "nuxt-swiper"]
 })
