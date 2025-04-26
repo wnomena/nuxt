@@ -12,7 +12,7 @@ class type {
 //value for subscription
 export let subscription_value:type[] = []
 export class member_model {
-    _id : Number
+    id : Number
     nom_complet:String
     mail : String
     mot_de_passe:String
@@ -22,22 +22,22 @@ export class member_model {
         this.nom_complet = a
         this.mail = a
         this.mot_de_passe = a
-        this._id = b
+        this.id = b
     }
 }
 export class commentary_model {
-    _id : String
+    id : String
     identifiant : Number
     mail : String
-    string_commentary : String
+    string : String
     created : String
 
     constructor(a:String,b : String , c : Number , d : String , e : String) {
-        this._id = a
+        this.id = a
         this.created = b
         this.identifiant = c
         this.mail = d
-        this.string_commentary = e
+        this.string = e
     }
 }
 export class presentation_image {
@@ -49,7 +49,7 @@ export class presentation_image {
     }
 }
 export class parent_road_list {
-    identifiant : Number
+    id : Number
     name : String
     description : String
     presentation_image : String
@@ -60,7 +60,7 @@ export class parent_road_list {
 
 
     constructor(a:Number,b : String, c: String, d : String,e:number,f : string){
-        this.identifiant = a
+        this.id = a
         this.name = b
         this.description = c
         this.presentation_image = d
@@ -157,7 +157,7 @@ export class child_road_for_display {
     }
 }
 export class child_road_list {
-    identifiant : number
+    id : number
     name : string
     description : string
     distance : number
@@ -170,7 +170,7 @@ export class child_road_list {
     period : string
 
     constructor(a:number,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
-        this.identifiant = a
+        this.id = a
         this.name = b
         this.description = b
         this.distance = c
@@ -248,7 +248,7 @@ export class val {
     }
 }
 export class contact {
-    _id : string
+    id : string
     name : string
     mail : string
     object : string
@@ -256,7 +256,7 @@ export class contact {
     seen : boolean
 
     constructor(a: string,b: true) {
-        this._id = a
+        this.id = a
         this.corps = a
         this.mail = a
         this.name = a

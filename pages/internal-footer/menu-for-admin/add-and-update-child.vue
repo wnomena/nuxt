@@ -5,39 +5,39 @@
         <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-parent'}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
     </div>
     <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
-    <form @submit="submit" class="w-full d-flex flex-wrap">
+    <form v-for="update of title.update" :key="update.id" @submit="submit" class="w-full d-flex flex-wrap">
         <div class="bg-transparent d-flex flex-row flex-wrap">
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="name">Le nom de votre circuit</label>
-                <input :value="title.update.name" name="name"  class="border-top-0 border-start-0 border-end-0" :disabled="add_or_udate(title.title)"  type="text">
+                <input :value="update.name" name="name"  class="border-top-0 border-start-0 border-end-0" :disabled="add_or_udate(title.title)"  type="text">
             </div>
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="distance">Distance à parcourir</label>
-                <input :value="title.update.distance" name="distance"  class="border-top-0 border-start-0 border-end-0" type="number">
+                <input :value="update.distance" name="distance"  class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="confort">Confort</label>
-                <input :value="title.update.confort" v-change="100" name="confort"  class="border-top-0 border-start-0 border-end-0" type="number">
+                <input :value="update.confort" v-change="100" name="confort"  class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="">Période</label>
                 <div class="periode d-flex flex-row justify-content-around">
-                    <input :value="title.update.period.split(' ')[0]" v-change="12" name="period_B"   class="border col-5" type="number" placeholder="07"> <input :value="title.update.period.split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
+                    <input :value="update.period.split(' ')[0]" v-change="12" name="period_B"   class="border col-5" type="number" placeholder="07"> <input :value="update.period.split(' ')[1]" v-change="12" name="period_E"  class="border" type="number" placeholder="09"> 
                 </div>
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Durée totale</label>
                 <div class="periode d-flex flex-row justify-content-around">
-                    <input :value="title.update.sejour_delay.split(' ')[0]" name="sejours_delais_B"  class="border" type="number" placeholder="jours"> <input name="sejours_delais_E" :value="title.update.sejour_delay.split(' ')[1]" class="border" type="number" placeholder="nuit"> 
+                    <input :value="update.sejour_delay.split(' ')[0]" name="sejours_delais_B"  class="border" type="number" placeholder="jours"> <input name="sejours_delais_E" :value="update.sejour_delay.split(' ')[1]" class="border" type="number" placeholder="nuit"> 
                 </div>
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="difficulty">Difficulté</label>
-                <input :value="title.update.difficulty" v-change="100" name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
+                <input :value="update.difficulty" v-change="100" name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="price"> Prix </label>
-                <input name="price" :value="title.update.price" class="border-top-0 border-start-0 border-end-0" type="number">
+                <input name="price" :value="update.price" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
             <div class="bg-transparent  d-flex flex-column m-0">
                 <label for="">Image</label>
@@ -67,14 +67,14 @@
 </template>
 <script lang="ts" setup>
 import { AxiosError } from 'axios';
-import { add_or_udate, Method } from '~/all_model/fonction-classique';
+import { add_or_udate, forceInt, navigate } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()   
-    const title: Ref<{alert: string;title: string , update : child_road_list,confirmation : boolean}> = ref({
+    const title: Ref<{alert: string;title: string , update : child_road_list[],confirmation : boolean}> = ref({
         alert : "",
         title : "",
-        update : {identifiant : 0,name : "", description : "", period : "", price : 0, difficulty : 0, distance : 0, sejour_delay : "",confort : 0,presentation_image : "", like_by_membes : []},
+        update : [],
         confirmation : false
     })
     onMounted(async() => {
@@ -82,28 +82,22 @@ import { HttpService } from '~/server/fetch-class/fetch';
         if(router.query.name?.toString()) {
             title.value.title = "Update child road"
             console.log(router.query.name)
-            await HttpService.get_one_child_road(router.query.name as string).then((response) => {
-                console.log(response.data.data)
+            await HttpService.getChild(forceInt(router.query.id ? router.query.id.toString() : undefined)).then((response) => {
                 title.value.update = response.data.data
             })
         }
-        else {
-            title.value.title = "Add new child road"
-        }
+        else title.value.title = "Add new child road"
+
     })
     const display = () => {
         if(title.value.title.split(" ")[0] == "Add") {
             console.log("ajout")
             return false
         }
-        else{
-             console.log("modif")
-             return true
-        }
+        else return true
     }
     async function update_before_deleting() {
-        console.log(title.value.update.name)
-        await HttpService.delete_child_road(title.value.update.name).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
+        await HttpService.deleteChild(title.value.update[0].id).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
     }
     async function submit(e:Event) {
         e.preventDefault()
@@ -120,20 +114,16 @@ import { HttpService } from '~/server/fetch-class/fetch';
             }
         }
         if(title.value.title.split(" ")[0] == "Add") {
-                await HttpService.add_new_child_road(formData).then((response) => {
-                    console.log(response)
-                    Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+                await HttpService.insertChild(formData).then((response) => {
+                    navigate("/internal-footer/menu-for-admin/list-of-parent",{})
                 }).catch((err:AxiosError<{message : string}>) => {
-                    console.log(err)
                     title.value.alert =  err.response?.data.message as string
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
-                formData.append("name",router.query.name as string)
-                await HttpService.update_child_road(formData).then((response) => {
-                    console.log(response)
-                    Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+                formData.set("name",router.query.name as string)
+                await HttpService.updateChild(formData).then((response) => {
+                    navigate("/internal-footer/menu-for-admin/list-of-parent",{})
                 }).catch((err:AxiosError<{message : string}>) => {
-                    console.log(err)
                     title.value.alert =  err.response?.data.message as string
                 })
             }

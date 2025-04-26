@@ -1,5 +1,6 @@
 <template>
     <section class="row border overflow-hidden mb-2">
+        
     <section class="col-12">
         <div class="row d-flex flex-row flex-nowrap">
             <div class="col-12 items-1 d-flex align-items-center">

@@ -12,12 +12,12 @@
         </div>
         <div class="d-flex justify-content-center"><div class="text-center text-danger fw-bold">{{ err }}</div></div>
         <div class="mb-3 text-center col-12">
-            <label for="old_pass" class="form-label col-12">Tape your password</label>
-            <input :type="input" :value="route.query.old" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7 overflow-hidden" name="old_pass" aria-describedby="emailHelp">
+            <label for="password" class="form-label col-12">Tape your password</label>
+            <input :type="input" :value="route.query.old" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7 overflow-hidden" name="password" aria-describedby="emailHelp">
           </div>
         <div class="mb-3 text-center col-12">
-          <label for="new_pass" class="form-label col-12">Tape your new password</label>
-          <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7" name="new_pass" aria-describedby="emailHelp">
+          <label for="new" class="form-label col-12">Tape your new password</label>
+          <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7" name="new" aria-describedby="emailHelp">
         </div>
         <div class="mb-3 text-center col-12">
           <label for="confirmNewpass" class="form-label col-12">Confirm your new password</label>
@@ -37,20 +37,20 @@
 </template>
 
 <script lang="ts" setup>
-import { Method } from '~/all_model/fonction-classique';
+import { useCounterStore } from '#build/imports';
+import { navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
   let err:Ref<string> = ref("")
+    const UseCounterStore = useCounterStore()
     const route = useRoute()
     let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
       let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         let input:Ref<string> = ref("password")
         let type:Ref<number> = ref(0)
 onMounted(() => {
-  if(!Teste.get().mail) {
-    navigateTo("/internal-footer/connexion")
-  }
+  if(!UseCounterStore.getToken().mail) navigateTo("/internal-footer/connexion")
 })
-          async function validate(e:Event) {
+    async function validate(e:Event) {
     e.preventDefault()
     let formData:FormData = new FormData(e.target as HTMLFormElement)
     formData.append("type",Teste.get().type.toString())
@@ -58,14 +58,22 @@ onMounted(() => {
      if(!value) err.value = "Required field"
     }
 
-    if(formData.get("new_pass") !== formData.get("confirmNewpass")) err.value = "New password not identical"
-    else if(formData.get("new_pass") === formData.get("confirmNewpass")) {
-      await HttpService.update_pass(formData).then((res) => {
-        Method.navigate("/internal-footer/connexion")
+    if(formData.get("new") !== formData.get("confirmNewpass")) err.value = "New password not identical"
+    else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type) {
+      await HttpService.updateUserPass(formData).then((res) => {
+        navigate("/internal-footer/connexion",{})
       }).catch((error) => {
         console.log(error)
       })
-    } 
+    } else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type !== 1) {
+      await HttpService.updateMemberPass(formData).then((res) => {
+        navigate("/internal-footer/connexion",{})
+      }).catch((error) => {
+        console.log(error)
+      })
+    } else {
+      navigate("/internal-footer/connexion",{})
+    }
   }
   function updatestyle() {
     const temp:string = selected.value

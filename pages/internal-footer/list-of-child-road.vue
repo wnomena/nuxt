@@ -13,7 +13,7 @@
             <div v-else class="col-12 d-flex flex-nowrap">
                 <div class="col-lg-7 m-auto">
                 <div ><h5 class="fw-bold m-0 p-0"> Description : </h5> <small class="ms-1">{{ i.description }}</small></div>
-                <div class="d-flex justify-content-end"> <div @click="next(i.name)" class="text-decoration-none text-primary">Next ..</div></div>
+                <div class="d-flex justify-content-end"> <div @click="function () {navigate('/internal-footer/complete-information',{id : i.id})}" class="text-decoration-none text-primary">Next ..</div></div>
             </div>
             <div class="col-lg-4 ms-1">
                 <img class="col-12" style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
@@ -24,23 +24,19 @@
 </template>
 <script setup lang="ts">
 const router = useRoute()
-import { Method } from '~/all_model/fonction-classique';
-import { child_road_for_display } from '~/all_model/model';
+import { forceInt, navigate } from '~/all_model/fonction-classique';
+import {  child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch'
-let reference :Ref<{value  : child_road_for_display[]}> = ref({
+let reference :Ref<{value  : child_road_list[]}> = ref({
     value : []
 })
 
 onMounted(async() => {
-    await HttpService.get_all_child_road("0").then((res) => {
+    await HttpService.getChilds(forceInt(useRoute().query.id?.toString())).then((res) => {
         console.log(res)
         reference.value.value = res.data.data
     })
 })
-function next(name :string) {
-    console.log("name")
-    Method.navigate("/internal-footer/complete-information",{name : name})
-}
 </script>
 <style scoped>
 .row .col-lg-10 .col-lg-4 {

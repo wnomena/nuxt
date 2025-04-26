@@ -24,7 +24,7 @@
 </div>
 </template>
 <script setup lang="ts">
-import { Method } from '~/all_model/fonction-classique';
+import { navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 let all_refs : Ref<{err:string}> = ref({
     err : '',
@@ -36,12 +36,8 @@ let all_refs : Ref<{err:string}> = ref({
 async function validateform(e:Event) {
     e.preventDefault()
     let formData = new FormData(e.target as HTMLFormElement)
-    formData.forEach((value) => {
-        console.log(value)
-    })
-    await HttpService.add_new_admin(formData).then((result) => {
-        console.log(result)
-        Method.navigate('/internal-footer/menu-for-admin/list-of-parent')
+    await HttpService.addNewAdmin(formData).then((_) => {
+        navigate('/internal-footer/menu-for-admin/list-of-parent',{})
     })
 
 

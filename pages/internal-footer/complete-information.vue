@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Method, period_function } from '~/all_model/fonction-classique';
+import { forceInt, navigate, period_function } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()
@@ -64,11 +64,11 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
     onMounted(() => {
         console.log(`router.query.name : ${router.query.name}`)
-        if(router.query.name) HttpService.get_one_child(router.query.name).then((res) => {
+        if(router.query.name) HttpService.getChild(forceInt(router.query.id?.toString())).then((res) => {
             console.log(res.data.data)
-            reference.value.value_to_show = [res.data.data]
+            reference.value.value_to_show = [...res.data.data]
         })
-        else Method.navigate("/")
+        else navigate("/",{})
     })
 </script>
 

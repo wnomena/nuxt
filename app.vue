@@ -2,10 +2,11 @@
     <div style="overflow-x: hidden">
         <NuxtRouteAnnouncer />
         <Header></Header>
-        <NuxtPage />
+        <NuxtPage @vue:mounted="(e) => console.log(e)" />
     </div>
 </template>
 <script setup lang="ts">
+    const display = ref(false)
     onMounted(() => {
         document.title = "CAP ON MADA"
     })

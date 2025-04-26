@@ -11,7 +11,7 @@
                         <img :src="i.presentation_image.toString()" alt="Card Image" class="card-image bg-light">
                         <p class="badge developer">{{ i.name }}</p>
                         <h2 class="card-title"> From £ {{ i.price }}</h2>
-                        <button @click="next(i.name.toString())" class="card-button material-symbols-rounded">
+                        <button @click="() => navigate('/internal-footer/list-of-child-road',{id : i.id})" class="card-button material-symbols-rounded">
                             <i class="bi bi-arrow-down-right-circle-fill fs-1"></i>
                         </button>
                     </NuxtLink>
@@ -21,7 +21,7 @@
 </section>
 </template>
 <script setup  lang="ts">
-import { Method } from '~/all_model/fonction-classique';
+import { navigate } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
@@ -29,7 +29,7 @@ let refs:Ref<{table : parent_road_list[]}> = ref({
     table : []
 })
 onMounted(async() => {
-    await HttpService.get_all_parent_road().then((value) => {
+    await HttpService.getParents().then((value) => {
         console.log(value.data)
         refs.value.table = [...value.data.data]
     })

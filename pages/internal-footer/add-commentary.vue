@@ -11,27 +11,17 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { child_road_for_display } from '~/all_model/model';
+import type { child_road_for_display, child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-// let favorite = ref(null)
-let all_value:Ref<{child_road : child_road_for_display[], authorization : boolean,mail : string}> = ref({
+let all_value:Ref<{child_road : child_road_list[], authorization : boolean,mail : string}> = ref({
     child_road : [],
     authorization : true,
     mail : ""
 })
 
-    // const element: HTMLElement | null = document.getElementById("scroll")
-    // element?.addEventListener("wheel",function(e:Event) {
-    //     console.log(e)
-    // })
-function make_favorite(event : Event) {
-    console.log(event)
-    //maka event de manamboatra an le icon ho lasa plein de avy eo
-} 
 onMounted(async () => {
     if(!Teste.get().type) navigateTo("/internal-footer/connexion")
-     await HttpService.get_all_child_road("0").then((response) => {
-        console.log(response)
+     await HttpService.getChilds(2).then((response) => {
         all_value.value.child_road = response.data.data
      })
 })

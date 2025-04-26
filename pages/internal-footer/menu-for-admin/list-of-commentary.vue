@@ -12,7 +12,7 @@
         </span>
     </div>
         <div v-if="all_value.list_or_string">
-            <div class="commentary_list" v-for="i in all_value.data" :key="i._id.toString()">
+            <div class="commentary_list" v-for="i in all_value.data" :key="i.id.toString()">
         <div class="container-fluid d-flex justify-content-between">
             <span> identifiant : {{ i.identifiant }}</span>
             <span> E-mail : {{ i.mail }}</span>
@@ -48,8 +48,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
 
     onMounted(async() => {
-       await HttpService.get_all_commentary().then((res) => {
-            all_value.value.data = [...res.data.liste]
+       await HttpService.getCommentaries().then((res) => {
+            all_value.value.data = [...res.data.data]
         })
     })
     function update_value() {

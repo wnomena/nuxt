@@ -6,11 +6,11 @@
       <div class="col-12 mt-1 mb-1"><h5 class="text-center"> {{ err }}</h5></div>
       <div class="col-lg-10 col-md-10 col-7 m-auto mb-4">
         <label class="col-12 text-center text-light fs-4" for="">Your complete name</label>
-        <input v-model="complete" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="text" name="" id="">
+        <input v-model="complete" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="text" name="name" id="">
       </div>
       <div class="col-lg-10 col-md-10 col-7 m-auto mb-4">
         <label class="col-12 text-center text-light fs-4" for="">Your mail </label>
-        <input v-model="mail" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="email" name="" id="">
+        <input v-model="mail" class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="email" name="mail" id="">
       </div> 
         <div class="col-lg-10 col-md-10 col-7 m-auto mb-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
           <div @click="validateform" type="button" class="bg-primary p-2 text-light rounded">Next </div>

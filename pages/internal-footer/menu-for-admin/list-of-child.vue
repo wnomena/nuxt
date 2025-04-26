@@ -14,25 +14,19 @@
 </section>
 </template>
 <script lang="ts" setup>
-import { Method } from '~/all_model/fonction-classique';
+import { forceInt, navigate } from '~/all_model/fonction-classique';
 import type { child_road_for_display } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-
     let value1:Ref<child_road_for_display[]> = ref([])
     let img:Ref<string> = ref("")
-
-    //methods
-    function onclick(i:string) {
-        img.value = i
-    }
+    function onclick(i:string) {img.value = i}
     onMounted(async() => {
         const id = useRoute().query.id
          console.log(useRoute().query.id)
-        await HttpService.get_all_child_road(id).then((value) => {
+        await HttpService.getChilds(forceInt(id?.toString())).then((value) => {
             const tout = value.data.data
-            console.log(tout)
             for(let i = 0; i <  tout.length; i++) {
-                value1.value = [...value1.value,tout[i]]
+                value1.value = [...value1.value]
                 if(i == 0) img.value = tout[0].presentation_image
                 
             }
@@ -40,11 +34,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
     function modifier(i : string | undefined) {
         const root = useRoute()
-        if(!i) navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { id : root.query.id as string}})
-        else navigateTo({path : "/internal-footer/menu-for-admin/add-and-update-child",query : { name : i}})
-    }
-    function ajout() {
-
+        navigate("/internal-footer/menu-for-admin/add-and-update-child",root.query)
     }
 </script>
 <style scoped>
@@ -74,8 +64,6 @@ section .d-flex {
     /* width: 70%; */
     
 }
-
-
 section .d-flex .border .border p{
     display: flex;
     margin: auto;

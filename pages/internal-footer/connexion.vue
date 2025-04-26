@@ -34,9 +34,8 @@
 <script setup lang="ts">
 // import type { AxiosResponse } from 'axios';
 import type { AxiosError } from 'axios';
-import { Method } from '~/all_model/fonction-classique';
+import {  navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-import { useCounterStore } from '~/stores/token';
 
 let value_show = ref("")
 let type:Ref<number> = ref(0)
@@ -49,31 +48,21 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     e.preventDefault()
     let data:FormData = new FormData(e.target as HTMLFormElement)
     if(type.value) {
-      await HttpService.login_admin(data).then((res) => {
-            if(res.data.message == "-1") {
-                
-                navigateTo({path : "/internal-footer/change_pass",query : {old : data.get("mot_de_passe") as string}})
-            } else {
-                console.log("manin 2")
-                Teste.set(data.get("mail") as string,type.value)
-                console.log(Teste.authenticate())
-                navigateTo("/internal-footer/menu-for-admin/list-of-parent")
+        await HttpService.loginUser(data).then( function(res) {
+            if(res.status == 200 && res.data.code) {
+                navigate("/internal-footer/menu-for-admin",{})
             }
-        }).catch((err:AxiosError<{message : string}>) => {
-            console.log(err)
-            if(err.response) {
-                value_show.value = err.response.data.message
-            }
+        }).catch(function (error:AxiosError<{message : string}>) {
+            value_show.value = error.message
         })
     } else {
-        await HttpService.login_member(data).then((res) => {
-            Teste.set(data.get("mail") as string,type.value)
-            Method.navigate("/")
-        }).catch((err:AxiosError<{message : string}>) => {
-            console.log(err)
-            if(err.response) {
-                value_show.value = err.response.data.message
+        await HttpService.loginMember(data).then(function (res) {
+            if(res.status == 200 && res.data.code) {
+                //mbola amboarina
+                navigate("/internal-footer/menu-for-admin",{})
             }
+        }).catch(function (error:AxiosError<{message : string}>) {
+            value_show.value = error.message
         })
     }
  }

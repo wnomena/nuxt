@@ -11,7 +11,7 @@
             <i class="bi bi-chevron-left"> <NuxtLink class="text-decoration-none text-light" to="internal-footer/menu-for-admin/list-of-parent" >Retour</NuxtLink></i>
         </span>
     </div>
-    <div class="commentary_list" v-for="i in all_value.data" :key="i.mail.toString()" @click="next(i._id)">
+    <div class="commentary_list" v-for="i in all_value.data" :key="i.mail.toString()" @click="next(parseInt(i.id.toString()))">
         <div class="container-fluid d-flex justify-content-between">
             <span>Nom : {{ i.name }}</span>
             <span> E-mail : {{ i.mail }}</span>
@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import { navigate } from '~/all_model/fonction-classique';
 import type { contact } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const all_value:Ref<{data : contact[]}> = ref({
@@ -31,18 +32,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
     })
     onMounted(async() => {
         console.log("reponse")
-        await HttpService.get_contact("test").then((response) => {
+        await HttpService.getContacts().then((response) => {
             console.log(response)
             all_value.value.data = response.data.data
         })
     })
-    function next(_id : string) {
-        navigateTo({
-            path : "/internal-footer/menu-for-admin/full-information-client",
-            query : {
-                _id : _id
-            }
-        })
+    function next(id : number) {
+        navigate("/internal-footer/menu-for-admin/full-information-client",{id : id})
     }
 </script>
 <style scoped>

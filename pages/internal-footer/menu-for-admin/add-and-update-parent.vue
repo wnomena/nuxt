@@ -67,15 +67,15 @@
 <script lang="ts" setup>
 // import type { Reactive } from 'vue';
 import type { AxiosError } from 'axios';
-import { Method } from '~/all_model/fonction-classique';
+import { forceInt, navigate } from '~/all_model/fonction-classique';
 import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
 const router = useRoute()
-const title : Ref<{value : string, updating_title : parent_road_list,alert : string}> = ref({
+const title : Ref<{value : string, updating_title : parent_road_list,alert : string,confirmation : boolean}> = ref({
     alert : "",
     value : "",
-    updating_title : { identifiant : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''},
+    updating_title : { id : 1, name : "", price : 0, description : '', period : "", presentation_image : "", difficulty : "",confort : ''},
     confirmation : false
 })
 function display() {
@@ -86,7 +86,7 @@ onMounted(async() => {
     if(router.query.id == undefined) {
         title.value.value = "Add new parent road"
     } else {
-        await HttpService.get_all_parent_road().then((res) => {
+        await HttpService.getParents().then((res) => {
             const value:parent_road_list[] = res.data.data
             console.log(value) 
             const updating_title =  Array.from(value).filter((a) => a.name == router.query.id as string)
@@ -99,7 +99,7 @@ onMounted(async() => {
     }
 }) 
     async function update_before_deleting() {
-        await HttpService.delete_parent_road(title.value.update.identifiant).then((res) => navigateTo("/internal-footer/menu-for-admin/list-of-parent"))
+        await HttpService.deleteParent(forceInt(title.value.updating_title.id.toString()))
     }
 async function upload(e : Event) {
     e.preventDefault()
@@ -111,17 +111,17 @@ async function upload(e : Event) {
         }
     });
     if(title.value.value.split(" ")[0] == "Add") {
-        await HttpService.add_new_parent_road(formData).then((response) => {
-            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+        await HttpService.insertParent(formData).then((response) => {
+            navigate("/internal-footer/menu-for-admin/list-of-parent",{})
         }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
             title.value.alert =  err.response?.data.message as string
                 })
     }
     else if(title.value.value.split(" ")[0] == "Update") {
-        formData.append("identifiant",title.value.updating_title.identifiant.toString())
-        await HttpService.update_parent_road(formData).then((response) => {
-            Method.navigate("/internal-footer/menu-for-admin/list-of-parent")
+        formData.append("id",title.value.updating_title.id.toString())
+        await HttpService.updateChild(formData).then((response) => {
+            navigate("/internal-footer/menu-for-admin/list-of-parent",{})
         }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
                     title.value.alert =  err.response?.data.message as string
