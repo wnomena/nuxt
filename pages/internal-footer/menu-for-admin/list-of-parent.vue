@@ -12,7 +12,7 @@
                 <div class="d-flex justify-content-around">
                     <div @click="navigate('/internal-footer/menu-for-admin/list-of-child',{id : i.id.toString(),name : i.name.toString()})" class="suivant ps-1 pe-1">Suivant</div>
                     <div @click="navigate('/internal-footer/menu-for-admin/add-and-update-parent',{id : i.id.toString()})" class="modifier ps-1 pe-1">Modifier</div>
-                    <div @click="deletion(i.id)" class="supprimer ps-1 pe-1">Supprimer</div>
+                    <div @click="deletion(parseInt(i.id.toString()))" class="supprimer ps-1 pe-1">Supprimer</div>
                 </div>
             </div>
         </section>

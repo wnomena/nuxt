@@ -7,11 +7,11 @@
         <div class="d-grid col-11 m-auto">
             <div class="icon items-1 "><i class="bi bi-arrow-left-circle-fill  d-lg-flex d-md-flex d-none text-primary align-items-center" ></i></div>
                 <div class="col-12 d-flex flex-nowrap justify-content-around overflow-x-scroll overflow-y-hidden gap-lg-2 gap-md-2 gap-5 p-2">
-                    <NuxtLink v-for="i in refs.table" :key="i.name.toString()" :to="{path: '/internal-footer/list-of-child-road',query : {id : i.identifiant.toString()}}" class="card-link col-lg-3 col-md-6 col-11">
+                    <NuxtLink v-for="i in refs.table" :key="i.name.toString()" :to="{path: '/internal-footer/list-of-child-road',query : {id : i.id.toString()}}" class="card-link col-lg-3 col-md-6 col-11">
                         <img :src="i.presentation_image.toString()" alt="Card Image" class="card-image bg-light">
                         <p class="badge developer">{{ i.name }}</p>
                         <h2 class="card-title"> From £ {{ i.price }}</h2>
-                        <button @click="() => navigate('/internal-footer/list-of-child-road',{id : i.id})" class="card-button material-symbols-rounded">
+                        <button @click="() => navigate('/internal-footer/list-of-child-road',{id : i.id.toString()})" class="card-button material-symbols-rounded">
                             <i class="bi bi-arrow-down-right-circle-fill fs-1"></i>
                         </button>
                     </NuxtLink>
@@ -34,9 +34,6 @@ onMounted(async() => {
         refs.value.table = [...value.data.data]
     })
 })
-function next(name : string) {
-    Method.navigate("/internal-footer/list-of-child-road",{id : name})
-}
 </script>
 <style scoped>
 @import url(./style.css);
