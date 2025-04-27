@@ -7,7 +7,6 @@ const headerConfig = {
 }
 export class HttpService {
      private static url = "https://travel-agency-project-vxkm.onrender.com"
-     //"https://travel-agency-project-vxkm.onrender.com"
      static async getParents() :Promise<AxiosResponse<{data : parent_road_list[]}>> {
         return await axios.get(`${this.url}/parent`)
      }
