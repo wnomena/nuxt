@@ -50,6 +50,7 @@
                 </div>
             </div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 
@@ -57,6 +58,7 @@
 import { forceInt, navigate, period_function } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
+let loading:Ref<boolean> = ref(true)
     const router = useRoute()
     let reference : Ref<{value_to_show : child_road_list[]}> = ref({
         value_to_show : []
@@ -67,6 +69,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
         if(router.query.name) HttpService.getChild(forceInt(router.query.id?.toString())).then((res) => {
             console.log(res.data.data)
             reference.value.value_to_show = [...res.data.data]
+        }).finally(function() {
+            loading.value = false
         })
         else navigate("/",{})
     })

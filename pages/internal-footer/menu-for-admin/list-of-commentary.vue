@@ -34,22 +34,24 @@
            </div>
             <div class=" bg-transparent d-flex justify-content-center"><div @click="update_value" class="text-dark text-center border ps-5 pe-5 rounded bg-success">Fermer</div></div>
         </div>
+        <loading-component v-if="loading"/>
 </section>
 </template>
 
 <script lang="ts" setup>
 import type { commentary_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-
     let all_value: Ref<{data : commentary_model[],string_commentary : string, list_or_string : boolean}> = ref({
         data : [],
         string_commentary : "",
         list_or_string : true
     })
-
+    let loading:Ref<boolean> = ref(true)
     onMounted(async() => {
        await HttpService.getCommentaries().then((res) => {
             all_value.value.data = [...res.data.data]
+        }).finally(function () {
+            loading.value = false
         })
     })
     function update_value() {

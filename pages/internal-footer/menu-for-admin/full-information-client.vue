@@ -7,6 +7,7 @@
       <h3 class="text-center">{{ value?.object }}</h3>
       <h5 class="text-center">{{ value?.corps }}</h5>
     </div>
+      <loading-component v-if="loading"/>
     </div>
 </template>
   
@@ -15,9 +16,13 @@ import type { contact } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 let value:Ref<contact> = ref({name : "", mail : "", object : "", corps : "", seen : false, id : ""})
 const router = useRoute()
+let loading:Ref<boolean> = ref(true)
+
    onMounted(async() => {
     await HttpService.getContact(router.query.id as string).then((response) => {
       value.value = response.data.data[0]
+    }).finally(function () {
+      loading.value = false
     })
     })
 </script>

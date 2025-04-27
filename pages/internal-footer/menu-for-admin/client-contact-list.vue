@@ -20,6 +20,7 @@
              </svg></div>
         </div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 
@@ -30,11 +31,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
     const all_value:Ref<{data : contact[]}> = ref({
       data : []
     })
+    const loading:Ref<boolean> = ref(true)
     onMounted(async() => {
-        console.log("reponse")
         await HttpService.getContacts().then((response) => {
             console.log(response)
             all_value.value.data = response.data.data
+        }).finally(function () {
+            loading.value = false
         })
     })
     function next(id : number) {

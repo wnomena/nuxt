@@ -8,9 +8,12 @@
                 <div class="d-flex justify-content-center mb-1"><NuxtLink class="text-decoration-none" to="/"><button class="border-0 ps-3 pe-3 fs-5">Retour</button></NuxtLink></div>
             </div>
         </div>
+        <loading-component v-if="loading"/>
     </div>
 </template>
 <script setup lang="ts">
+//need implementation for commentary and loading for add
+import { navigate } from '~/all_model/fonction-classique';
 import type { child_road_for_display, child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 let all_value:Ref<{child_road : child_road_list[], authorization : boolean,mail : string}> = ref({
@@ -18,11 +21,13 @@ let all_value:Ref<{child_road : child_road_list[], authorization : boolean,mail 
     authorization : true,
     mail : ""
 })
-
+let loading:Ref<boolean> = ref(true)
 onMounted(async () => {
-    if(!Teste.get().type) navigateTo("/internal-footer/connexion")
+    if(!Teste.get().type) navigate("/internal-footer/connexion",{})
      await HttpService.getChilds(2).then((response) => {
         all_value.value.child_road = response.data.data
+     }).finally(function () {
+        loading.value = false
      })
 })
 </script>

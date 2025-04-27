@@ -30,6 +30,7 @@
             </div>
         </div>
     </section>
+    <loading-component v-if="loading" />
   </div>
 </template>
 
@@ -41,9 +42,12 @@ import { HttpService } from '~/server/fetch-class/fetch';
 const reference:Ref<{data : member_model[]}> = ref({
   data :  []
 })
+const loading:Ref<boolean> = ref(true)
 onMounted(async() => {
   await HttpService.getAllMember().then((result) => {
     reference.value.data = [...result.data.data]
+  }).finally(function () {
+    loading.value = false
   })
 })
 async function deletemember(id : number) {

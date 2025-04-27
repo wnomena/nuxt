@@ -2,7 +2,7 @@
     <section class="row m-0">
     <div v-for="i in reference.value" :key="i.name" class="col-lg-10 m-auto d-flex mt-3 mb-3 p-1">
             <div v-if="i.id % 2" style="border-color:red" class="col-12 d-lg-flex d-block flex-nowrap border rounded">
-                <div class="col-lg-4 col-12 m-lg-start m-auto">
+                <div class="col-lg-4  col-12 m-lg-start m-auto">
                     <img class="col-10 m-1 rounded"  style="height: 40vh" :src="i.presentation_image" alt="" srcset="">
                 </div>
             <div class="col-lg-7 col-12">
@@ -20,22 +20,25 @@
             </div>
     </div>
 </div>
+<loading-component v-if="loading"/>
 </section>
 </template>
 <script setup lang="ts">
-const router = useRoute()
 import { forceInt, navigate } from '~/all_model/fonction-classique';
 import {  child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch'
 let reference :Ref<{value  : child_road_list[]}> = ref({
     value : []
 })
-
+let loading:Ref<boolean> = ref(true)
 onMounted(async() => {
     await HttpService.getChilds(forceInt(useRoute().query.id?.toString())).then((res) => {
         console.log(res)
         reference.value.value = res.data.data
+    }).finally(function () {
+        loading.value = false
     })
+    console.log("vita le chargement")
 })
 </script>
 <style scoped>

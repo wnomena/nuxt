@@ -3,24 +3,27 @@
         
     <section class="col-12">
         <div class="row d-flex flex-row flex-nowrap">
-            <div class="col-12 items-1 d-flex align-items-center">
-                <div class="container flex-column text-center text-light">
-                    <h4 class="fs-lg-4 fs-md-6" >Descending the river to the Tsingy</h4>
-                    <h1 class="fs-lg-1 fs-md-3">MANAMBOLO</h1>
+            <div class="col-12">
+            <img style="height: 70vh;" class="m-0 col-12" src="./slide/manambolo_copie.jpg" alt="">
+                    <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
+                        <h4 class="fs-lg-4 fs-md-6" >Descending the river to the Tsingy</h4>
+                        <h1 class="fs-lg-1 fs-md-3">MANAMBOLO</h1>
+                    </div>
                 </div>
+        <div class="col-12">
+            <img style="height: 70vh;" class="m-0 col-12" src="./slide/DSCF2672.JPG" alt="">
+            <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
+                <h4 class="fs-lg-4 fs-md-6" >Visite the Park</h4>
+                <h1 class="fs-lg-1 fs-md-3">GRAND TSINGY</h1>
             </div>
-            <div class="col-12 items-2 d-flex align-items-center">
-                <div class="container flex-column text-center text-light">
-                    <h4 class="fs-lg-4 fs-md-6">Visite the Park</h4>
-                    <h1 class="fs-lg-1 fs-md-3">GRAND TSINGY</h1>
-                </div>
+        </div>
+        <div class="col-12">
+            <img style="height: 70vh;" class="m-0 col-12" src="./slide/soatanana.jpg" alt="">
+            <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
+                <h4 class="fs-lg-4 fs-md-6" >Passage to the south of the country</h4>
+                <h1 class="fs-lg-1 fs-md-3">SOATANANA</h1>
             </div>
-            <div class="col-12 items-3 d-flex align-items-center">
-                <div class="container flex-column text-center text-light">
-                    <h4 class="fs-lg-4 fs-md-6 ">Passage to the south of the country</h4>
-                    <h1 class="fs-lg-1 fs-md-3">SOATANANA</h1>
-                </div>
-            </div>
+        </div>
         </div>
     </section>
 </section>
@@ -36,15 +39,6 @@
 .row .col-12 .row .col-12 .container h1{
     font-size: 80px;
     font-weight: bold;
-}
-.row .col-12 .row .items-1 {
-    background-image: url(./slide/manambolo_copie.jpg);
-}
-.row .col-12 .row .items-2 {
-    background-image: url(./slide/DSCF2672.JPG);
-}
-.row .col-12 .row .items-3 {
-    background-image: url(./slide/soatanana.jpg);
 }
 .row .col-12 .row {
     animation-name: slide;

@@ -25,13 +25,14 @@
              </svg> <span>Effacer</span></div>
         </div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 <script setup lang="ts">
 import { navigate } from '~/all_model/fonction-classique';
 import type { member_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-
+let loading:Ref<boolean> = ref(true)
     let all_value: Ref<{data : member_model[]}> = ref({
         data : [],
     })
@@ -39,6 +40,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
     onMounted(() => {
         HttpService.getAllMember().then((res) => {
             all_value.value.data = [...res.data.data]
+        }).finally(function () {
+            loading.value = false
         })
     })
     function deletion(i:string) {

@@ -26,6 +26,7 @@
              </svg> <span>Effacer</span></div>
         </div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 
@@ -33,13 +34,15 @@
 import type { forceInt } from '~/all_model/fonction-classique';
 import type { member_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-
+let loading:Ref<boolean> = ref(true)
 let contact_dom:Ref<{list_table : member_model[]}> = ref({
     list_table : []
 })
-onBeforeMount(() => {
+onMounted(() => {
     HttpService.getAllMember().then((data) => {
         contact_dom.value.list_table = data.data.data
+    }).finally(function () {
+        loading.value = false
     })
 })
 function delete_member(id : number) {

@@ -33,11 +33,12 @@
             <span  class="fs-5"><NuxtLink class="text-decoration-none text-light" to="/">Cancel </NuxtLink></span>
         </div>
       </form>
+      <loading-component v-if="loading"/>
 </div>
 </template>
 
 <script lang="ts" setup>
-import { useCounterStore } from '#build/imports';
+import type { AxiosError } from 'axios';
 import { navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
   let err:Ref<string> = ref("")
@@ -47,11 +48,13 @@ import { HttpService } from '~/server/fetch-class/fetch';
       let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         let input:Ref<string> = ref("password")
         let type:Ref<number> = ref(0)
+          let loading:Ref<boolean> = ref(false)
 onMounted(() => {
   if(!UseCounterStore.getToken().mail) navigateTo("/internal-footer/connexion")
 })
     async function validate(e:Event) {
     e.preventDefault()
+    loading.value = true
     let formData:FormData = new FormData(e.target as HTMLFormElement)
     formData.append("type",Teste.get().type.toString())
     for(let [key,value] of formData.entries()) {
@@ -62,14 +65,16 @@ onMounted(() => {
     else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type) {
       await HttpService.updateUserPass(formData).then((res) => {
         navigate("/internal-footer/connexion",{})
-      }).catch((error) => {
-        console.log(error)
+      }).catch((error:AxiosError<{message:string}>) => {
+        loading.value = false
+        err.value = error.message || error.response?.data.message as string
       })
     } else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type !== 1) {
       await HttpService.updateMemberPass(formData).then((res) => {
         navigate("/internal-footer/connexion",{})
-      }).catch((error) => {
-        console.log(error)
+      }).catch((error:AxiosError<{message:string}>) => {
+        loading.value = false
+        err.value = error.message || error.response?.data.message as string
       })
     } else {
       navigate("/internal-footer/connexion",{})

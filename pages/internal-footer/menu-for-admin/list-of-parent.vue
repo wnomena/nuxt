@@ -28,6 +28,7 @@
             </div>
         </div>
   </section>
+  <loading-component v-if="loading"/>
     </section>
 </template>
 <script setup lang="ts">
@@ -38,8 +39,11 @@ let confirmation:Ref<{type : boolean, info :number}> = ref({type : false, info :
 let value:Ref<{list :  parent_road_list[]}> = ref({
     list : []
 })
+let loading:Ref<boolean> = ref(true)
 onMounted(async() => {
     await HttpService.getParents().then((response) => {value.value.list = [...response.data.data]
+    }).finally(function () {
+        loading.value = false
     })
 })
 function deletion(value : number) {

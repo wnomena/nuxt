@@ -62,6 +62,7 @@
             </div>
         </div>
   </section>
+  <loading-component v-if="loading"/>
 </section>
 </template>
 <script lang="ts" setup>
@@ -72,6 +73,7 @@ import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
 const router = useRoute()
+let loading:Ref<boolean> = ref(true)
 const title : Ref<{value : string, updating_title : parent_road_list,alert : string,confirmation : boolean}> = ref({
     alert : "",
     value : "",
@@ -95,14 +97,18 @@ onMounted(async() => {
                 title.value.value= "Update one parent road" 
                 title.value.updating_title = updating_title[0]              
             }
+        }).finally(function () {
+            loading.value = false
         })
     }
+    loading.value = false
 }) 
     async function update_before_deleting() {
         await HttpService.deleteParent(forceInt(title.value.updating_title.id.toString()))
     }
 async function upload(e : Event) {
     e.preventDefault()
+    loading.value = true
     const formData : FormData = new FormData(e.target as HTMLFormElement)
     formData.forEach(element => {
         console.log(element)
@@ -116,6 +122,7 @@ async function upload(e : Event) {
         }).catch((err:AxiosError<{message : string}>) => {
             console.log(err)
             title.value.alert =  err.response?.data.message as string
+            loading.value = false
                 })
     }
     else if(title.value.value.split(" ")[0] == "Update") {
@@ -123,8 +130,9 @@ async function upload(e : Event) {
         await HttpService.updateChild(formData).then((response) => {
             navigate("/internal-footer/menu-for-admin/list-of-parent",{})
         }).catch((err:AxiosError<{message : string}>) => {
-            console.log(err)
-                    title.value.alert =  err.response?.data.message as string
+                    console.log(err.message)
+                    title.value.alert =  err.response?.data.message as string || err.message
+                    loading.value = false
                 })
     }
 }

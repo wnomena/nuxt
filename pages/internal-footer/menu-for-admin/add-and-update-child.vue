@@ -63,6 +63,7 @@
             </div>
         </div>
   </section>
+  <loading-component v-if="loading"/>
 </section>
 </template>
 <script lang="ts" setup>
@@ -70,7 +71,8 @@ import { AxiosError } from 'axios';
 import { add_or_udate, forceInt, navigate } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-    const router = useRoute()   
+    const router = useRoute()  
+    let loading:Ref<boolean> = ref(true) 
     const title: Ref<{alert: string;title: string , update : child_road_list[],confirmation : boolean}> = ref({
         alert : "",
         title : "",
@@ -87,7 +89,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
             })
         }
         else title.value.title = "Add new child road"
-
+        loading.value = false
     })
     const display = () => {
         if(title.value.title.split(" ")[0] == "Add") {
@@ -101,7 +103,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
     }
     async function submit(e:Event) {
         e.preventDefault()
-
+        loading.value = true
         const formData:FormData = new FormData(e.target as HTMLFormElement)
         formData.append("parent_ident_equal_to_child",router.query.id as string)
         console.log(formData)
@@ -118,6 +120,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     navigate("/internal-footer/menu-for-admin/list-of-parent",{})
                 }).catch((err:AxiosError<{message : string}>) => {
                     title.value.alert =  err.response?.data.message as string
+                    loading.value = false
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
                 formData.set("name",router.query.name as string)
@@ -125,6 +128,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
                     navigate("/internal-footer/menu-for-admin/list-of-parent",{})
                 }).catch((err:AxiosError<{message : string}>) => {
                     title.value.alert =  err.response?.data.message as string
+                    loading.value = false
                 })
             }
         

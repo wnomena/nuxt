@@ -18,13 +18,14 @@
                 </div>
             <div class="icon items-2 "><i class="bi bi-arrow-right-circle-fill d-lg-flex d-md-flex d-none  text-primary align-items-center" ></i></div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 <script setup  lang="ts">
 import { navigate } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
-
+let loading:Ref<boolean> = ref(true) 
 let refs:Ref<{table : parent_road_list[]}> = ref({
     table : []
 })
@@ -32,6 +33,8 @@ onMounted(async() => {
     await HttpService.getParents().then((value) => {
         console.log(value.data)
         refs.value.table = [...value.data.data]
+    }).finally(function () {
+        loading.value = false
     })
 })
 </script>

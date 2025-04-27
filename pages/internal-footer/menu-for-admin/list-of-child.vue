@@ -11,6 +11,7 @@
             </div>
         </div>
     </div>
+    <loading-component v-if="loading"/>
 </section>
 </template>
 <script lang="ts" setup>
@@ -19,6 +20,8 @@ import type { child_road_for_display } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     let value1:Ref<child_road_for_display[]> = ref([])
     let img:Ref<string> = ref("")
+    let loading:Ref<boolean> = ref(true)
+
     function onclick(i:string) {img.value = i}
     onMounted(async() => {
         const id = useRoute().query.id
@@ -30,6 +33,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
                 if(i == 0) img.value = tout[0].presentation_image
                 
             }
+        }).finally(function () {
+            loading.value = false
         })
     })
     function modifier(i : string | undefined) {

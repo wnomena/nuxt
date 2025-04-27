@@ -1,6 +1,6 @@
 <template>
     <section data-aos="fade-right" class="row">
-        <div class="col-12 m-2">
+    <div class="col-12 m-2">
             <div class="row">
     <div class="col-6 d-flex flex-nowrap m-auto overflow-hidden p-0">
         <div @click="updatestyle" :class="selected">Membre</div>
@@ -8,7 +8,7 @@
     </div>
 </div>
         </div>
-        <form @submit="formvalidation" class="col-12 d-flex flex-column p-1">
+<form @submit="formvalidation" class="col-12 d-flex flex-column p-1">
   <div class="col-lg-4 col-md-6 col-12 m-lg-auto m-md-auto p-1 rounded">
     <div class="col-12 mt-3 mb-5"><h3 class="text-center text-light">Connexion</h3></div>
     <div class="col-12 mt-1 mb-1"><h5 class="text-center">{{ value_show }}</h5></div>
@@ -29,6 +29,7 @@
     </div>
   </div>
 </form>
+    <loading-component v-if="loading" class="loading"/>
     </section>
 </template>
 <script setup lang="ts">
@@ -39,7 +40,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
 let value_show = ref("")
 let type:Ref<number> = ref(0)
-
+let loading :Ref<boolean> = ref(false)
 let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
 let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
 
@@ -47,22 +48,26 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
  async function formvalidation(e:Event) {
     e.preventDefault()
     let data:FormData = new FormData(e.target as HTMLFormElement)
+    loading.value = true
     if(type.value) {
-        await HttpService.loginUser(data).then( function(res) {
-            if(res.status == 200 && res.data.code) {
+        await HttpService.loginUser(data).then( function(res)  {
+                if(res.status == 200) {
+                // useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 1})
                 navigate("/internal-footer/menu-for-admin",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
             value_show.value = error.message
+            loading.value = false
         })
     } else {
         await HttpService.loginMember(data).then(function (res) {
-            if(res.status == 200 && res.data.code) {
-                //mbola amboarina
+            if(res.status == 200) {
+                //useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 0})
                 navigate("/internal-footer/menu-for-admin",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
             value_show.value = error.message
+            loading.value = false
         })
     }
  }

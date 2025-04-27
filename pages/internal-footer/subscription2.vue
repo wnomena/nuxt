@@ -21,18 +21,21 @@
       </div>
     </div>
 </form>
+<loading-component v-if="loading"/>
 </div>
 </template>
 <script setup lang="ts">
+import type { AxiosError } from 'axios';
 import { navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
-
+let loading:Ref<boolean> = ref(false)
 let router = useRoute()
 let all_value:Ref<{err : string}> = ref({
         err: ''
 })
 async function takeallinformation(e:Event) {
     e.preventDefault()
+    loading.value = true
     let formData:FormData = new FormData(e.target as HTMLFormElement)
     for(let [key,value] of formData.entries()) {
         console.log(`${key} : ${value}`)
@@ -43,6 +46,9 @@ async function takeallinformation(e:Event) {
     formData.append("name",router.query.complete as string)
     await HttpService.SignUp(formData).then((res) => {
        navigate("/internal-footer/connexion",{})
+    }).catch( function(err:AxiosError<{message : string}>) {
+        all_value.value.err = err.message || err.response?.data.message as string
+        loading.value = false
     })
 }
 </script>

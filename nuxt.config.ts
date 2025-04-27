@@ -1,6 +1,7 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-  modules: ["@pinia/nuxt", "nuxt-aos", "nuxt-swiper"],
+  ssr : false,
+  modules: ["@pinia/nuxt", "nuxt-aos"],
   compatibilityDate: "2025-04-09"
 })

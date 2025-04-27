@@ -21,9 +21,11 @@
       </div>
     </div>
   </form>
+  <loading-component v-if="loading"/>
 </div>
 </template>
 <script setup lang="ts">
+import type { AxiosError } from 'axios';
 import { navigate } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 let all_refs : Ref<{err:string}> = ref({
@@ -31,6 +33,7 @@ let all_refs : Ref<{err:string}> = ref({
     complete : "",
     mail : ""
 })
+const loading:Ref<boolean> = ref(false)
 
 //methods
 async function validateform(e:Event) {
@@ -38,6 +41,8 @@ async function validateform(e:Event) {
     let formData = new FormData(e.target as HTMLFormElement)
     await HttpService.addNewAdmin(formData).then((_) => {
         navigate('/internal-footer/menu-for-admin/list-of-parent',{})
+    }).catch(function (err:AxiosError<{message : string}>) {
+        all_refs.value.err = err.response?.data.message as string || err.message
     })
 
 
