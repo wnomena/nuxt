@@ -11,7 +11,7 @@
                     </div>
                 </div>
         <div class="col-12">
-            <img style="height: 70vh;" class="m-0 col-12" src="./slide/DSCF2672.JPG" alt="">
+            <img style="height: 70vh;" class="m-0 col-12" src="./slide/tsingy.jpg">
             <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
                 <h4 class="fs-lg-4 fs-md-6" >Visite the Park</h4>
                 <h1 class="fs-lg-1 fs-md-3">GRAND TSINGY</h1>
