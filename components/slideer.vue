@@ -29,17 +29,6 @@
 </section>
 </template>
 <style scoped>
-    .row .col-12 .row .col-12 {
-    /* height: 95vh; */
-    /* border: 2px solid; */
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.row .col-12 .row .col-12 .container h1{
-    font-size: 80px;
-    font-weight: bold;
-}
 .row .col-12 .row {
     animation-name: slide;
     animation-duration: 15s;
@@ -58,56 +47,5 @@
         transform: translateX(-200%);
     }
 }
-@media only screen and (max-width: 700px) {
-    .row .col-12 .row .col-12 {
-        height: 50vh;
-    }
-    .row .col-12 .row .col-12 .container h4 {
-        font-weight: 500;
-        font-size: 20px;
-    }
-    .row .col-12 .row .col-12 .container h1 {
-        font-weight: 900;
-        font-size: 50px;
-    }
-}
-@media only screen and (max-width: 700px) {
-    .row .col-12 .row .col-12 {
-        height: 50vh;
-    }
-    .row .col-12 .row .col-12 .container h4 {
-        font-weight: 500;
-        font-size: 20px;
-    }
-    .row .col-12 .row .col-12 .container h1 {
-        font-weight: 900;
-        font-size: 40px;
-    }
-}
-@media only screen and (min-width: 700px) {
-    .row .col-12 .row .col-12 {
-        height: 70vh;
-    }
-    .row .col-12 .row .col-12 .container h4 {
-        font-weight: 500;
-        font-size: 50px;
-    }
-    .row .col-12 .row .col-12 .container h1 {
-        font-weight: 900;
-        font-size: 70px;
-    }
-}
-@media only screen and (min-width: 950px) {
-    .row .col-12 .row .col-12 {
-        height: 95vh;
-    }
-    .row .col-12 .row .col-12 .container h4 {
-        font-weight: 500;
-        font-size: auto;
-    }
-    .row .col-12 .row .col-12 .container h1 {
-        font-weight: 900;
-        font-size: auto;
-    }
-}
+
 </style>

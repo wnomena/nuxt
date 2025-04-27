@@ -64,7 +64,7 @@
 
   <!-- Copyright -->
   <div class="p-3 d-lg-flex d-block justify-content-around text-light fw-bold" style="background-color: rgba(0, 0, 0, 0.2);">
-    <p>© 2024 Company, Inc. All rights reserved.</p>
+    <p>© 2025  Company, Inc. All rights reserved.</p>
     <p>Designed by Fandresena Tsaroana Ny Aina and developed by Sedraniaina Nomenjanahary</p>
     
   </div>
