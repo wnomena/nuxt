@@ -1,12 +1,13 @@
 import { LocationQueryValue } from "vue-router"
 import  axios, { AxiosResponse } from "axios"
-import { child_road_list, commentary_model, contact, fetch_clild_road,member_model, parent_road_list } from "~/all_model/model"
+import { child_road_list, commentary_model, contact
+    ,member_model, parent_road_list } from "~/all_model/model"
 import { useCounterStore } from "#build/imports"
 const headerConfig = {
     Authorization : `Bearer ${useCounterStore().getToken().token}`
 }
 export class HttpService {
-     private static url = "https://travel-agency-project-vxkm.onrender.com"
+     private static url = "http://localhost:5000"
      static async getParents() :Promise<AxiosResponse<{data : parent_road_list[]}>> {
         return await axios.get(`${this.url}/parent`)
      }

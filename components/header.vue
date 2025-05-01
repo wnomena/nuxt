@@ -31,21 +31,19 @@
                 <div class="full-screen col-12 p-0 m-0 d-flex">
                     <span class="d-flex justify-content-center col-3  ms-1 p-1"><NuxtLink class="text-light text-decoration-none d-flex col-12 justify-content-center h-inherit m-0 align-items-center button" to="/" ><i class="bi bi-house-door"></i> <p class="m-0 d-lg-block d-md-none d-none"> Home </p></NuxtLink></span>
                     <span class="d-flex justify-content-center  col-3 ms-1 p-1"><NuxtLink to="/internal-footer/list-of-child-road" class="text-light text-decoration-none d-flex col-12 justify-content-center h-auto m-0 align-items-center button" ><i class="bi bi-signpost-split"></i> <p class="m-0 d-lg-block d-md-none d-none"> Our Tours</p></NuxtLink></span>            
-                    <span v-if="mail.mail"  @click="() => Teste.set_display(true)" class="d-flex align-items-center justify-content-center flex-nowrap col-4 ms-1 p-1"><i type="button" class="bi bi-people-fill"></i><small class="d-lg-flex align-items-center d-md-none d-none ms-1">{{ mail.mail }}</small></span>
+                    <span v-if="mail.mail"  @click="useCounterStore().displayMenu()" class="d-flex align-items-center justify-content-center flex-nowrap col-4 ms-1 p-1"><i type="button" class="bi bi-people-fill"></i><small class="d-lg-flex align-items-center d-md-none d-none ms-1">{{ mail.mail }}</small></span>
                     <span v-else class="d-flex justify-content-center  col-3 ms-1 p-1"><NuxtLink class="text-light text-decoration-none d-flex col-12 justify-content-center h-auto m-0 align-items-center button" to="/internal-footer/connexion"><i class="bi bi-globe2"></i> <p class="m-0 d-lg-block d-md-none d-none"> Connexion</p></NuxtLink></span>
             </div>
               </div>
           </div>
       </div>
-      <MenuAbsolute v-if="mail.display" />
+      <MenuAbsolute v-if="mail.display"/>
 </section>
 </template>
 <script setup lang="ts">
+import { navigate } from '~/all_model/fonction-classique';
 import MenuAbsolute from './menu-absolute.vue';
-
-const mail = computed(() => {
-    return Teste.get()
-})
+const mail = computed(() => useCounterStore().getToken())
 </script>
 <style scoped>
   span {

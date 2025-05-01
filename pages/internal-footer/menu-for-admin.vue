@@ -52,7 +52,9 @@
     </section>
 </template>
 <script setup lang="ts">
-
+onMounted(function() {
+    console.log(useCounterStore().getToken().mail)
+})
 
 </script>
 <style scoped>

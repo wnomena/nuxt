@@ -1,18 +1,35 @@
 import { defineStore} from "pinia"
 
 export const useCounterStore = defineStore('counter',function () {
-     const token:Ref<{token:string,type:number,mail:string}> = ref({
+     const token:Ref<{token:string,type:number,mail:string,display:boolean}> = ref({
         token : "",
         type : 0,
-        mail : ""
+        mail : "",
+        display : false
      })
      const updateToken = function (data : {token:string,type:number,mail:string}) {
-        token.value = data
+        token.value = {
+            token : data.token,
+            mail : data.mail,
+            type : data.type,
+            display : token.value.display
+        }
+     }
+     const displayMenu = function() {
+        token.value.display = token.value.display ? false : true
      }
      const getToken = function () {
         return token.value
      }
-     return {updateToken,getToken}
+     const deleteToken = function () {
+        token.value = {
+            token : '',
+            type : 0,
+            mail : "",
+            display : token.value.display
+        }
+     }
+     return {updateToken,getToken,deleteToken,displayMenu}
   })
   
 // const pinia = createPinia()

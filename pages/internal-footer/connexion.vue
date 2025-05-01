@@ -17,8 +17,8 @@
       <input class="col-11 m-auto mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="email" name="mail" id="">
     </div>
     <div class="col-lg-10 d-flex flex-column justify-content-center col-md-10 col-12 m-auto mb-4">
-      <label class="col-12 text-center text-light fs-4" for="mot_de_passe">Enter your passwords</label>
-      <input class="col-11  mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="password" name="mot_de_passe" id="">
+      <label class="col-12 text-center text-light fs-4" for="password">Enter your passwords</label>
+      <input class="col-11  mt-3 border-top-0 border-start-0 border-end-0 border-bottom-1 text-center" type="password" name="password" id="">
     </div> 
       <div class="col-lg-10 col-md-10 col-7 m-auto mb-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
         <button  type="submit" class="bg-primary p-2 text-light rounded border-0">Log in</button>
@@ -43,7 +43,13 @@ let type:Ref<number> = ref(0)
 let loading :Ref<boolean> = ref(false)
 let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
 let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
-
+onMounted(() => {
+    if(useCounterStore().getToken().mail && useCounterStore().getToken().type) {
+        navigate("/internal-footer/menu-for-admin/list-of-parent",{})
+    } else if(useCounterStore().getToken().mail && useCounterStore().getToken().type == 0) {
+        navigate("/",{})
+    }
+})
 //all methods
  async function formvalidation(e:Event) {
     e.preventDefault()
@@ -52,21 +58,22 @@ let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
     if(type.value) {
         await HttpService.loginUser(data).then( function(res)  {
                 if(res.status == 200) {
-                // useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 1})
+                console.log(res)
+                useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 1})
                 navigate("/internal-footer/menu-for-admin",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
-            value_show.value = error.message
+            value_show.value = error.response.data.message ? error.response.data.message : error.message 
             loading.value = false
         })
     } else {
         await HttpService.loginMember(data).then(function (res) {
             if(res.status == 200) {
-                //useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 0})
+                useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 0})
                 navigate("/internal-footer/menu-for-admin",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
-            value_show.value = error.message
+            value_show.value = error.response.data.message ? error.response.data.message : error.message 
             loading.value = false
         })
     }
