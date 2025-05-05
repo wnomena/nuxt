@@ -29,7 +29,8 @@
 </section>
 </template>
 <script setup lang="ts">
-import { navigate } from '~/all_model/fonction-classique';
+import type { AxiosError } from 'axios';
+import { navigate, redirect401 } from '~/all_model/fonction-classique';
 import type { member_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 let loading:Ref<boolean> = ref(true)
@@ -47,6 +48,8 @@ let loading:Ref<boolean> = ref(true)
     function deletion(i:string) {
         HttpService.deleteMember(parseInt(i.toString())).then((res) => {
             navigate("/internal-footer/menu-for-admin/list-of-parent",{})
+        }).catch(function(err:AxiosError) {
+            redirect401(err)
         })
     }
 </script>

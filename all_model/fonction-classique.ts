@@ -1,5 +1,6 @@
+import type { AxiosError, AxiosResponse } from "axios"
 import { Month } from "./model"
-export function navigate(url:string,query: {name?: string,id?:number|string,mail?:string}) {
+export function navigate(url:string,query: {name?: string,id?:number|string,mail?:string,persist?: string}) {
         return navigateTo({path : url,query : query})
     }
 
@@ -24,4 +25,7 @@ export function forceInt(string:string | undefined) {
     } catch (error) {
         throw Error("Exited")
     }
+}
+export function redirect401(res:AxiosError) {
+    if(res.status == 401 || res.status == 403) navigate("/internal-footer/connexion",{})
 }

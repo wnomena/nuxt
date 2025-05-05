@@ -58,22 +58,25 @@ onMounted(() => {
     if(type.value) {
         await HttpService.loginUser(data).then( function(res)  {
                 if(res.status == 200) {
-                console.log(res)
+                console.log(res.data.token)
                 useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 1})
-                navigate("/internal-footer/menu-for-admin",{})
+                const data2 = useCounterStore().getToken()
+                sessionStorage.setItem("piniaPersistance",JSON.stringify(data2))
+                navigate("/internal-footer/menu-for-admin/list-of-parent",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
-            value_show.value = error.response.data.message ? error.response.data.message : error.message 
+            value_show.value = error.response?.data.message ? error.response.data.message : error.message 
             loading.value = false
         })
     } else {
         await HttpService.loginMember(data).then(function (res) {
             if(res.status == 200) {
+                console.log(res)
                 useCounterStore().updateToken({token : res.data.token,mail : data.get("mail") as string,type : 0})
                 navigate("/internal-footer/menu-for-admin",{})
             }
         }).catch(function (error:AxiosError<{message : string}>) {
-            value_show.value = error.response.data.message ? error.response.data.message : error.message 
+            value_show.value = error.response?.data.message ? error.response.data.message : error.message 
             loading.value = false
         })
     }
@@ -101,9 +104,6 @@ section.container {
 .row .d-flex {
     border-radius: 30px;
 }
-.row /* .col-12 {
-    height: 70vh;
-} */
 .col-12 .col-lg-4 {
     background-color: #383535;
     padding: 0;

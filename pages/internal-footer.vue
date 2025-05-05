@@ -1,7 +1,7 @@
 <template>
   <div class="col-12">
-    <NuxtPage />
-    <footer class="text-center bg-primary">
+    <NuxtPage style="overflow-y: scroll;" />
+    <footer :style="{position : Absolute,bottom : '0'}" class="text-center bg-primary col-12">
     <!-- Grid container -->
     <div class="container pt-4">
       <!-- Section: Social media -->
@@ -35,6 +35,18 @@
   </div>
 
 </template>
+<script setup lang="ts">
+    const Absolute:Ref<"fixed" | "initial"> = ref("initial")
+    onMounted(() => {
+      location.href.split("/").forEach((element) => {
+        if(element == "menu-for-admin") {
+          Absolute.value = "fixed"
+        }
+      })
+    })
+
+    onMounted
+</script>
 <style scoped>
 /* footer {
     width: 100vw;
@@ -46,6 +58,7 @@ section.mb-4 {
     width: 400px;
     display: flex;
     justify-content: space-around;
+
 }
 svg:hover {
     fill: #ffffff;

@@ -159,6 +159,7 @@ export class child_road_for_display {
 export class child_road_list {
     id : number
     name : string
+    parent_id : number
     description : string
     distance : number
     presentation_image : string
@@ -171,6 +172,7 @@ export class child_road_list {
 
     constructor(a:number,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
         this.id = a
+        this.parent_id = a
         this.name = b
         this.description = b
         this.distance = c

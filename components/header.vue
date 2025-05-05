@@ -41,9 +41,17 @@
 </section>
 </template>
 <script setup lang="ts">
-import { navigate } from '~/all_model/fonction-classique';
-import MenuAbsolute from './menu-absolute.vue';
 const mail = computed(() => useCounterStore().getToken())
+onMounted(function () {
+    let a = sessionStorage.getItem("piniaPersistance")
+        try {
+            if(a !== null) {
+                useCounterStore().updateToken(JSON.parse(a))
+            } 
+        } catch (error) {
+            console.log("aucune données")
+        }
+})
 </script>
 <style scoped>
   span {

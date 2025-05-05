@@ -68,7 +68,7 @@
 <script lang="ts" setup>
 // import type { Reactive } from 'vue';
 import type { AxiosError } from 'axios';
-import { forceInt, navigate } from '~/all_model/fonction-classique';
+import { forceInt, navigate, redirect401 } from '~/all_model/fonction-classique';
 import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
@@ -130,7 +130,6 @@ async function upload(e : Event) {
         await HttpService.updateChild(formData).then((response) => {
             navigate("/internal-footer/menu-for-admin/list-of-parent",{})
         }).catch((err:AxiosError<{message : string}>) => {
-                    console.log(err.message)
                     title.value.alert =  err.response?.data.message as string || err.message
                     loading.value = false
                 })

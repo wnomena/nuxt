@@ -25,7 +25,8 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from '~/all_model/fonction-classique';
+import type { AxiosError } from 'axios';
+import { navigate, redirect401 } from '~/all_model/fonction-classique';
 import type { contact } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const all_value:Ref<{data : contact[]}> = ref({
@@ -36,6 +37,8 @@ import { HttpService } from '~/server/fetch-class/fetch';
         await HttpService.getContacts().then((response) => {
             console.log(response)
             all_value.value.data = response.data.data
+        }).catch((err:AxiosError) => {
+            redirect401(err)
         }).finally(function () {
             loading.value = false
         })

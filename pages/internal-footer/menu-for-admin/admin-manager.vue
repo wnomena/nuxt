@@ -35,7 +35,8 @@
 </template>
 
 <script lang="ts" setup>
-import { navigate } from '~/all_model/fonction-classique';
+import type { AxiosError } from 'axios';
+import { navigate, redirect401 } from '~/all_model/fonction-classique';
 import type { member_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
@@ -53,6 +54,8 @@ onMounted(async() => {
 async function deletemember(id : number) {
   await HttpService.deleteMember(id).then((response) => {
     navigate("/internal-footer/menu-for-admin/list-of-parent",{})
+  }).catch((err:AxiosError) => {
+    redirect401(err)
   })
 }
 </script>

@@ -1,4 +1,4 @@
-import { defineStore} from "pinia"
+import { createPinia, defineStore, setActivePinia} from "pinia"
 
 export const useCounterStore = defineStore('counter',function () {
      const token:Ref<{token:string,type:number,mail:string,display:boolean}> = ref({
@@ -14,60 +14,29 @@ export const useCounterStore = defineStore('counter',function () {
             type : data.type,
             display : token.value.display
         }
+      //   localStorage.setItem("piniaPersistance",JSON.stringify({token : data.token,mail : data.mail,type : data.type, display : token.value.display}))
      }
-     const displayMenu = function() {
+     const displayMenu = function():void {
         token.value.display = token.value.display ? false : true
+        console.log(token.value.display)
      }
-     const getToken = function () {
+     const getToken = function ():{token:string,type:number,mail:string,display:boolean} {
         return token.value
      }
-     const deleteToken = function () {
+     const deleteToken = function ():void {
         token.value = {
             token : '',
             type : 0,
             mail : "",
             display : token.value.display
         }
+        sessionStorage.removeItem("piniaPersistance")
      }
      return {updateToken,getToken,deleteToken,displayMenu}
+  },{
+   persist : true
   })
   
-// const pinia = createPinia()
-// setActivePinia(pinia)
-// export const Pinia = useCounterStore()
-
-export let Teste = {
-    type : ref(0),
-    mail : ref(""),
-    display : ref(false),
-    get : function(){
-        return {
-            mail : this.mail.value,
-            type : this.type.value,
-            display : this.display.value
-        }
-    },
-    set : function(mail : string, type : number) {
-        this.mail.value = mail
-        this.type.value = type
-    },
-    set_display: function(display:boolean) {
-        this.display.value = display
-        console.log(display)
-    },
-    delete : function() {
-        this.mail.value = ""
-        this.type.value = 0
-        this.display.value = false
-        navigateTo({
-            path : "/"
-        })
-    },
-    authenticate : function() {
-        return this.mail.value && this.type.value == 1 ? true : false
-    }
-}
-
-function get() {
-    throw new Error("Function not implemented.")
-}
+const pinia = createPinia()
+setActivePinia(pinia)
+export const Pinia = useCounterStore()

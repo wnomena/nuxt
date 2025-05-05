@@ -31,7 +31,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { forceInt } from '~/all_model/fonction-classique';
+import type { AxiosError } from 'axios';
+import { redirect401, type forceInt } from '~/all_model/fonction-classique';
 import type { member_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 let loading:Ref<boolean> = ref(true)
@@ -46,7 +47,9 @@ onMounted(() => {
     })
 })
 function delete_member(id : number) {
-    HttpService.deleteMember(id)
+    HttpService.deleteMember(id).catch(function (err:AxiosError) {
+        redirect401(err)
+    })
 }
 </script>
 

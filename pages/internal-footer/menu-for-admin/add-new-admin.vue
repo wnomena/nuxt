@@ -26,7 +26,7 @@
 </template>
 <script setup lang="ts">
 import type { AxiosError } from 'axios';
-import { navigate } from '~/all_model/fonction-classique';
+import { navigate, redirect401 } from '~/all_model/fonction-classique';
 import { HttpService } from '~/server/fetch-class/fetch';
 let all_refs : Ref<{err:string}> = ref({
     err : '',
@@ -37,15 +37,16 @@ const loading:Ref<boolean> = ref(false)
 
 //methods
 async function validateform(e:Event) {
+    loading.value = true
     e.preventDefault()
     let formData = new FormData(e.target as HTMLFormElement)
     await HttpService.addNewAdmin(formData).then((_) => {
         navigate('/internal-footer/menu-for-admin/list-of-parent',{})
     }).catch(function (err:AxiosError<{message : string}>) {
         all_refs.value.err = err.response?.data.message as string || err.message
+    }).finally(function () {
+        loading.value = false
     })
-
-
 }
 </script>
 <style scoped>

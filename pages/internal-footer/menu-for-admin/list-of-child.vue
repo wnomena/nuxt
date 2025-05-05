@@ -1,6 +1,6 @@
 <template>
     <section>
-    <div class="col-12"><p @click="modifier(undefined)" >Ajout</p></div>
+    <div class="col-12"><p @click="modifier(undefined)">Ajout</p></div>
     <div class="img_contain">
         <img :img="img" alt="" srcset=""> 
     </div>
@@ -37,9 +37,12 @@ import { HttpService } from '~/server/fetch-class/fetch';
             loading.value = false
         })
     })
-    function modifier(i : string | undefined) {
+    function modifier(id? : string) {
         const root = useRoute()
-        navigate("/internal-footer/menu-for-admin/add-and-update-child",root.query)
+        console.log("id : " + id)
+        if(!id) navigate("/internal-footer/menu-for-admin/add-and-update-child",{id : root.query.id?.toString()})
+        else navigate("/internal-footer/menu-for-admin/add-and-update-child",root.query)
+
     }
 </script>
 <style scoped>

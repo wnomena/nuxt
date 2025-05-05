@@ -6,9 +6,21 @@
     </div>
 </template>
 <script setup lang="ts">
+
     const display = ref(false)
     onMounted(() => {
         document.title = "CAP ON MADA"
+        console.log(useCounterStore().getToken())
+    })
+    window.addEventListener("DOMContentLoaded",function () {
+        let a = this.sessionStorage.getItem("piniaPersistance")
+        try {
+            if(a !== null) {
+                useCounterStore().updateToken(JSON.parse(a))
+            } 
+        } catch (error) {
+            console.log("aucune données")
+        }
     })
 </script>
 <style >
