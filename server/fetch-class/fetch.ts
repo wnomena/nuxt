@@ -5,11 +5,16 @@ import { child_road_list, commentary_model, contact
     ,member_model, parent_road_list } from "~/all_model/model"
 import { useCounterStore } from "~/stores/token"
 function token() {
-    const condition = useCounterStore().getToken().token as string
-    while (!condition) {
-        token()
+    const a = sessionStorage.getItem("piniaPersistance")
+    if(a) {
+        const b:{token:string, mail : string, type : number,display:boolean} = a ? JSON.parse(a) : undefined
+        console.log(b.token)
+        return b.token
+    } else {
+        console.log(a)
+        return undefined
     }
-    return condition
+
 }
 export class HttpService {
     private static  headerConfig = {
@@ -32,10 +37,11 @@ export class HttpService {
         return await axios.delete(`${this.url}/admin/delete/${id}/parent`,{headers :  this.headerConfig})
      }
     //child
-    static async getChilds(parent:number):Promise<AxiosResponse<{data :child_road_list[]}>> {
-        return await axios.get(`${this.url}/${parent}/child`,{headers :  this.headerConfig})
+    static async getChilds(parent?:number):Promise<AxiosResponse<{data :child_road_list[]}>> {
+        return await axios.get(`${this.url}/${parent}/childs`,{headers :  this.headerConfig})
      }
     static async getChild(id:number) :Promise<AxiosResponse<{data : child_road_list[]}>> {
+        console.log(id)
         return await axios.get(`${this.url}/${id}/child`,{headers :  this.headerConfig})
      }
     static async insertChild(formdata:FormData):Promise<AxiosResponse<{message : string}>> {

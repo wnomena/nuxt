@@ -5,8 +5,8 @@
         <span class="d-flex bg-primary"><NuxtLink class="text-decoration-none text-light m-auto" to="/internal-footer/menu-for-admin/list-of-parent"><i class="bi bi-chevron-left"> Retour</i></NuxtLink></span>
     </div>
     <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
-    <form v-empty @submit="upload" class="bg-transparent w-100 m-top-10 d-flex flex-wrap">
-        <div class="col-6 d-flex bg-transparent flex-row">
+    <form v-empty @submit="upload" class="bg-transparent m-top-10 col-12 d-flex flex-wrap border">
+        <div class="col-12 d-flex bg-transparent border ">
             <div class="bg-transparent d-flex flex-column" >
                 <label class="text-dark" for="name">Nom</label>
                 <input :value="title.updating_title.name" name="name" class="border-top-0 border-start-0 border-end-0 " type="text">
@@ -29,10 +29,6 @@
                 <label class="text-dark" for="difficulty">Dificulty</label>
                 <input :value="title.updating_title.difficulty" v-change="100"  name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
             </div>
-            <div class="bg-transparent d-flex flex-column m-10">
-                <label class="text-dark" for="confort">Confort </label>
-                <input :value="title.updating_title.confort" v-change="100" name="confort" class="border-top-0 border-start-0 border-end-0" type="number">
-            </div>
             <div class="bg-transparent d-flex flex-column m-10" >
                 <label class="text-dark" for="file">L'image</label>
                 <input name="image" accept="image/**" class="text-dark" type="file">
@@ -40,13 +36,13 @@
         </div>
         <div class="container-fluid bg-transparent d-flex flex-column">
                 <label class="text-dark" for="desc">La description de ce circuit</label>
-                <textarea :value="title.updating_title.description.toString()" name="desc" class="rounded" id="" placeholder="La description de ce circuit"></textarea>
+                <textarea style="width: 100%; height: 200px;" :value="title.updating_title.description.toString()" name="desc" class="rounded" id="" v-on:change="change" placeholder="La description de ce circuit"></textarea>
         </div><br>
-        <div class="bg-transparent d-flex flex-row">
-            <div class="bg-transparent d-flex w-50">
+        <div style="width: fit-content;" class="bg-transparent d-flex flex-row border">
+            <div class="bg-transparent d-flex">
                 <button type="submit" id="button">Enregistrer</button>
             </div>
-            <div class="bg-transparent d-flex justify-content-start w-50">
+            <div class="bg-transparent d-flex justify-content-start">
                 <span v-if="display()" @click="()=> title.confirmation = true" id="cancel"> Effacer </span>
             </div>
         </div>
@@ -68,7 +64,7 @@
 <script lang="ts" setup>
 // import type { Reactive } from 'vue';
 import type { AxiosError } from 'axios';
-import { forceInt, navigate, redirect401 } from '~/all_model/fonction-classique';
+import { change, forceInt, navigate, persist_form_error_for_parent, redirect401 } from '~/all_model/fonction-classique';
 import type { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 
@@ -88,15 +84,12 @@ onMounted(async() => {
     if(router.query.id == undefined) {
         title.value.value = "Add new parent road"
     } else {
-        await HttpService.getParents().then((res) => {
+        await HttpService.getParent(forceInt(router.query.id as string)).then((res) => {
             const value:parent_road_list[] = res.data.data
-            console.log(value) 
-            const updating_title =  Array.from(value).filter((a) => a.name == router.query.id as string)
-            console.log(updating_title)
-            if(updating_title.length !== 0) {
                 title.value.value= "Update one parent road" 
-                title.value.updating_title = updating_title[0]              
-            }
+                title.value.updating_title = value[0]              
+        }).catch((err) => {
+            console.log(err)
         }).finally(function () {
             loading.value = false
         })
@@ -110,12 +103,6 @@ async function upload(e : Event) {
     e.preventDefault()
     loading.value = true
     const formData : FormData = new FormData(e.target as HTMLFormElement)
-    formData.forEach(element => {
-        console.log(element)
-        if(!element) {
-            title.value.alert = "Required field"
-        }
-    });
     if(title.value.value.split(" ")[0] == "Add") {
         await HttpService.insertParent(formData).then((response) => {
             navigate("/internal-footer/menu-for-admin/list-of-parent",{})
@@ -127,12 +114,13 @@ async function upload(e : Event) {
     }
     else if(title.value.value.split(" ")[0] == "Update") {
         formData.append("id",title.value.updating_title.id.toString())
-        await HttpService.updateChild(formData).then((response) => {
+        await HttpService.updateParent(formData).then((response) => {
             navigate("/internal-footer/menu-for-admin/list-of-parent",{})
         }).catch((err:AxiosError<{message : string}>) => {
+            console.log(err)
                     title.value.alert =  err.response?.data.message as string || err.message
                     loading.value = false
-                })
+       })
     }
 }
 </script>
@@ -142,7 +130,6 @@ async function upload(e : Event) {
         top: 0;
     }
     section.section .col-5 .col-12 div {
-        width: 70px;
         font-weight: bold;
         text-align: center;
         cursor: pointer;
@@ -152,13 +139,12 @@ async function upload(e : Event) {
 }
 .container-fluid .d-flex {
     background-color: #3f474d;
-    width: 100%;
     color: white;
 }
-.container-fluid .d-flex span {
+/* .container-fluid .d-flex span {
    width: 200px;
 
-}
+} */
 .container-fluid .d-flex span i {
     margin: auto;
     font-weight: bold;
@@ -171,16 +157,14 @@ async function upload(e : Event) {
 }
 .container-fluid .bg-transparent {
     display: flex;
-    width: 250px;
+    width: 100%;
     margin: 10px;
 }
 
 .container-fluid .bg-transparent .col-6 {
     flex-wrap: wrap;
-    width: 70%;
 }
 .border-top-0 {
-    width: 250px;
     overflow: hidden;
 }
 .border-top-0:focus, .border-top-0:active , .border-top-0 {
@@ -191,14 +175,11 @@ async function upload(e : Event) {
     outline: none;
     font-weight: bold;
     font-family: "Calibri Light (Titres)",sans-serif;
-    width: 250px;
 }
 .bg-transparent .d-flex .d-flex input {
     margin-right: 20px;
 }
 textarea {
-    width: 250px;
-    height: 250px;
     font-weight: bold;
     border: 2px solid black;
 }

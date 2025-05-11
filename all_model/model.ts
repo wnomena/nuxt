@@ -169,27 +169,29 @@ export class child_road_list {
     like_by_membes : like[]
     confort : number
     period : string
+    carte : string
 
-    constructor(a:number,b : string, c: number, d : string, e : string, f : number,g : number,h : like[],i : number,j : string) {
-        this.id = a
-        this.parent_id = a
-        this.name = b
-        this.description = b
-        this.distance = c
-        this.presentation_image = d
-        this.sejour_delay = e
-        this.price = f
-        this.difficulty = g
-        this.like_by_membes = h
-        this.confort = i
-        this.period = j
+    constructor(a:string,b:number) {
+        this.id = b
+        this.parent_id = b
+        this.name = a
+        this.description = a
+        this.distance = b
+        this.presentation_image = a
+        this.sejour_delay = a
+        this.price = b
+        this.difficulty = b
+        this.like_by_membes = []
+        this.confort = b
+        this.period = a
+        this.carte = a
     }
 }
 export class fetch_clild_road {
     message : string
     data : child_road_for_display[]
     
-    constructor(a : string,data : child_road_for_display[]) {
+    constructor(a : string,data : child_road_for_display[]) { 
         this.message = a
         this.data = data
     }

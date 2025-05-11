@@ -1,6 +1,6 @@
 
 <template>
-    <section class="row">
+    <section style="overflow-x: hidden;" class="row">
         <section v-if="!confirmation.type" class="border col-12">
         <div><NuxtLink to="/internal-footer/menu-for-admin/add-and-update-parent"> Ajout</NuxtLink></div>
         <section class="d-flex flex-nowrap justify-content-around" style="height : 60vh">
@@ -51,9 +51,12 @@ function deletion(value : number) {
         confirmation.value = {type : true, info : value}
         console.log(confirmation.value)
 }
-function  fetchdelete() {
-        HttpService.deleteParent(confirmation.value.info).finally(()=> {
-            navigate("/internal-footer/menu-for-admin/list-of-parent",{})
+async function fetchdelete() {
+    loading.value = true
+       await HttpService.deleteParent(confirmation.value.info).then(()=> {
+        loading.value = false
+        }).finally(() => {
+            location.reload()
         })
     }
 
@@ -117,3 +120,4 @@ function  fetchdelete() {
     flex-direction: column;
 } */
 </style>
+// Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis quae velit aliquam eaque id aspernatur dolorem illo exercitationem nam beatae labore corrupti quisquam voluptates saepe placeat dicta qui, quasi aliquid eum amet ratione, ullam aperiam. Ipsa consectetur voluptas nihil dolorum dolor atque mollitia ratione earum consequuntur quibusdam perspiciatis, repellendus deserunt facilis illo, quam cum dignissimos excepturi dicta aut, officia accusamus et animi recusandae. Ab deleniti hic, architecto nam dolor nobis, nulla dicta est asperiores autem qui. Esse nemo dignissimos aut distinctio placeat nisi saepe ducimus, cum inventore neque sequi dolor atque quod maxime aspernatur? Necessitatibus nostrum nulla ab! Laborum, officia!

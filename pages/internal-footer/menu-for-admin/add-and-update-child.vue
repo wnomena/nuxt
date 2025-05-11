@@ -4,12 +4,12 @@
         <h3 class="text-light"> {{ title.title }}</h3>
         <NuxtLink  style="cursor: pointer;" class="d-flex justify-content-center bg-primary" :to="{path : '/internal-footer/menu-for-admin/list-of-parent'}"><i class="bi bi-chevron-left"> Retour</i></NuxtLink>
     </div>
-    <div class="col-7 m-auto text-center bg-danger">{{ title.alert }}</div>
-    <form @submit="submit" class="w-full d-flex flex-wrap">
+    <div class="col-12 m-auto text-center bg-danger">{{ title.alert }}</div>
+    <form @submit="submit" class="w-full d-flex flex-wrap border">
         <div class="bg-transparent d-flex flex-row flex-wrap">
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="name">Le nom de votre circuit</label>
-                <input :value="title.update.name" name="name"  class="border-top-0 border-start-0 border-end-0" :disabled="add_or_udate(title.title)"  type="text">
+                <input :value="title.update.name" name="name"  class="border-top-0 border-start-0 border-end-0"  type="text">
             </div>
             <div class="bg-transparent border-0 d-flex flex-column m-0">
                 <label for="distance">Distance à parcourir</label>
@@ -43,13 +43,30 @@
                 <label for="">Image</label>
                 <input name="image"  class="border-top-0 border-start-0 border-end-0" type="file">
             </div>
+            <div class="bg-transparent  d-flex flex-column m-0">
+                <label for="">Image</label>
+                <input name="image"  class="border-top-0 border-start-0 border-end-0" type="file">
+            </div>
+                    <div class="bg-transparent d-flex flex-row justify-content-start">
+            <div class="bg-transparent d-flex">
+                <button type="submit" id="button">Enregistrer</button>
+            </div>
+            <div class="bg-transparent d-flex justify-content-start w-50">
+                <span v-if="display()" @click="()=> title.confirmation = true" id="cancel"> Effacer </span>
+            </div>
         </div>
-        <div class="bg-transparent  d-flex flex-column m-0 w-auto">
+        </div>
+        <div class="bg-transparent  d-flex flex-column m-0 col-12 border">
             <label for="">La description du circuit</label>
-            <textarea  name="description" id="" placeholder="Une petite description"></textarea>
+            <textarea style="width: 100%;" :value="title.update.description" name="desc" id="" v-on:change="change" placeholder="Une petite description"></textarea>
         </div>
-        <div class="bg-transparent d-flex">
-            <button class="border-0 submit" type="submit">Valider</button><span @click="display" class="border-0"> Effacer </span>
+        <div class="bg-transparent d-flex flex-row justify-content-start">
+            <div class="bg-transparent d-flex">
+                <button type="submit" id="button">Enregistrer</button>
+            </div>
+            <div class="bg-transparent d-flex justify-content-start w-50">
+                <span v-if="display()" @click="()=> title.confirmation = true" id="cancel"> Effacer </span>
+            </div>
         </div>
     </form>
       <section v-if="title.confirmation" class=" section col-12">
@@ -68,7 +85,7 @@
 </template>
 <script lang="ts" setup>
 import { AxiosError } from 'axios';
-import { add_or_udate, forceInt, navigate, redirect401 } from '~/all_model/fonction-classique';
+import { add_or_udate, change, forceInt, navigate, redirect401, undefinedForceInt } from '~/all_model/fonction-classique';
 import type { child_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     const router = useRoute()  
@@ -76,69 +93,55 @@ import { HttpService } from '~/server/fetch-class/fetch';
     const title: Ref<{alert: string;title: string , update : child_road_list,confirmation : boolean}> = ref({
         alert : "",
         title : "",
-        update : {id: 0,name : "",parent_id : 0,like_by_membes : [],description : "",presentation_image : "", period : "", price : 0, difficulty : 0, distance : 0,sejour_delay : "", confort : 0},
+        update : {id : 0,name : "",description : "", price : 0, distance : 0,difficulty : 0,like_by_membes : [], sejour_delay : "", period : "", presentation_image : "",parent_id : 0, confort : 0,carte : ""},
         confirmation : false
     })
     onMounted(async() => {
-        if(!router.query.name || !router.query.id) console.log("vide") 
-        if(router.query.name?.toString()) {
+        console.log(JSON.stringify(router.query.id))
+        if(undefinedForceInt(router.query.id as string)) {
             title.value.title = "Update child road"
-            console.log(router.query.name)
             await HttpService.getChild(forceInt(router.query.id ? router.query.id.toString() : undefined)).then((response) => {
+                console.log(response)
                 title.value.update = response.data.data[0]
             })
         }
         else title.value.title = "Add new child road"
         loading.value = false
     })
+
     const display = () => {
         if(title.value.title.split(" ")[0] == "Add") {
-            console.log("ajout")
             return false
         }
         else return true
     }
     async function update_before_deleting() {
-        await HttpService.deleteChild(title.value.update.id).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
+        await HttpService.deleteChild(forceInt(title.value.update.id.toString())).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
     }
     async function submit(e:Event) {
         e.preventDefault()
         loading.value = true
-        const formData:FormData = new FormData(e.target as HTMLFormElement)
-        formData.append("parent_ident_equal_to_child",router.query.id as string)
-        console.log(formData)
-        for(let [key,value] of formData.entries()) {
-            console.log(key,value)
-            if(!value) {
-                console.log(key)
-                 title.value.alert = ` Required field : ${key}`
-                return false
-            }
-        }
-        if(title.value.title.split(" ")[0] == "Add") {
-                formData.append("parent_id",router.query.id as string)
+        const formData:FormData = new FormData(e.target as HTMLFormElement) 
+        formData.append("parent_id",router.query.parent as string) 
+        if(title.value.title.split(" ")[0] == "Add") {           
                 await HttpService.insertChild(formData).then((response) => {
                     navigate("/internal-footer/menu-for-admin/list-of-parent",{})
-                    console.log(response)
                 }).catch((err:AxiosError<{message : string}>) => {
-                    console.log(err)
                     title.value.alert =  err.response?.data.message as string
-
                 }).finally(() => {
-                                        loading.value = false
+                    loading.value = false
                 })
             }else if(title.value.title.split(" ")[0] == "Update") {
-                formData.set("name",router.query.name as string)
+                formData.set("id",router.query.id as string)
+                console.log(formData.get("name"))
                 await HttpService.updateChild(formData).then((response) => {
                     navigate("/internal-footer/menu-for-admin/list-of-parent",{})
                 }).catch((err:AxiosError<{message : string}>) => {
                     title.value.alert =  err.response?.data.message as string
-
                 }).finally(() => {
-                                        loading.value = false
+                    loading.value = false
                 })
             }
-        
     }
 </script>
 <style scoped>
@@ -169,7 +172,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
 }
 .container-fluid .w-full .bg-transparent {
     padding: 10px;
-    width: 75%;
+    width: 100%;
 }
 .container-fluid .w-full .bg-transparent .bg-transparent {
     width: 300px;
@@ -215,8 +218,38 @@ button {
         width: 100%;
     }
 }
-app-internal-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}</style>
+#button{
+    width: 110px;
+    text-align: center;
+    color: #046ee0;
+    background-color: white;
+    border: 2px solid #046ee0;
+    font-weight: bold;
+    border-radius: 8px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#cancel{
+    width: 110px;
+    text-align: center;
+    color: red;
+    background-color: white;
+    border: 2px solid red;
+    font-weight: bold;
+    border-radius: 8px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#cancel:hover {
+    color: white;
+    background-color: red;
+    text-decoration: none ;
+    border: 1px solid red;
+    transition: 0.3s;
+}
+#button:hover{
+    color: white;
+    background-color: #046ee0;
+    text-decoration: none ;
+    border: 1px solid #046ee0;
+    transition: 0.3s;
+}
+</style>

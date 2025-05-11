@@ -26,11 +26,14 @@
                 <button type="submit" class="border-0 col-3 text-center rounded"> Send </button>
             </div>
         </form>
+        <loading-component v-if="loading"/>
     </section>
 </template>
 
 <script lang="ts" setup>
+import type { AxiosError } from 'axios';
 import { HttpService } from '~/server/fetch-class/fetch';
+    const loading = ref(false)
     const notification:Ref<{err: string,success : string}> = ref({
         err: '',
         success : ''
@@ -38,6 +41,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
 
     async function submit_function(e:Event) {
         e.preventDefault()
+        loading.value = true
         const data = new FormData(e.target as HTMLFormElement)
         for(let [key,value] of data.entries() ){
             if(!value) {
@@ -46,12 +50,14 @@ import { HttpService } from '~/server/fetch-class/fetch';
                 return false
             }
         }
-        await HttpService.add_new_contact(data).then((response) => {
+        await HttpService.addNewContact(data).then((response) => {
             console.log(response)
             notification.value.success = response.data.message
             notification.value.err = ""
-        }).catch((err) => {
-            console.log(err)
+        }).catch((err:AxiosError<{message : string}>) => {
+            notification.value.err = err.response?.data.message as string
+        }).finally(function () {
+            loading.value = false
         })
     }
 </script>
