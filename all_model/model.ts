@@ -257,15 +257,15 @@ export class contact {
     mail : string
     object : string
     corps : string
-    seen : boolean
+    vue : boolean
 
-    constructor(a: string,b: true) {
+    constructor(a: string,b: boolean) {
         this.id = a
         this.corps = a
         this.mail = a
         this.name = a
         this.object = a
-        this.seen = b
+        this.vue = b
     }
 }
 export class pinia_model {

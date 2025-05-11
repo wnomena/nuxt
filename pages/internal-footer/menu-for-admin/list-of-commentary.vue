@@ -17,28 +17,29 @@
             <span> identifiant : {{ i.identifiant }}</span>
             <span> E-mail : {{ i.mail }}</span>
             <div class="commentary_container">
-                <span @click="update_value" class="text-decoration-underline-hover">Commentaire</span>
+                <span @click="update_value(i.string.toString())" class="text-decoration-underline-hover">Commentaire</span>
             </div>
-            <div class="rounded border d-flex justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="45" height="40" fill="none" stroke="#036d03" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+            <a href="https://mala.gasyweb.com:2096/cpsess2741722080/3rdparty/roundcube/?_task=mail&_mbox=INBOX" target="_blank" class="text-decoration-none rounded border d-flex justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="45" height="40" fill="none" stroke="#036d03" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                 <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
-              </svg><span>Contacter</span></div>
+              </svg><span>Contacter</span></a>
             <div class="delete_member rounded border d-flex justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="45" height="40" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
              </svg> <span>Effacer</span></div>
         </div>
     </div>
         </div>
-        <div v-else class="bg-transparent col-10 border m-auto">
+        <div v-else class="bg-transparent col-10  m-auto">
            <div class="col-10 m-auto">
             <h3 class="text-dark text-center">{{ all_value.string_commentary }}</h3>
            </div>
-            <div class=" bg-transparent d-flex justify-content-center"><div @click="update_value" class="text-dark text-center border ps-5 pe-5 rounded bg-success">Fermer</div></div>
+            <div class=" bg-transparent d-flex justify-content-center"><div @click="update_value" class="text-dark text-center ps-5 pe-5 rounded bg-success" style="cursor: pointer;">Fermer</div></div>
         </div>
         <loading-component v-if="loading"/>
 </section>
 </template>
 
 <script lang="ts" setup>
+import { navigate } from '~/all_model/fonction-classique';
 import type { commentary_model } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
     let all_value: Ref<{data : commentary_model[],string_commentary : string, list_or_string : boolean}> = ref({
@@ -54,8 +55,9 @@ import { HttpService } from '~/server/fetch-class/fetch';
             loading.value = false
         })
     })
-    function update_value() {
-        all_value.value.list_or_string = all_value.value.list_or_string == true ? false : true
+    function update_value(data?:string) {
+        all_value.value.list_or_string = all_value.value.list_or_string ? false : true
+        all_value.value.string_commentary = data as string
     }
     //un fonction d'éffacement de comantaire/et un composant de confirmation avant l'effacement.
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="col-12">
-    <NuxtPage style="overflow-y: scroll;" />
+    <NuxtPage />
     <footer :style="{position : Absolute,bottom : '0'}" class="text-center bg-primary col-12">
     <!-- Grid container -->
     <div class="container pt-4">
