@@ -3,9 +3,17 @@
         <div v-for="i in reference.value" :key="i.id" class="col-12 d-flex justify-content-between p-1 tout">
             <div class="col-lg-7 col-10 m-auto">
                 <h3 class="text-success"> Name : {{ i.name }}</h3>
-                <div class="col-12">
+                <div class="col-12d-lg-block d-md-block d-none">
                     <h4 class="text-primary">Description : </h4>
-                    <span class="fw-bold d-lg-block d-md-block d-none">{{ i.description }}</span>
+                    <span class="fw-bold">{{ i.description }}</span>
+                </div>
+                <div class="col-12d-lg-none d-md-none d-block">
+                    <h4 class="text-primary">Description : </h4>
+                    <span class="fw-bold">{{ i.description.split(".")[0] }}</span>
+                </div>
+                <div  class="col-12 d-lg-none d-md-none d-flex">
+                    <h4 class="text-primary">From : <i class="bi bi-currency-euro"></i></h4> <h6 style="margin-bottom: 8px; margin-left: 12px;" class="fw-bold fs-3">{{ i.price }}</h6>
+                    
                 </div>
                 <div class="col-12 d-flex justify-content-end">
                     <NuxtLink class=" text-decoration-none fw-bold" :to="{path : '/internal-footer/complete-information',query : {id : i.id}}">More</NuxtLink>
