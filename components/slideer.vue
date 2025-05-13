@@ -1,3 +1,8 @@
+<script setup lang="ts">
+// import { NuxtImg } from '#components';
+
+</script>
+
 <template>
     <section class="row border overflow-hidden mb-2">
         

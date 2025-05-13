@@ -15,6 +15,7 @@
                 <NuxtImg class="col-10 border rounded m-auto" :src="i.presentation_image" />
             </div>
         </div>
+        <loading-component v-if="loading"/>
     </section>
 </template>
 <script setup lang="ts">

@@ -1,10 +1,6 @@
 <template>
   <div class="row bg-lg-transparent bg-md-transparent bg-lg-transparent bg-md-transparent bg-sm-secondary bg-xs-secondary">
     <div class="row">
-    <div class="col-6 d-flex flex-nowrap m-auto overflow-hidden p-0 ">
-        <div @click="updatestyle" :class="selected">Membre</div>
-        <div @click="updatestyle" :class="unselected" >Admin</div>        
-    </div>
 </div>
     <form @submit="validate" class="rounded col-lg-4 col-md-6 col-12 mt-lg-3 mt-md-2 mt-0 mb-lg-3 mb-md-2 mb-0 bg-xs-transparent m-auto">
         <div class="text-center m-5">
@@ -20,8 +16,8 @@
           <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7" name="new" aria-describedby="emailHelp">
         </div>
         <div class="mb-3 text-center col-12">
-          <label for="confirmNewpass" class="form-label col-12">Confirm your new password</label>
-          <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7" name="confirmNewpass">
+          <label for="confirmNewPass" class="form-label col-12">Confirm your new password</label>
+          <input :type="input" class="border-top-0 border-start-0 border-end-0 rounded-0 col-lg-10 col-md-10 col-7" name="confirmNewPass">
         </div>
         <div class="col-10 m-auto d-flex">
           <input @click="checked" type="checkbox" id="" value="Show password"> <span class="ms-3 fw-bold">Show password</span>
@@ -44,10 +40,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
   let err:Ref<string> = ref("")
     const UseCounterStore = useCounterStore()
     const route = useRoute()
-    let selected:Ref<string> = ref("selected text-center col-6 m-0 p-0")
-      let unselected:Ref<string> = ref("text-center m-0 p-0 col-6")
         let input:Ref<string> = ref("password")
-        let type:Ref<number> = ref(0)
           let loading:Ref<boolean> = ref(false)
 onMounted(() => {
   if(!UseCounterStore.getToken().mail) navigateTo("/internal-footer/connexion")
@@ -56,36 +49,34 @@ onMounted(() => {
     e.preventDefault()
     loading.value = true
     let formData:FormData = new FormData(e.target as HTMLFormElement)
-    formData.append("type",Teste.get().type.toString())
+    formData.append("mail",UseCounterStore.getToken().mail as string)
     for(let [key,value] of formData.entries()) {
-     if(!value) err.value = "Required field"
+     if(!value) {
+      err.value = "Required field"
+      loading.value = false
     }
-
-    if(formData.get("new") !== formData.get("confirmNewpass")) err.value = "New password not identical"
-    else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type) {
+    }
+    if(UseCounterStore.getToken().type) {
       await HttpService.updateUserPass(formData).then((res) => {
         navigate("/internal-footer/connexion",{})
       }).catch((error:AxiosError<{message:string}>) => {
+        err.value =  error.response?.data.message as string || error.message
+        console.log(err)
+      }).finally(() => {
         loading.value = false
-        err.value = error.message || error.response?.data.message as string
       })
-    } else if(formData.get("new") === formData.get("confirmNewpass") && UseCounterStore.getToken().type !== 1) {
+    } else if(UseCounterStore.getToken().type !== 1) {
       await HttpService.updateMemberPass(formData).then((res) => {
         navigate("/internal-footer/connexion",{})
       }).catch((error:AxiosError<{message:string}>) => {
+      console.log(err)
         loading.value = false
-        err.value = error.message || error.response?.data.message as string
+        err.value =  error.response?.data.message as string || error.message
       })
     } else {
       navigate("/internal-footer/connexion",{})
     }
   }
-  function updatestyle() {
-    const temp:string = selected.value
-    selected.value = unselected.value
-    unselected.value = temp
-    type.value = type.value == 0 ? 1 : 0
-}
   function checked(e:Event) {
     let a = e.target as HTMLInputElement
     if(a.checked) input.value = "text"

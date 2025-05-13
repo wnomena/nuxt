@@ -44,8 +44,6 @@
         }
       })
     })
-
-    onMounted
 </script>
 <style scoped>
 /* footer {

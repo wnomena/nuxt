@@ -8,7 +8,7 @@
                 <div class="col-11 m-auto">
                     <img style="height : 70%" class="border rounded m-1 col-12" :src="i.presentation_image.toString()" alt="name" srcset="">
                 </div>
-                <h4>Nom : {{i.name}}</h4>
+                <h4 class="text-center">Nom : {{i.name}}</h4>
                 <div class="d-flex justify-content-around">
                     <div @click="navigate('/internal-footer/menu-for-admin/list-of-child',{id : i.id.toString()})" class="suivant ps-1 pe-1">Suivant</div>
                     <div @click="navigate('/internal-footer/menu-for-admin/add-and-update-parent',{id : i.id.toString()})" class="modifier ps-1 pe-1">Modifier</div>
