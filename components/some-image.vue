@@ -1,16 +1,16 @@
 <template>
  <div ref="container" class="keen-slider">
     <div class="keen-slider__slide number-slide1 border">
-        <img  class="col-12" src="./some-image-inset/vecteezy_cameleon_copy.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/IMG_20230923_094118_767.jpg" alt="">    
     </div>
     <div class="keen-slider__slide number-slide2">
-        <img  class="col-12" src="./some-image-inset/vecteezy_lemur.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/vecteezy_ring-tailed-.jpg" alt="">
     </div>
     <div class="keen-slider__slide number-slide3">
         <img  class="col-12" src="./some-image-inset/vecteezy_black-lemur.jpg" alt="">
     </div>
     <div class="keen-slider__slide number-slide4">
-        <img  class="col-12" src="./some-image-inset/couche_soleil_baobab.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/IMG_20230923_142926_953.jpg" alt="">
     </div>
     <div class="keen-slider__slide number-slide5">
         <img  class="col-12" src="./some-image-inset/baobab_lena copy.jpg" alt="">
