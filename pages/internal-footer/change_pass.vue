@@ -29,7 +29,7 @@
             <span  class="fs-5"><NuxtLink class="text-decoration-none text-light" to="/">Cancel </NuxtLink></span>
         </div>
       </form>
-      <loading-component v-if="loading"/>
+      <loading-component v-if="loading"/>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, impedit ab blanditiis expedita quam illo beatae cupiditate, et ullam porro necessitatibus voluptatum sequi rem recusandae ut suscipit odio! Hic eligendi cupiditate voluptatibus non! Laboriosam dignissimos quo nisi ullam quae a eos! Porro iste reiciendis nam amet. Illo doloribus nemo ea eveniet saepe, labore expedita a iure aut itaque tempora soluta autem praesentium quaerat eaque magni id nihil est reiciendis alias dignissimos veritatis. Libero temporibus aspernatur commodi explicabo voluptatum exercitationem repellendus deleniti itaque, placeat, delectus qui rem fugiat tenetur nulla corporis, nihil cupiditate animi reprehenderit quod molestiae saepe repudiandae culpa? Esse.
 </div>
 </template>
 

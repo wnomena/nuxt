@@ -15,7 +15,7 @@
                             <span class="text"> <i class="fas fa-paper-plane"><i class="bi bi-envelope"></i> contact@caponmada.com </i></span>
                         </div>
                         <div class="col-4 col-lg-3 pr-4 d-none d-lg-flex d-md-flex topper align-items-center text-lg-right">
-                            <span class="text"><i class="bi bi-telephone-fill"> +261 38 57 589 64</i></span>
+                            <span class="text"><i class="bi bi-telephone-fill"> +261 38 29 150 34</i></span>
                         </div>
                     </div>
                 </div>

@@ -4,26 +4,25 @@
 </script>
 
 <template>
-    <section class="row border overflow-hidden mb-2">
-        
+    <section class="row border overflow-hidden mb-2">    
     <section class="col-12">
         <div class="row d-flex flex-row flex-nowrap">
             <div class="col-12">
-            <img style="height: 70vh;" class="m-0 col-12" src="./slide/manambolo_copie.jpg" alt="">
+            <img class="m-0 col-12" src="./slide/manambolo_copie.jpg" alt="">
                     <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
                         <h4 class="fs-lg-4 fs-md-6" >Descending the river to the Tsingy</h4>
                         <h1 class="fs-lg-1 fs-md-3">MANAMBOLO</h1>
                     </div>
                 </div>
         <div class="col-12">
-            <img style="height: 70vh;" class="m-0 col-12" src="./slide/tsingy.jpg">
+            <img class="m-0 col-12" src="./slide/tsingy.jpg">
             <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
                 <h4 class="fs-lg-4 fs-md-6" >Visite the Park</h4>
                 <h1 class="fs-lg-1 fs-md-3">GRAND TSINGY</h1>
             </div>
         </div>
         <div class="col-12">
-            <img style="height: 70vh;" class="m-0 col-12" src="./slide/soatanana.jpg" alt="">
+            <img class="m-0 col-12" src="./slide/soatanana.jpg" alt="">
             <div style="background-color: blueviolet; text-align: center; padding-top: 20px; padding-bottom: 20px;" class="col-12 text-light">
                 <h4 class="fs-lg-4 fs-md-6" >Passage to the south of the country</h4>
                 <h1 class="fs-lg-1 fs-md-3">SOATANANA</h1>
@@ -40,6 +39,14 @@
     animation-delay: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+.row .col-12 .row .col-12 img.col-12 {
+    height: 70vh;
+}
+@media screen and (max-width: 480px) {
+    .row .col-12 .row .col-12 img.col-12 {
+        height: 50vh;
+    }
 }
 @keyframes slide {
     0%,33% {

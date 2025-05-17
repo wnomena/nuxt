@@ -9,7 +9,7 @@
         <h5 class="text-decoration-underline">About us</h5>
 
         <p>
-          Cap sur Mada is a travel agency specializing in organizing authentic and tailor-made trips to Madagascar. Passionate about this unique island, we are dedicated to helping travelers discover the rich natural, cultural, and human heritage of Madagascar. Our team, made up of local experts and experienced guides, accompanies you throughout your adventure, offering customized tours that cater to your desires—whether you're seeking adventure, relaxation, or cultural immersion.
+          Cap on Mada is a travel agency specializing in organizing authentic and tailor-made trips to Madagascar. Passionate about this unique island, we are dedicated to helping travelers discover the rich natural, cultural, and human heritage of Madagascar. Our team, made up of local experts and experienced guides, accompanies you throughout your adventure, offering customized tours that cater to your desires—whether you're seeking adventure, relaxation, or cultural immersion.
         </p>
       </div>
       <!--Grid column-->
@@ -42,13 +42,13 @@
   
           <ul class="list-unstyled">
             <li>
-              <a href="#!" class="text-white"><i class="bi bi-telephone-fill">+261 34 32 843 86/i></i></a>
+              <a href="#!" class="text-white"><i class="bi bi-telephone-fill">+261 38 29 150 34</i></a>
             </li>
             <li>
               <a href="#!" class="text-white"><i class="bi bi-geo-alt-fill"> ID 36 Ankadivory Ilafy, Antananarivo</i></a>
             </li>
             <li>
-              <a href="#!" class="text-white"><i class="bi bi-envelope"> jsdev.web2@gmail.com</i></a>
+              <a href="#!" class="text-white"><i class="bi bi-envelope"> contact@caponmada.com</i></a>
             </li>
             <li class="d-flex justify-content-center">
               <a href="#!" class="text-white"><i class="bi bi-facebook"></i></a><a href="#!" class="text-white"><i class="bi bi-instagram"></i></a><a href="#!" class="text-white"><i class="bi bi-linkedin"></i></a><a href="#!" class="text-white"><i class="bi bi-youtube"></i></a>
@@ -65,7 +65,7 @@
   <!-- Copyright -->
   <div class="p-3 d-lg-flex d-block justify-content-around text-light fw-bold" style="background-color: rgba(0, 0, 0, 0.2);">
     <p>© 2025  Company, Inc. All rights reserved.</p>
-    <p>Designed by Fandresena Tsaroana Ny Aina and developed by Sedraniaina Nomenjanahary</p>
+    <p>Designed and developed by Sedraniaina Nomenjanahary</p>
     
   </div>
   <!-- Copyright -->

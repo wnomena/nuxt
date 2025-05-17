@@ -1,7 +1,7 @@
 <template>
     <section class="row overflow-hidden">
-        <div class="col-11 d-flex m-auto">
-            <div data-aos="fade-up-right" class="col-lg-3 col-md-5 col-11 border rounded m-1 items-1 overflow-hidden">
+        <div class="col-11 d-flex m-auto flex-nowrap">
+            <div id="first" data-aos="fade-up-right" class="col-lg-3 col-md-5 col-11 border rounded m-1 items-1 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-flex align-items-end">
@@ -23,13 +23,13 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up" class="col-lg-3 col-md-5 d-lg-block d-md-block d-none  col-11 border rounded m-1 items-2 overflow-hidden">
+            <div id="second" data-aos="fade-up" class="col-lg-3 col-md-5 d-lg-block d-block  col-11 border rounded m-1 items-2 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-flex align-items-end">
                             <div class="col-12 d-flex justify-content-end">
                                 <i class="bi bi-arrow-down-right-circle-fill fs-2 m-2"></i>
-                            </div>
+                                   </div>
                         </div>
                     </div>
                     <div class="contain d-flex col-12 bg-success">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up-left" class="col-lg-3 d-lg-block d-none col-11 border rounded m-1 items-3 overflow-hidden">
+            <div id="third" data-aos="fade-up-left" class="col-lg-3 d-lg-block d-block col-11 border rounded m-1 items-3 overflow-hidden">
                 <div class="bg-primary col-12">
                     <div class="items d-flex">
                         <div class="col-12 d-lg-none d-md-none d-flex justify-content-end"><i class="bi bi-x-square"></i></div>
@@ -79,6 +79,8 @@ import type { some_component_type } from '~/all_model/model';
                 {title : "Personalized Journeys: " ,content : " Every traveler is unique, and we believe every adventure should be too. We offer tailor-made tours that are adapted to your desires and pace, ensuring a truly unforgettable experience."},
                 {title : "Environmental Respect: " ,content : "By choosing our agency, you are opting for responsible tourism. We are committed to protecting the environment and promoting sustainable practices that benefit both nature and local communities."}
     ])
+
+
 </script>
 <style scoped>
 section {

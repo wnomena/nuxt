@@ -116,6 +116,7 @@ import { HttpService } from '~/server/fetch-class/fetch';
         else return true
     }
     async function update_before_deleting() {
+        loading.value = true
         await HttpService.deleteChild(forceInt(title.value.update.id.toString())).then((res) => {navigateTo("/internal-footer/menu-for-admin/list-of-parent")})
     }
     async function submit(e:Event) {

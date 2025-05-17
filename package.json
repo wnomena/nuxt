@@ -15,6 +15,7 @@
     "axios": "^1.7.7",
     "nuxt": "^3.13.2",
     "nuxt-aos": "^1.2.5",
+    "nuxt-swiper": "^2.0.1",
     "pinia": "^3.0.2",
     "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "latest",
