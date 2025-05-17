@@ -43,9 +43,9 @@
 .row .col-12 .row .col-12 img.col-12 {
     height: 70vh;
 }
-@media screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) {
     .row .col-12 .row .col-12 img.col-12 {
-        height: 50vh;
+        height: 40vh;
     }
 }
 @keyframes slide {
