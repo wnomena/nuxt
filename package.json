@@ -19,9 +19,13 @@
     "pinia": "^3.0.2",
     "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-carousel-nuxt": "^1.1.5"
   },
   "overrides": {
     "vue": "latest"
+  },
+  "devDependencies": {
+    "nuxt-keen-slider": "^1.1.0"
   }
 }
