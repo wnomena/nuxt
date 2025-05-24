@@ -1,5 +1,5 @@
 <template>
- <div ref="container" class="keen-slider">
+ <div ref="container" class="keen-slider pt-0 pb-0">
     <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
             <img  class="col-12" src="./some-image-inset/IMG_20230923_094118_767.jpg" alt=""> 
@@ -84,24 +84,12 @@ export default {
 </script>
 
 <style scoped>
-/* body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-[class^="number-slide"],
-[class*=" number-slide"] {
-  background: grey;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
-  color: #fff;
-  font-weight: 500;
-  height: 300px;
-  max-height: 100vh;
-} */
+  .keen-slider {
+    overflow: hidden;
+    outline: none;
+    border-radius: 10px;
+    padding: 0;
+  }
  .keen-slider .number-slide1 {
   height: 300px;
  }

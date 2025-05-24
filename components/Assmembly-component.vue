@@ -9,7 +9,7 @@
 
     <div data-aos="fade-right" class="col-10 m-auto pt-5 pb-5">
         <LinkForAllChildRoad  />
-    <SomeImage class="pt-5 pb-5" />
+    <SomeImage />
     </div>
     <PublicFooter />
     </div>
