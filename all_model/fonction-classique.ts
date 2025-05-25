@@ -1,5 +1,5 @@
 import type { AxiosError, AxiosResponse } from "axios"
-import { Month, parent_road_list } from "./model"
+import { child_road_list, Month, parent_road_list } from "./model"
 export function navigate(url:string,query: {name?: string,id?:number|string,mail?:string,parent?: string}) {
         return navigateTo({path : url,query : query})
     }
@@ -20,6 +20,7 @@ export function persist_form_error_for_parent(data:FormData):parent_road_list {
         presentation_image : ""
     }
 }
+
 export function add_or_udate(type : string):Boolean | undefined {
     if(type.split(" ")[0] == "Add") {
         return false
@@ -52,4 +53,32 @@ export function undefinedForceInt(a:string):number|undefined {
 }
 export function redirect401(res:AxiosError) {
     if(res.status == 401 || res.status == 403) navigate("/internal-footer/connexion",{})
+}
+
+export function indexedDBImplementation(props : {type : number,id?:number,data?:parent_road_list[] | child_road_list[]}):parent_road_list[] | child_road_list[] | void {
+    const DatabaseName = ["Parent","Child"]
+    const request = indexedDB.open(DatabaseName[props.type],2)
+    request.onsuccess = function () {
+        console.log("Cool mande")
+    }
+    request.onerror = function () {
+        throw Error("Connexion failed to DB")
+    }
+    request.onupgradeneeded = function () {
+        const db = request.result
+        if(!db.objectStoreNames.contains(DatabaseName[props.type] as string )) {
+            db.createObjectStore(DatabaseName[props.type] as string,{keyPath : "id"})
+        }
+        const transaction = db.transaction(DatabaseName[props.type] as string,"versionchange")
+        
+        const Aleatoire = transaction.objectStore(DatabaseName[props.type] as string)
+
+        if(props.data) {
+            for(let data of props.data) {
+                Aleatoire.add(data)
+                return undefined
+            }    
+        } else if(props.id) return Aleatoire.getKey(props.id)
+        else return Aleatoire.getAll()
+    }
 }

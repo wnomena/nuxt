@@ -22,7 +22,7 @@
 </section>
 </template>
 <script setup  lang="ts">
-import { navigate } from '~/all_model/fonction-classique';
+import { indexedDBImplementation, navigate } from '~/all_model/fonction-classique';
 import { parent_road_list } from '~/all_model/model';
 import { HttpService } from '~/server/fetch-class/fetch';
 let loading:Ref<boolean> = ref(true) 
@@ -33,8 +33,13 @@ onMounted(async() => {
     await HttpService.getParents().then((value) => {
         console.log(value.data)
         refs.value.table = [...value.data.data]
+        indexedDBImplementation({type : 0,data : value.data.data})
     }).finally(function () {
         loading.value = false
+    })
+    await HttpService.getChilds(undefined).then((partiel) => {
+        console.log(partiel.data.data)
+        indexedDBImplementation({type : 1,data : partiel.data.data})
     })
 })
 </script>

@@ -2,7 +2,7 @@
  <div ref="container" class="keen-slider pt-0 pb-0">
     <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-            <img  class="col-12" src="./some-image-inset/IMG_20230923_094118_767.jpg" alt=""> 
+            <img  class="col-12" src="./some-image-inset/IMG_20230923_094118_767.webp" alt=""> 
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[0].title  }}</h3>
               <div class="col-12 text-center">{{ array[0].content }}</div>
@@ -11,7 +11,7 @@
     </div>
         <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/vecteezy_ring-tailed-.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/vecteezy_ring-tailed-.webp" alt="">
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[1].title  }}</h3>
               <div class="col-12 text-center">{{ array[1].content }}</div>
@@ -20,7 +20,7 @@
     </div>
         <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/vecteezy_black-lemur.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/vecteezy_black-lemur.webp" alt="">
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[2].title  }}</h3>
               <div class="col-12 text-center">{{ array[2].content }}</div>
@@ -29,7 +29,7 @@
     </div>
         <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/IMG_20230923_142926_953.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/IMG_20230923_142926_953.webp" alt="">
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[3].title  }}</h3>
               <div class="col-12 text-center">{{ array[3].content }}</div>
@@ -38,7 +38,7 @@
     </div>
         <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/baobab_lena copy.jpg" alt="">
+        <img  class="col-12" src="./some-image-inset/baobab_lena copy.webp" alt="">
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[4].title  }}</h3>
               <div class="col-12 text-center">{{ array[4].content }}</div>
@@ -47,7 +47,7 @@
     </div>
         <div class="keen-slider__slide number-slide1 border">
       <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/capsM.jpeg" alt="">
+        <img  class="col-12" src="./some-image-inset/capsM.webp" alt="">
             <div class="col-12 bg-success m-0 p-0">
               <h3 class="fw-bold text-center">{{ array[6].title  }}</h3>
              <div class="col-12 text-center">{{ array[6].content }}</div>

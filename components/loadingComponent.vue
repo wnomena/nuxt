@@ -1,5 +1,5 @@
 <template>
-    <section class="row">
+    <section class="row bg-light">
         <div class="loading">Loading&#8230;</div>
     </section>
 </template>
