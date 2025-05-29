@@ -20,7 +20,8 @@ export class HttpService {
     private static  headerConfig = {
         authorization : `Bearer ${token()}`
     }
-     private static url = "https://travel-agency-project-vxkm.onrender.com"
+     private static url = "http://localhost:5000"
+     //https://travel-agency-project-vxkm.onrender.com
      static async getParents() :Promise<AxiosResponse<{data : parent_road_list[]}>> {
         return await axios.get(`${this.url}/parent`)
      }

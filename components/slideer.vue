@@ -57,7 +57,7 @@
     display: flex;
 }
 .row .col-12 .row .col-12 .col-12:nth-child(2) .col-12 {
-    background-color: rgba(138, 44, 226, 0.4); text-align: center; padding-top: 20px; padding-bottom: 20px;  height: fit-content; align-self: center;
+    background-color: rgba(56, 53, 53, 0.5); text-align: center; padding-top: 20px; padding-bottom: 20px;  height: fit-content; align-self: center;
 }
 @media only screen and (max-width: 480px) {
     .row .col-12 .row .col-12 .col-12 {
