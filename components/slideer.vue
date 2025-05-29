@@ -62,7 +62,14 @@
 @media only screen and (max-width: 480px) {
     .row .col-12 .row .col-12 .col-12 {
         height: 40vh;
+        position: relative;
     }
+    .row .col-12 .row .col-12 .col-12:nth-child(2) {
+    height: 40vh;
+    position: absolute;
+    transform: translateY(-100%);
+    display: flex;
+}
 }
 @keyframes slide {
     0%,33% {
