@@ -57,7 +57,7 @@ export function redirect401(res:AxiosError) {
 
 export function indexedDBImplementation(props : {type : number,id?:number,data?:parent_road_list[] | child_road_list[]}):parent_road_list[] | child_road_list[] | void {
     const DatabaseName = ["Parent","Child"]
-    const request = indexedDB.open(DatabaseName[props.type],2)
+    const request = indexedDB.open(DatabaseName[props.type],1)
     request.onsuccess = function () {
         console.log("Cool mande")
     }
