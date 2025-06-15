@@ -1,10 +1,9 @@
 <script setup lang="ts">
-// import { NuxtImg } from '#components';
 
 </script>
 
 <template>
-    <section class="row border overflow-hidden mb-2">    
+    <section style="top: 0;" class="row border overflow-hidden mb-2">    
     <section class="col-12">
         <div class="row d-flex flex-row flex-nowrap">
             <div class="col-12">
@@ -47,11 +46,11 @@
     animation-direction: alternate;
 }
 .row .col-12 .row .col-12 .col-12 {
-    height: 90vh;
+    height: 100vh;
     position: relative;
 }
 .row .col-12 .row .col-12 .col-12:nth-child(2) {
-    height: 90vh;
+    height: 100vh;
     position: absolute;
     transform: translateY(-100%);
     display: flex;
@@ -62,7 +61,14 @@
 @media only screen and (max-width: 480px) {
     .row .col-12 .row .col-12 .col-12 {
         height: 40vh;
+        position: relative
     }
+    .row .col-12 .row .col-12 .col-12:nth-child(2) {
+    height: 40vh;
+    position: absolute;
+    transform: translateY(-100%);
+    display: flex;
+}
 }
 @keyframes slide {
     0%,33% {
