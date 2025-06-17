@@ -11,26 +11,26 @@
             <img loading="lazy" class="m-0 col-12" src="./slide/manambolo.webp" alt="">
                     <div class="col-12">
                         <div class="col-12 text-light">
-                        <h4 class="fs-lg-4 fs-md-6" >Descending the river to the Tsingy</h4>
-                        <h1 class="fs-lg-1 fs-md-3">MANAMBOLO</h1>
+                        <h4 class="fs-lg-4 fs-md-6" >Descending the river</h4>
+                        <h1 class="fs-lg-1 fs-md-3">Manambolo</h1>
                     </div>
                     </div>
                 </div>
         <div class="col-12">
-            <img loading="lazy" class="m-0 col-12" src="./slide/tsingy.webp">
+            <img loading="lazy" class="m-0 col-12" src="./slide/andasibe.webp">
             <div class="col-12">
                 <div class="col-12 text-light">
                 <h4 class="fs-lg-4 fs-md-6" >Visite the Park</h4>
-                <h1 class="fs-lg-1 fs-md-3">GRAND TSINGY</h1>
+                <h1 class="fs-lg-1 fs-md-3">Andasibe</h1>
             </div>
             </div>
         </div>
         <div class="col-12">
-            <img loading="lazy" class="m-0 col-12" src="./slide/soatanana.webp" alt="">
+            <img loading="lazy" class="m-0 col-12" src="./slide/lavanonoo.webp" alt="">
             <div class="col-12">
                 <div class="col-12 text-light">
-                <h4 class="fs-lg-4 fs-md-6" >Passage to the south of the country</h4>
-                <h1 class="fs-lg-1 fs-md-3">SOATANANA</h1>
+                <h4 class="fs-lg-4 fs-md-6" >The southern part</h4>
+                <h1 class="fs-lg-1 fs-md-3">Lavanono</h1>
             </div>
             </div>
         </div>
