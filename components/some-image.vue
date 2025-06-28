@@ -36,24 +36,6 @@
             </div>
       </div>
     </div>
-        <div class="keen-slider__slide number-slide1 border">
-      <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/baobab_lena copy.webp" alt="">
-            <div class="col-12 bg-success m-0 p-0">
-              <h3 class="fw-bold text-center">{{ array[4].title  }}</h3>
-              <div class="col-12 text-center">{{ array[4].content }}</div>
-            </div>
-      </div>
-    </div>
-        <div class="keen-slider__slide number-slide1 border">
-      <div class="col-12 d-block m-0 p-0">
-        <img  class="col-12" src="./some-image-inset/capsM.webp" alt="">
-            <div class="col-12 bg-success m-0 p-0">
-              <h3 class="fw-bold text-center">{{ array[6].title  }}</h3>
-             <div class="col-12 text-center">{{ array[6].content }}</div>
-            </div>
-      </div>
-    </div>
   </div>
 </template>
 
