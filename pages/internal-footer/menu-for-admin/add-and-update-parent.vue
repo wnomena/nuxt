@@ -25,10 +25,6 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-transparent d-flex flex-column m-10">
-                <label class="text-dark" for="difficulty">Dificulty</label>
-                <input :value="title.updating_title.difficulty" v-change="100"  name="difficulty" class="border-top-0 border-start-0 border-end-0" type="number">
-            </div>
             <div class="bg-transparent d-flex flex-column m-10" >
                 <label class="text-dark" for="file">L'image</label>
                 <input name="image" accept="image/**" class="text-dark" type="file">
