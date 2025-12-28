@@ -4,7 +4,6 @@ import { child_road_list, commentary_model, contact, fetch_clild_road,member_mod
 import { Teste, useCounterStore } from "~/stores/token"
 export class HttpService {
     private static url : string = `https://travel-agency-project-vxkm.onrender.com`
-    //all get request https://travel-agency-project.onrender.com
     static async delete_member(i: string): Promise<AxiosResponse<{message : string}>> {
         return await axios.delete(`${this.url}/utilisateurs/delete_member/by_admin/${Teste.get().mail}/${i}`)
       }
